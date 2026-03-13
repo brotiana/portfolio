@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Milike — Project Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #0a0a0a; color: #fff; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+        .container { max-width: 900px; margin: 3rem auto; padding: 1rem; }
+    .media { border-radius: 12px; overflow: hidden; background: transparent; }
+        .back { color: #c084fc; text-decoration: none; }
+        .tech { display:inline-block; background: rgba(147,51,234,0.15); color:#c084fc; padding:0.25rem .5rem; border-radius:999px; margin-right:.5rem }
+
+        /* Responsive media layout: row on desktop, stacked/overlapping on mobile */
+        .media-grid { display: flex; gap: 1rem; align-items: center; justify-content: center; margin-top: 0.5rem; }
+        /* Slightly larger on desktop but constrained by max-height */
+        .media-item { flex: 1 1 48%; max-width: 48%; display:flex; flex-direction:column; align-items:stretch; }
+        .media-item h2 { font-size: 1.05rem; margin-bottom: .5rem; }
+        .media video, .media img { width: 100%; height: auto; display: block; max-height: 520px; }
+
+        @media (max-width: 768px) {
+            /* stacked layout on phones, centered */
+            .media-grid { flex-direction: column; align-items: center; }
+            .media-item { max-width: 92%; width: 92%; }
+            /* overlap the second item upward without fully hiding either — give z-index so second sits above */
+            .media-item { position: relative; }
+            /* remove strong overlap and add more breathing room between items on phones */
+            /* Increase the vertical gap so the video and photo are clearly separated on small screens */
+            .media-item + .media-item { margin-top: 24px; z-index: 2; }
+            .media-item:first-child { margin-bottom: 24px; }
+            .media-item:first-child { z-index: 1; }
+            .media video, .media img { max-height: 420px; }
+            .media-item h2 { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="index.html">← Back to portfolio</a>
+
+        <h1 style="font-size:2.25rem; margin-top:1rem;">Milike — Instagram Automation Tool</h1>
+        <p class="text-gray-400" style="color:#a1a1aa; margin-top:.5rem;">A small project that automates common Instagram actions for growth experiments and content management. Below you'll find a short screen recording of the tool in action and a screenshot of the admin interface.</p>
+
+        <section class="media-section" style="margin-top:1.5rem">
+            <div class="media-grid">
+                <div class="media-item">
+                    <h2>Screen Recording</h2>
+                    <div class="media" style="padding:0.5rem;">
+                        <video controls src="Screenrecording_20251204_080238.mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <h2>Admin Screenshot</h2>
+                    <div class="media">
+                        <img src="Screenshot_20251207_085338.jpg" alt="Milike admin screenshot" style="object-fit:contain;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top:1.5rem;">
+            <h2 style="font-size:1.25rem; margin-bottom:.5rem;">About the program</h2>
+            <p style="color:#d1d5db; line-height:1.6;">
+                Milike is a lightweight automation tool built to assist social media operators in scaling basic Instagram workflows. The project combines a small Python backend that interacts with Instagram endpoints (or a headless browser when needed) and a minimal web-based admin UI for scheduling and monitoring tasks.
+            </p>
+            <ul style="color:#d1d5db; margin-top:.75rem; line-height:1.6;">
+                <li><strong>Core actions:</strong> automatically like posts, follow/unfollow accounts based on simple filters, post scheduled content, add comments and optionally delete posts.</li>
+                <li><strong>Scheduler:</strong> tasks can be scheduled or run immediately from the dashboard; the scheduler respects configurable rate limits to avoid triggering platform protections.</li>
+                <li><strong>Monitoring:</strong> an activity log shows recent actions and simple success/failure metrics; screenshots (like the one above) help verify results.</li>
+                <li><strong>Storage:</strong> uses a small SQLite database for queues, user credentials (encrypted in production) and task history.</li>
+            </ul>
+
+            <p style="color:#d1d5db; margin-top:.75rem">This demo is intended for learning and experimentation. In a production context, platform policies and legal constraints must be respected and appropriate rate-limiting, error handling and credential security must be implemented.</p>
+
+            <div style="margin-top:1rem">
+                <span class="tech">Python</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">SQLite</span>
+                <span class="tech">Tailwind</span>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

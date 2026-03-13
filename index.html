@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullstack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Matrix Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #0a0a0a;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+
+        .matrix-word {
+            position: absolute;
+            font-size: 16px;
+            color: rgba(30, 100, 220, 0.7);
+            white-space: nowrap;
+            text-shadow: 0 0 8px rgba(30, 100, 220, 0.6), 0 0 15px rgba(30, 100, 220, 0.4);
+            animation: matrixFall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            95% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(calc(100vh + 150px));
+                opacity: 0;
+            }
+        }
+
+        .bg-glow-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(30, 100, 220, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 100, 220, 0.05) 0%, transparent 50%);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(30, 100, 220, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1e64dc, #60a5fa);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before {
+            width: 80%;
+        }
+
+        .nav-link:hover {
+            color: #60a5fa;
+            transform: translateY(-2px);
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(30, 100, 220, 0.1);
+            border: 1px solid rgba(30, 100, 220, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(30, 100, 220, 0.2);
+            border-color: #1e64dc;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: rgba(30, 100, 220, 0.3);
+            border-color: #1e64dc;
+            box-shadow: 0 0 10px rgba(30, 100, 220, 0.3);
+        }
+
+        .flag-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            display: none;
+            opacity: 1;
+            transform: none;
+            position: relative;
+        }
+
+        .section.active {
+            display: block !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        /* Empêcher le scroll d'affecter les sections */
+        body {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section */
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e64dc, #60a5fa, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #a1a1aa;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .typing-text {
+            border-right: 2px solid #1e64dc;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                border-color: transparent;
+            }
+
+            51%,
+            100% {
+                border-color: #1e64dc;
+            }
+        }
+
+        /* Skills Grid */
+        .skill-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s ease;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.03);
+        }
+
+        .skill-card:hover .skill-crystal {
+            filter: drop-shadow(0 15px 30px rgba(30, 100, 220, 0.4));
+        }
+
+        .skill-description {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            min-height: 2.5em;
+            line-height: 1.4;
+        }
+
+        .skill-crystal {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: filter 0.4s ease;
+            filter: drop-shadow(0 8px 20px rgba(30, 100, 220, 0.25));
+        }
+
+        .skill-crystal img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .skill-crystal-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .skill-icon {
+            font-size: 2.8rem;
+            color: #60a5fa;
+            text-shadow: 0 0 15px rgba(30, 100, 220, 0.5);
+        }
+
+        .skill-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Projects */
+        .project-row {
+            background: rgba(30, 100, 220, 0.05);
+            border: 1px solid rgba(30, 100, 220, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-row:hover {
+            background: rgba(30, 100, 220, 0.1);
+            border-color: #1e64dc;
+            transform: translateX(10px);
+        }
+
+        .project-tech {
+            display: inline-block;
+            background: rgba(30, 100, 220, 0.2);
+            color: #60a5fa;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin: 0.25rem;
+        }
+
+        /* Contact Form */
+        .form-input {
+            background: rgba(30, 100, 220, 0.1);
+            border: 1px solid rgba(30, 100, 220, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #ffffff;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1e64dc;
+            box-shadow: 0 0 0 3px rgba(30, 100, 220, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e64dc, #60a5fa);
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 100, 220, 0.3);
+        }
+
+        /* Mobile Menu Styling */
+        .mobile-menu-container {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(30, 100, 220, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu-content {
+            background: linear-gradient(135deg, rgba(30, 100, 220, 0.05), rgba(96, 165, 250, 0.05));
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(30, 100, 220, 0.1);
+            border: 1px solid rgba(30, 100, 220, 0.2);
+            font-weight: 500;
+        }
+
+        .mobile-menu-link:hover {
+            background: rgba(30, 100, 220, 0.2);
+            border-color: #1e64dc;
+            transform: translateX(5px);
+            color: #60a5fa;
+            box-shadow: 0 5px 15px rgba(30, 100, 220, 0.3);
+        }
+
+        .mobile-menu-link i {
+            width: 24px;
+            text-align: center;
+            color: #1e64dc;
+        }
+
+        .mobile-menu-link:hover i {
+            color: #60a5fa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 1rem 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .photo-container {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        /* Profile circular image (no dashed ring) */
+        .photo-container {
+            width: 360px;
+            /* larger on desktop */
+            height: 360px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            /* ensure shadow follows circle */
+            box-shadow: 0 30px 60px rgba(30, 100, 220, 0.16);
+        }
+
+        .photo-wrap {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <span class="matrix-word" style="animation-delay: 0s; animation-duration: 10s; left: 12%;">await money()</span>
+        <span class="matrix-word" style="animation-delay: 3s; animation-duration: 12s; left: 12%;">import Flask</span>
+
+        <span class="matrix-word"
+            style="animation-delay: 1.5s; animation-duration: 11s; left: 28%;">data.get("action")</span>
+        <span class="matrix-word" style="animation-delay: 4.5s; animation-duration: 13s; left: 28%;">return ('',
+            204)</span>
+
+        <span class="matrix-word" style="animation-delay: 2s; animation-duration: 10s; left: 44%;">flush=True</span>
+        <span class="matrix-word" style="animation-delay: 5s; animation-duration: 12s; left: 44%;">async function</span>
+
+        <span class="matrix-word" style="animation-delay: 0.5s; animation-duration: 11s; left: 60%;">SELECT *
+            FROM</span>
+        <span class="matrix-word"
+            style="animation-delay: 3.5s; animation-duration: 13s; left: 60%;">console.log()</span>
+
+        <span class="matrix-word" style="animation-delay: 1s; animation-duration: 10s; left: 76%;">app.route('/')</span>
+        <span class="matrix-word" style="animation-delay: 4s; animation-duration: 12s; left: 76%;">npm install</span>
+
+        <span class="matrix-word" style="animation-delay: 2.5s; animation-duration: 11s; left: 92%;">git commit
+            -m</span>
+        <span class="matrix-word" style="animation-delay: 5.5s; animation-duration: 13s; left: 92%;">try: except:</span>
+
+        <div class="bg-glow-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-blue-400">
+                    <i class="fas fa-code"></i> Tiana
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link" onclick="showSection('home')">Home</a>
+                    <a href="#skills" class="nav-link" onclick="showSection('skills')">Skills</a>
+                    <a href="#projects" class="nav-link" onclick="showSection('projects')">Projects</a>
+                    <a href="#contact" class="nav-link" onclick="showSection('contact')">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn"
+                        class="text-white hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-900/20">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-16 left-0 right-0 z-50 hidden mobile-menu-container">
+        <div class="flex flex-col p-6 space-y-3 mobile-menu-content">
+            <a href="#home" class="mobile-menu-link" onclick="showSection('home'); toggleMobileMenu()">
+                <i class="fas fa-home mr-3"></i> <span>Home</span>
+            </a>
+            <a href="#skills" class="mobile-menu-link" onclick="showSection('skills'); toggleMobileMenu()">
+                <i class="fas fa-code mr-3"></i> <span>Skills</span>
+            </a>
+            <a href="#projects" class="mobile-menu-link" onclick="showSection('projects'); toggleMobileMenu()">
+                <i class="fas fa-briefcase mr-3"></i> <span>Projects</span>
+            </a>
+            <a href="#contact" class="mobile-menu-link" onclick="showSection('contact'); toggleMobileMenu()">
+                <i class="fas fa-envelope mr-3"></i> <span>Contact</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="flex justify-center lg:justify-start order-1 lg:order-1">
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-tr from-blue-500/60 via-blue-500/60 to-cyan-500/60 rounded-full blur-xl opacity-70">
+                        </div>
+                        <div class="relative photo-container border border-blue-400/40 shadow-2xl shadow-blue-500/20">
+                            <div class="photo-wrap">
+                                <img src="IMG_mod4.JPG.png" alt="Photo du développeur" class="photo-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center lg:text-left order-2 lg:order-2">
+                    <div class="hero-title">Fullstack Developer</div>
+                    <div class="hero-subtitle mb-6">
+                        <span id="typed-text" class="typing-text"></span>
+                    </div>
+                    <p class="text-xl text-gray-400 max-w-3xl mb-8">
+                        Passionate about creating innovative and high-performance web applications. I turn ideas into
+                        concrete solutions using modern technologies.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <button class="btn-primary" onclick="showSection('projects')">
+                            View my projects
+                        </button>
+                        <button class="btn-primary" onclick="showSection('contact')">
+                            Contact me
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+                <div class="skill-card">
+                    <p class="skill-description">Semantic structure and accessibility</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <span class="skill-name">HTML5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Modern design and animations</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                            <span class="skill-name">CSS3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Dynamics and interactivity</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Robust and performant backend</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-php"></i></div>
+                            <span class="skill-name">PHP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Relational database</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Lightweight database</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <span class="skill-name">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">Scripting and automation</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <span class="skill-name">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <p class="skill-description">No-code automation</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <span class="skill-name">n8n</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="project-row" onclick="window.location.href='tikDown/tikDown.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
+                        <img src="tikDown.png" alt="tikDown project cover"
+                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">tikDown</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        For downloading video in tik tok , hd and without watermark
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">HTML</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">Assets</span>
+                    </div>
+                </div>
+                <div class="project-row" onclick="window.location.href='gotik/gotik.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
+                        <img src="gotik.png" alt="Gotik project cover"
+                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Gotik</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        AUtomating like and follow in tik tok .
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">Extension Firefox (html, css, js)</span>
+                        <span class="project-tech">Python</span>
+                        <span class="project-tech">Shell</span>
+                    </div>
+                </div>
+                <div class="project-row" onclick="window.location.href='milike.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20 bg-black p-2">
+                        <img src="milikepdp.jpg" alt="Milike project cover"
+                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">miLike</h3>
+                        <span class="text-blue-400">2024</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Automating action in INSTAGRAM : like , follow , comment , publish post and storie , delete post
+                        .
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">HTML</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">Python</span>
+                        <span class="project-tech">sql Lite</span>
+                    </div>
+                </div>
+
+                <div class="project-row" onclick="openProject('project2')">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                            alt="API RESTful pour E-commerce"
+                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">RESTful API for E-commerce</h3>
+                        <span class="text-blue-400">2024</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Complete REST API for an e-commerce platform handling products, carts, payments and third-party
+                        integrations.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">PHP</span>
+                        <span class="project-tech">MySQL</span>
+                        <span class="project-tech">Python</span>
+                        <span class="project-tech">n8n</span>
+                    </div>
+                </div>
+
+                <div class="project-row" onclick="openProject('project3')">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                            alt="Système de Chat en Temps Réel"
+                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Real-time Chat System</h3>
+                        <span class="text-blue-400">2023</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Instant messaging application with private chat rooms, file sharing and push notifications.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">SQLite</span>
+                        <span class="project-tech">Python</span>
+                    </div>
+                </div>
+
+                <div class="project-row" onclick="openProject('project4')">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <img src="https://images.pexels.com/photos/1181670/pexels-photo-1181670.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                            alt="Dashboard Analytics"
+                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Dashboard Analytics</h3>
+                        <span class="text-blue-400">2023</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Interface de visualisation de données avec graphiques interactifs,
+                        filtres dynamiques et export de rapports.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">HTML</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">Contact Me</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Contact information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-envelope text-blue-400 text-xl"></i>
+                            <span>contact@developpeur-fullstack.com</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-phone text-blue-400 text-xl"></i>
+                            <span>+33 6 12 34 56 78</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-map-marker-alt text-blue-400 text-xl"></i>
+                            <span>Paris, France</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="text-xl font-semibold mb-4">Social networks</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
+                                <i class="fab fa-github text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <input type="text" id="name" name="name" placeholder="Your name" class="form-input"
+                                required>
+                        </div>
+                        <div>
+                            <input type="email" id="email" name="email" placeholder="Your email" class="form-input"
+                                required>
+                        </div>
+                        <div>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" class="form-input"
+                                required>
+                        </div>
+                        <div>
+                            <textarea id="message" name="message" rows="5" placeholder="Your message" class="form-input"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            Send message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
