@@ -20,9 +20,50 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
+            background: linear-gradient(160deg, #030a18 0%, #060d1c 50%, #020508 100%);
             color: #ffffff;
             overflow-x: hidden;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        /* ── Scanlines ── */
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.32) 2px,
+                rgba(0, 0, 0, 0.32) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* ── Vignette ── */
+        .vignette {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 40%,
+                rgba(0, 0, 0, 0.72) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* ── Lueurs bleues d'angle ── */
+        .corner-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse 40% 40% at 0% 100%, rgba(26,111,255,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 100% 0%, rgba(0,212,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
 
 
@@ -189,7 +230,9 @@
         .skill-description {
             color: #94a3b8;
             font-size: 0.9rem;
-            margin-top: 0.75rem;
+            margin-top: -38px;
+            position: relative;
+            z-index: 10;
             min-height: 2.5em;
             line-height: 1.4;
         }
@@ -206,7 +249,7 @@
             filter: drop-shadow(0 8px 20px rgba(30, 100, 220, 0.25));
         }
 
-        .skill-crystal img {
+        .skill-crystal > img {
             position: absolute;
             top: 0;
             left: 0;
@@ -371,6 +414,48 @@
                 font-size: 1.2rem;
             }
 
+            .skill-crystal {
+                width: 200px;
+                height: 200px;
+            }
+
+            .skill-icon {
+                font-size: 1.8rem;
+            }
+
+            .skill-name {
+                font-size: 0.65rem;
+            }
+
+            .skill-description {
+                margin-top: -20px;
+                font-size: 0.8rem;
+                padding: 0 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill-crystal {
+                width: 130px;
+                height: 130px;
+            }
+
+            .skill-icon {
+                font-size: 1.4rem;
+            }
+
+            .skill-name {
+                font-size: 0.55rem;
+            }
+
+            .skill-description {
+                margin-top: -15px;
+                font-size: 0.7rem;
+            }
+
+            .text-5xl {
+                font-size: 2rem;
+            }
         }
 
         /* ════════════════════════════════════════════════════
@@ -773,8 +858,9 @@
 </head>
 
 <body>
-
-
+    <div class="scanlines"></div>
+    <div class="corner-glow"></div>
+    <div class="vignette"></div>
     <!-- ════════════════ NAVBAR ════════════════ -->
     <div class="navbar-wrapper">
         <!-- MAIN BAR -->
@@ -823,39 +909,74 @@
     </div>
 
     <!-- Home Section -->
-    <section id="home" class="section active">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col items-center justify-center gap-10">
-                <div class="flex justify-center order-1 mt-8">
-                    <div class="flex flex-col items-center gap-4">
-                        <div class="id-badge">CANDIDAT · 07</div>
-                        <div class="frame c07">
-                            <div class="orbit2"></div>
-                            <div class="orbit"></div>
-                            <div class="border-layer"></div>
-                            <div class="photo">
-                                <img src="IMG_mod4.JPG.png" alt="Photo du développeur">
+    <section id="home" class="section active" style="padding: 0; min-height: 0; height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; scroll-snap-type: y mandatory; scroll-behavior: smooth;">
+        <!-- Hero Element (Sticky Layer) -->
+        <div class="sticky w-full flex items-center justify-center z-0 pt-20 pb-10" style="top: -25vh; height: 100vh; height: 100dvh; scroll-snap-align: start;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="flex flex-col items-center justify-center gap-6 md:gap-10">
+                    <div class="flex justify-center order-1 mt-4 md:mt-8">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="id-badge">CANDIDAT · 07</div>
+                            <div class="frame c07">
+                                <div class="orbit2"></div>
+                                <div class="orbit"></div>
+                                <div class="border-layer"></div>
+                                <div class="photo">
+                                    <img src="finit.jpeg" alt="Photo du développeur">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="text-center order-2">
+                        <div class="hero-title">Fullstack Developer</div>
+                        <div class="hero-subtitle mb-4">
+                            <span id="typed-text" class="typing-text"></span>
+                        </div>
+                        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-6">
+                            Passionate about creating innovative and high-performance web applications. I turn ideas into
+                            concrete solutions using modern technologies.
+                        </p>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <button class="btn-primary" onclick="showSection('projects')">
+                                View my projects
+                            </button>
+                            <button class="btn-primary" onclick="showSection('contact')">
+                                Contact me
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center order-2">
-                    <div class="hero-title">Fullstack Developer</div>
-                    <div class="hero-subtitle mb-6">
-                        <span id="typed-text" class="typing-text"></span>
-                    </div>
-                    <p class="text-xl text-gray-400 max-w-3xl mb-8">
-                        Passionate about creating innovative and high-performance web applications. I turn ideas into
-                        concrete solutions using modern technologies.
+            </div>
+        </div>
+
+        <!-- Bio Slide-Up Reveal Panel -->
+        <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
+            <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
+                <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Story</h2>
+                
+                <div class="text-[0.95rem] md:text-lg text-gray-300 leading-relaxed md:leading-loose space-y-4 md:space-y-6 bg-white/5 border border-blue-500/20 p-6 md:p-10 rounded-2xl backdrop-blur-md shadow-2xl overflow-y-auto shrink" style="scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.5) transparent;">
+                    <p>
+                        My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar — a Full Stack Developer with a passion for automation and problem-solving.
                     </p>
-                    <div class="flex flex-wrap gap-4 justify-center">
-                        <button class="btn-primary" onclick="showSection('projects')">
-                            View my projects
-                        </button>
-                        <button class="btn-primary" onclick="showSection('contact')">
-                            Contact me
-                        </button>
-                    </div>
+                    <p>
+                        Four years ago, I started doing tasks on the Internet across several platforms to earn some income. After a while, I began wondering: <em class="text-blue-300 font-medium tracking-wide">"what if I automated these tasks?"</em>
+                    </p>
+                    <p>
+                        That's when I started researching and learning how to automate things in browsers and on Android phones. I realized that being a developer was making my life much easier, so I became deeply interested in it — and that's what drove me toward becoming a Full Stack Developer.
+                    </p>
+                    <p>
+                        In 2025, I earned my Bachelor's degree in Software Engineering, and I am now a Master's student at CNTEMAD. During that journey, I also learned to use AI, because the way of building things changed completely once it arrived.
+                    </p>
+                    <p>
+                        I have completed more than 10 projects that I consider serious, professional work since becoming a developer. You can explore them in the <a href="#projects" onclick="showSection('projects')" class="text-blue-400 hover:text-blue-300 transition-colors font-semibold underline underline-offset-4 decoration-blue-500/50 hover:decoration-blue-400">Projects</a> section of my portfolio website.
+                    </p>
+                </div>
+                
+                <!-- Small indicator to scroll back down or view more -->
+                <div class="mt-6 md:mt-8 flex justify-center w-full animate-bounce shrink-0">
+                    <a href="#skills" onclick="showSection('skills')" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <i class="fas fa-chevron-down text-2xl md:text-3xl"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -865,9 +986,8 @@
     <section id="skills" class="section">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 justify-items-center">
                 <div class="skill-card">
-                    <p class="skill-description">Semantic structure and accessibility</p>
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
@@ -875,10 +995,10 @@
                             <span class="skill-name">HTML5</span>
                         </div>
                     </div>
+                    <p class="skill-description">Semantic structure and accessibility</p>
                 </div>
 
                 <div class="skill-card">
-                    <p class="skill-description">Modern design and animations</p>
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
@@ -886,10 +1006,21 @@
                             <span class="skill-name">CSS3</span>
                         </div>
                     </div>
+                    <p class="skill-description">Modern design and animations</p>
                 </div>
 
                 <div class="skill-card">
-                    <p class="skill-description">Dynamics and interactivity</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/tailwindcss/60A5FA" alt="Tailwind CSS" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
+                            <span class="skill-name">Tailwind</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Utility-first CSS framework</p>
+                </div>
+
+                <div class="skill-card">
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
@@ -897,10 +1028,32 @@
                             <span class="skill-name">JavaScript</span>
                         </div>
                     </div>
+                    <p class="skill-description">Dynamics and interactivity</p>
                 </div>
 
                 <div class="skill-card">
-                    <p class="skill-description">Robust and performant backend</p>
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <span class="skill-name">React JS</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Component-based UI architecture</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/greensock/60A5FA" alt="GSAP" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
+                            <span class="skill-name">GSAP</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Professional web animations</p>
+                </div>
+
+                <div class="skill-card">
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
@@ -908,32 +1061,10 @@
                             <span class="skill-name">PHP</span>
                         </div>
                     </div>
+                    <p class="skill-description">Robust and performant backend</p>
                 </div>
 
                 <div class="skill-card">
-                    <p class="skill-description">Relational database</p>
-                    <div class="skill-crystal">
-                        <img src="cristal.png" alt="crystal">
-                        <div class="skill-crystal-content">
-                            <div class="skill-icon"><i class="fas fa-database"></i></div>
-                            <span class="skill-name">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <p class="skill-description">Lightweight database</p>
-                    <div class="skill-crystal">
-                        <img src="cristal.png" alt="crystal">
-                        <div class="skill-crystal-content">
-                            <div class="skill-icon"><i class="fas fa-database"></i></div>
-                            <span class="skill-name">SQLite</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <p class="skill-description">Scripting and automation</p>
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
@@ -941,16 +1072,97 @@
                             <span class="skill-name">Python</span>
                         </div>
                     </div>
+                    <p class="skill-description">Scripting and automation</p>
                 </div>
 
                 <div class="skill-card">
-                    <p class="skill-description">No-code automation</p>
                     <div class="skill-crystal">
                         <img src="cristal.png" alt="crystal">
                         <div class="skill-crystal-content">
-                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/mysql/60A5FA" alt="MySQL" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Relational database</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/postgresql/60A5FA" alt="PostgreSQL" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
+                            <span class="skill-name">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Advanced relational database</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/sqlite/60A5FA" alt="SQLite" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
+                            <span class="skill-name">SQLite</span>
+                        </div>
+                    </div>
+                    <p class="skill-description">Lightweight database</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-crystal">
+                        <img src="cristal.png" alt="crystal">
+                        <div class="skill-crystal-content">
+                            <div class="skill-icon"><img src="https://cdn.simpleicons.org/n8n/60A5FA" alt="n8n" style="width: 1em; height: 1em; filter: drop-shadow(0 0 15px rgba(30, 100, 220, 0.5));"></div>
                             <span class="skill-name">n8n</span>
                         </div>
+                    </div>
+                    <p class="skill-description">No-code automation</p>
+                </div>
+            </div>
+
+            <!-- What can I do with these skills -->
+            <div class="mt-28 w-full">
+                <h3 class="text-3xl font-bold text-center mb-12 text-blue-400">What can I do with these skills?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 max-w-5xl mx-auto">
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Build complete modern websites</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Scrape and extract web data</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Manipulate and store data in databases</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Automate actions on websites, PCs, and Android</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Build Android, Linux & Windows apps with web tech</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Create bots for Facebook, Instagram, Telegram, Gmail & WhatsApp</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Automate social media publishing workflows</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Train AI and integrate pre-trained models</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Host websites and scripts on cloud servers</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
+                        <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
+                        <span class="font-medium text-[0.95rem]">Develop payment systems using blockchains</span>
                     </div>
                 </div>
             </div>
