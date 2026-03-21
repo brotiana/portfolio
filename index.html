@@ -257,6 +257,7 @@
             height: 100%;
             object-fit: contain;
             pointer-events: none;
+            opacity: 0.8;
         }
 
         .skill-crystal-content {
@@ -854,6 +855,169 @@
             .hamburger { width: 34px; height: 34px; }
             .mobile-menu a { font-size: 9px; padding: 12px 24px; letter-spacing: 2px; }
         }
+
+        /* ════════════════════════════════════════════════════
+           SAYIT REDIRECT MODAL
+        ════════════════════════════════════════════════════ */
+        .sayit-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(3, 10, 24, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .sayit-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sayit-modal {
+            background: linear-gradient(145deg, rgba(8, 17, 40, 0.95), rgba(6, 13, 28, 0.98));
+            border: 1px solid rgba(26, 111, 255, 0.35);
+            border-radius: 16px;
+            padding: 2.5rem 2rem 2rem;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 40px rgba(26, 111, 255, 0.15),
+                0 20px 60px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(96, 165, 250, 0.1);
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.4s cubic-bezier(.22, 1, .36, 1);
+        }
+        .sayit-modal-overlay.active .sayit-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Top glow line */
+        .sayit-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #1a6fff, transparent);
+            border-radius: 2px;
+        }
+
+        /* Corner accents */
+        .sayit-modal::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background:
+                radial-gradient(ellipse 50% 50% at 0% 0%, rgba(0, 212, 255, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 100% 100%, rgba(26, 111, 255, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .sayit-modal-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 1.25rem;
+            background: rgba(26, 111, 255, 0.12);
+            border: 1px solid rgba(26, 111, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .sayit-modal-icon i {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+        }
+
+        .sayit-modal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sayit-modal-text {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sayit-modal-url {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: #60a5fa;
+            background: rgba(26, 111, 255, 0.1);
+            border: 1px solid rgba(26, 111, 255, 0.2);
+            border-radius: 6px;
+            padding: 0.35rem 0.75rem;
+            margin-bottom: 1.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sayit-modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sayit-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .sayit-btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            color: #7ca8d4;
+        }
+        .sayit-btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: #ffffff;
+        }
+
+        .sayit-btn-confirm {
+            background: linear-gradient(135deg, #1a6fff, #00d4ff);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(26, 111, 255, 0.3);
+        }
+        .sayit-btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
+        }
     </style>
 </head>
 
@@ -1162,7 +1326,7 @@
                     </div>
                     <div class="flex items-center gap-4 p-5 bg-white/5 border border-blue-500/20 rounded-xl hover:border-blue-400/60 hover:bg-blue-900/10 transition-all shadow-lg shadow-black/20">
                         <i class="fas fa-gem text-blue-400 text-xl drop-shadow-[0_0_10px_rgba(96,165,250,0.8)]"></i>
-                        <span class="font-medium text-[0.95rem]">Develop payment systems using blockchains</span>
+                        <span class="font-medium text-[0.95rem]">Develop blockchain-based payment systems</span>
                     </div>
                 </div>
             </div>
@@ -1175,6 +1339,26 @@
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Projects</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <div class="project-row" onclick="showSayitModal()">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <img src="sayit.png">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Sayit</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        A web app that lets people message you anonymously. You need to create an account and get your unique link, then share it on social media. You will receive a notification on your email and your dashboard whenever someone visits your link and sends you a message . 
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">PHP</span>
+                        <span class="project-tech">MySQL</span>
+                        <span class="project-tech">JS</span>
+                        
+                    </div>
+                </div>
+
                 <div class="project-row" onclick="window.location.href='tikDown/tikDown.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
                         <img src="tikDown.png" alt="tikDown project cover"
@@ -1401,6 +1585,41 @@
                 }
             });
         }
+    </script>
+
+    <!-- Sayit Redirect Modal -->
+    <div class="sayit-modal-overlay" id="sayitModal">
+        <div class="sayit-modal">
+            <div class="sayit-modal-icon">
+                <i class="fas fa-external-link-alt"></i>
+            </div>
+            <div class="sayit-modal-title">Redirection externe</div>
+            <p class="sayit-modal-text">
+                Vous allez être redirigé vers un site externe.<br>Une nouvelle fenêtre va s'ouvrir.
+            </p>
+            <div class="sayit-modal-url">sayit.gt.tc</div>
+            <div class="sayit-modal-buttons">
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeSayitModal()">Annuler</button>
+                <button class="sayit-btn sayit-btn-confirm" onclick="confirmSayit()">Continuer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSayitModal() {
+            document.getElementById('sayitModal').classList.add('active');
+        }
+        function closeSayitModal() {
+            document.getElementById('sayitModal').classList.remove('active');
+        }
+        function confirmSayit() {
+            closeSayitModal();
+            window.open('https://sayit.gt.tc/', '_blank');
+        }
+        // Close on overlay click
+        document.getElementById('sayitModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSayitModal();
+        });
     </script>
 </body>
 
