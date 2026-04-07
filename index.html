@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fullstack Developer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="tailwind.js"></script>
+    <script src="transition.js?v=2"></script>
+    <script src="anime.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -161,8 +162,6 @@
 
         .section.active {
             display: block !important;
-            opacity: 1 !important;
-            transform: none !important;
         }
 
         /* Empêcher le scroll d'affecter les sections */
@@ -311,39 +310,199 @@
         }
 
         /* Contact Form */
-        .form-input {
-            background: rgba(30, 100, 220, 0.1);
-            border: 1px solid rgba(30, 100, 220, 0.3);
-            border-radius: 8px;
-            padding: 1rem;
-            color: #ffffff;
-            width: 100%;
-            transition: all 0.3s ease;
+        /* ════════════════════════════════════════════════════
+           CONTACT SECTION — Premium Redesign
+        ════════════════════════════════════════════════════ */
+        .contact-wrapper {
+            position: relative;
+        }
+        .contact-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #1a6fff, #00d4ff, #1a6fff, transparent);
+        }
+        .contact-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-align: center;
+            background: linear-gradient(135deg, #60a5fa, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .contact-subtitle {
+            text-align: center;
+            color: #7ca8d4;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
         }
 
+        /* Contact info cards */
+        .contact-card {
+            background: rgba(8, 13, 26, 0.7);
+            border: 1px solid rgba(26, 111, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, box-shadow 0.4s;
+        }
+        .contact-card:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 30px rgba(26, 111, 255, 0.15), inset 0 0 30px rgba(26, 111, 255, 0.03);
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1a6fff, transparent);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            background: rgba(26, 111, 255, 0.04);
+            border: 1px solid rgba(26, 111, 255, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+        .contact-info-item:last-child { margin-bottom: 0; }
+        .contact-info-item:hover {
+            background: rgba(26, 111, 255, 0.1);
+            border-color: rgba(26, 111, 255, 0.3);
+            transform: translateX(6px);
+        }
+        .contact-info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(26, 111, 255, 0.2), rgba(0, 212, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4ff;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+        }
+        .contact-info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #5a7fa8;
+            font-family: 'Orbitron', monospace;
+        }
+        .contact-info-value {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        /* Social icons */
+        .social-row {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .social-icon-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(26, 111, 255, 0.08);
+            border: 1px solid rgba(26, 111, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-icon-btn:hover {
+            background: #1a6fff;
+            color: #ffffff;
+            border-color: #1a6fff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(26, 111, 255, 0.4);
+        }
+
+        /* Form card */
+        .form-input {
+            background: rgba(8, 13, 26, 0.6);
+            border: 1px solid rgba(26, 111, 255, 0.15);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: #ffffff;
+            width: 100%;
+            font-size: 0.95rem;
+            transition: all 0.35s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-input::placeholder {
+            color: #4a6a8a;
+        }
         .form-input:focus {
             outline: none;
-            border-color: #1e64dc;
-            box-shadow: 0 0 0 3px rgba(30, 100, 220, 0.1);
+            border-color: #00d4ff;
+            background: rgba(8, 13, 26, 0.9);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1), 0 0 20px rgba(0, 212, 255, 0.08);
+        }
+        textarea.form-input {
+            resize: vertical;
+            min-height: 130px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #1e64dc, #60a5fa);
+            position: relative;
+            background: linear-gradient(135deg, #1a6fff, #00d4ff);
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1rem 2rem;
             color: #ffffff;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
-
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(30, 100, 220, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(26, 111, 255, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
         }
 
-        /* Mobile Menu Styling */
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 5px #22c55e; }
+            50% { box-shadow: 0 0 20px #22c55e, 0 0 40px rgba(34,197,94,0.3); }
+        }
         .mobile-menu-container {
             backdrop-filter: blur(20px);
             background: rgba(10, 10, 10, 0.95);
@@ -839,6 +998,9 @@
                     0 calc(100% - 12px)
                 );
             }
+            .corner{
+                display: none;
+            }
             .nav-links { display: none; }
             .hamburger { display: flex; }
             .home-icon { width: 42px; height: 42px; }
@@ -1037,12 +1199,12 @@
 
             <!-- LEFT LINKS -->
             <ul class="nav-links">
-                <li><a href="#home" onclick="showSection('home')" data-text="Home">Home</a></li>
-                <li><a href="#skills" onclick="showSection('skills')" data-text="Skills">Skills</a></li>
+                <li><a href="#bio" data-text="Bio">Bio</a></li>
+                <li><a href="#skills" data-text="Skills">Skills</a></li>
             </ul>
 
             <!-- CENTER HOME ICON -->
-            <div class="home-icon" title="Home" onclick="showSection('home')">
+            <div class="home-icon" title="Home" id="homeIconBtn" style="cursor:pointer;">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
@@ -1050,8 +1212,8 @@
 
             <!-- RIGHT LINKS -->
             <ul class="nav-links">
-                <li><a href="#projects" onclick="showSection('projects')" data-text="Projects">Projects</a></li>
-                <li><a href="#contact" onclick="showSection('contact')" data-text="Contact">Contact</a></li>
+                <li><a href="#projects" data-text="Projects">Projects</a></li>
+                <li><a href="#contact" data-text="Contact">Contact</a></li>
             </ul>
 
             <!-- HAMBURGER (mobile only) -->
@@ -1064,11 +1226,11 @@
 
         <!-- MOBILE DROPDOWN -->
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-            <a href="#home" onclick="showSection('home')" data-text="Home">Home</a>
-            <a href="#skills" onclick="showSection('skills')" data-text="Skills">Skills</a>
+            <a href="#bio" data-text="Bio">Bio</a>
+            <a href="#skills" data-text="Skills">Skills</a>
             <div class="divider"></div>
-            <a href="#projects" onclick="showSection('projects')" data-text="Projects">Projects</a>
-            <a href="#contact" onclick="showSection('contact')" data-text="Contact">Contact</a>
+            <a href="#projects" data-text="Projects">Projects</a>
+            <a href="#contact" data-text="Contact">Contact</a>
         </div>
     </div>
 
@@ -1080,7 +1242,7 @@
                 <div class="flex flex-col items-center justify-center gap-6 md:gap-10">
                     <div class="flex justify-center order-1 mt-4 md:mt-8">
                         <div class="flex flex-col items-center gap-4">
-                            <div class="id-badge">CANDIDAT · 07</div>
+                            <div class="id-badge">Tiana</div>
                             <div class="frame c07">
                                 <div class="orbit2"></div>
                                 <div class="orbit"></div>
@@ -1101,10 +1263,10 @@
                             concrete solutions using modern technologies.
                         </p>
                         <div class="flex flex-wrap gap-4 justify-center">
-                            <button class="btn-primary" onclick="showSection('projects')">
+                            <button class="btn-primary">
                                 View my projects
                             </button>
-                            <button class="btn-primary" onclick="showSection('contact')">
+                            <button class="btn-primary">
                                 Contact me
                             </button>
                         </div>
@@ -1116,7 +1278,7 @@
         <!-- Bio Slide-Up Reveal Panel -->
         <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
             <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
-                <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Story</h2>
+                <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Bio</h2>
                 
                 <div class="text-[0.95rem] md:text-lg text-gray-300 leading-relaxed md:leading-loose space-y-4 md:space-y-6 bg-white/5 border border-blue-500/20 p-6 md:p-10 rounded-2xl backdrop-blur-md shadow-2xl overflow-y-auto shrink" style="scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.5) transparent;">
                     <p>
@@ -1132,13 +1294,13 @@
                         In 2025, I earned my Bachelor's degree in Software Engineering, and I am now a Master's student at CNTEMAD. During that journey, I also learned to use AI, because the way of building things changed completely once it arrived.
                     </p>
                     <p>
-                        I have completed more than 10 projects that I consider serious, professional work since becoming a developer. You can explore them in the <a href="#projects" onclick="showSection('projects')" class="text-blue-400 hover:text-blue-300 transition-colors font-semibold underline underline-offset-4 decoration-blue-500/50 hover:decoration-blue-400">Projects</a> section of my portfolio website.
+                        I have completed more than 10 projects that I consider serious, professional work since becoming a developer. You can explore them in the <a href="#projects" class="text-blue-400 hover:text-blue-300 transition-colors font-semibold underline underline-offset-4 decoration-blue-500/50 hover:decoration-blue-400">Projects</a> section of my portfolio website.
                     </p>
                 </div>
                 
                 <!-- Small indicator to scroll back down or view more -->
                 <div class="mt-6 md:mt-8 flex justify-center w-full animate-bounce shrink-0">
-                    <a href="#skills" onclick="showSection('skills')" class="text-gray-500 hover:text-blue-400 transition-colors">
+                    <a href="#skills" class="text-gray-500 hover:text-blue-400 transition-colors">
                         <i class="fas fa-chevron-down text-2xl md:text-3xl"></i>
                     </a>
                 </div>
@@ -1486,72 +1648,87 @@
     </section>
 
     <!-- Contact Section -->
+    <!-- Contact Section — Premium Redesign -->
     <section id="contact" class="section">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">Contact Me</h2>
+        <div class="max-w-5xl mx-auto contact-wrapper" style="padding-top: 2rem;">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6">Contact information</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-4">
-                            <i class="fas fa-envelope text-blue-400 text-xl"></i>
-                            <span>contact@developpeur-fullstack.com</span>
+            <!-- Title -->
+            <div class="contact-title">Get In Touch</div>
+            <p class="contact-subtitle">Have a project in mind? Let's build something amazing together.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+                <!-- Left column — Info (2/5 width) -->
+                <div class="lg:col-span-2 flex flex-col gap-6">
+
+                    <!-- Contact details card -->
+                    <div class="contact-card">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <div class="contact-info-label">Email</div>
+                                <div class="contact-info-value">contact@developpeur-fullstack.com</div>
+                            </div>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <i class="fas fa-phone text-blue-400 text-xl"></i>
-                            <span>+33 6 12 34 56 78</span>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <div class="contact-info-label">Phone</div>
+                                <div class="contact-info-value">+33 6 12 34 56 78</div>
+                            </div>
                         </div>
-                        <div class="flex items-center space-x-4">
-                            <i class="fas fa-map-marker-alt text-blue-400 text-xl"></i>
-                            <span>Paris, France</span>
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <div class="contact-info-label">Location</div>
+                                <div class="contact-info-value">Paris, France</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-8">
-                        <h4 class="text-xl font-semibold mb-4">Social networks</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
-                                <i class="fab fa-linkedin text-2xl"></i>
-                            </a>
-                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
-                                <i class="fab fa-github text-2xl"></i>
-                            </a>
-                            <a href="#" class="text-blue-400 hover:text-white transition-colors">
-                                <i class="fab fa-twitter text-2xl"></i>
-                            </a>
+                    <!-- Social card -->
+                    <div class="contact-card">
+                        <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1rem;">Connect with me</div>
+                        <div class="social-row">
+                            <a href="#" class="social-icon-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-icon-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Availability badge -->
+                    <div class="contact-card" style="text-align:center; padding:1.25rem;">
+                        <div style="display:inline-flex; align-items:center; gap:0.5rem;">
+                            <span style="width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e; animation: pulse-dot 2s ease-in-out infinite;"></span>
+                            <span style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:#94a3b8;">Currently Available</span>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <input type="text" id="name" name="name" placeholder="Your name" class="form-input"
-                                required>
-                        </div>
-                        <div>
-                            <input type="email" id="email" name="email" placeholder="Your email" class="form-input"
-                                required>
-                        </div>
-                        <div>
-                            <input type="text" id="subject" name="subject" placeholder="Subject" class="form-input"
-                                required>
-                        </div>
-                        <div>
-                            <textarea id="message" name="message" rows="5" placeholder="Your message" class="form-input"
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary w-full">
-                            Send message
-                        </button>
-                    </form>
+                <!-- Right column — Form (3/5 width) -->
+                <div class="lg:col-span-3">
+                    <div class="contact-card" style="padding: 2.5rem;">
+                        <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1.75rem;">Send me a message</div>
+                        <form id="contact-form" style="display:flex; flex-direction:column; gap:1.25rem;">
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem;">
+                                <input type="text" id="name" name="name" placeholder="Your name" class="form-input" required>
+                                <input type="email" id="email" name="email" placeholder="Your email" class="form-input" required>
+                            </div>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" class="form-input" required>
+                            <textarea id="message" name="message" placeholder="Tell me about your project..." class="form-input" required></textarea>
+                            <button type="submit" class="btn-primary w-full" style="margin-top:0.5rem;">
+                                <i class="fas fa-paper-plane" style="margin-right:10px;"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <script src="main.js"></script>
+    <script src="main.js?v=2"></script>
     <script>
         const hamburger   = document.getElementById('hamburger');
         const mobileMenu  = document.getElementById('mobileMenu');

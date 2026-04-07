@@ -25,34 +25,69 @@ document.addEventListener('DOMContentLoaded', function() {
     changeLanguage(currentLanguage);
     initializeTypingEffect();
     
+    // Home icon → navigate to home
+    const homeIconBtn = document.getElementById('homeIconBtn');
+    if (homeIconBtn) {
+        homeIconBtn.addEventListener('click', function() {
+            showSection('home');
+        });
+    }
+    
     // Empêcher le scroll de changer les sections
     let isNavigating = false;
     window.addEventListener('scroll', function() {
         if (isNavigating) return;
-        // Ne rien faire - les sections sont contrôlées uniquement par la navigation
     });
 });
 
 // Navigation entre les sections
 function showSection(sectionId) {
-    // Masquer toutes les sections
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-        section.style.display = 'none';
-    });
-    
-    // Afficher la section demandée
     const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
+    if (!targetSection) return;
+
+    const currentActive = document.querySelector('.section.active');
+    
+    // Ne rien faire si on est déjà sur la section
+    if (currentActive && currentActive.id === sectionId) return;
+
+    const displayNew = () => {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none';
+        });
+        
         targetSection.classList.add('active');
         targetSection.style.display = 'block';
-        // Scroll vers le haut de la page
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        targetSection.style.opacity = '0';
+        window.scrollTo({ top: 0 });
+        
+        anime({
+            targets: targetSection,
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 400,
+            easing: 'easeOutQuad'
+        });
+    };
+
+    if (currentActive) {
+        anime({
+            targets: currentActive,
+            opacity: [1, 0],
+            translateY: [0, -20],
+            duration: 300,
+            easing: 'easeInQuad',
+            complete: displayNew
+        });
+    } else {
+        displayNew();
     }
     
-    // Mettre à jour l'URL
-    window.history.pushState(null, null, `#${sectionId}`);
+    // Mettre à jour l'URL sans scroller nativement
+    if (window.location.hash !== `#${sectionId}`) {
+        window.history.pushState(null, null, `#${sectionId}`);
+    }
 }
 
 // Animation des éléments de section (désactivé pour affichage immédiat)
@@ -216,9 +251,60 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Animations au scroll - désactivées pour affichage immédiat
+// Animations au scroll — IntersectionObserver reveal
 function initializeScrollAnimations() {
-    // Désactivées
+    // CSS pour les éléments cachés avant apparition
+    const revealCSS = document.createElement('style');
+    revealCSS.textContent = `
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
+        }
+        .reveal-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    `;
+    document.head.appendChild(revealCSS);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Stagger delay based on index within its parent grid
+                const parent = entry.target.parentElement;
+                const siblings = Array.from(parent.children).filter(c => c.classList.contains('reveal-item'));
+                const idx = siblings.indexOf(entry.target);
+                entry.target.style.transitionDelay = `${idx * 80}ms`;
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Tag and observe skill cards, project rows, capability cards
+    function observeItems() {
+        document.querySelectorAll('.skill-card, .project-row, #skills .grid > div:not(.skill-card)').forEach(el => {
+            if (!el.classList.contains('reveal-item')) {
+                el.classList.add('reveal-item');
+                observer.observe(el);
+            }
+        });
+    }
+
+    // Run once now, and also after every section switch
+    observeItems();
+    const origShowSection = window._origShowSection || showSection;
+    if (!window._origShowSection) {
+        window._origShowSection = showSection;
+    }
+    // Re-tag new items whenever a section becomes visible
+    const mutObs = new MutationObserver(() => {
+        observeItems();
+    });
+    document.querySelectorAll('.section').forEach(s => {
+        mutObs.observe(s, { attributes: true, attributeFilter: ['style', 'class'] });
+    });
 }
 
 // Ouvrir un projet (placeholder)
@@ -233,6 +319,43 @@ window.addEventListener('popstate', function(e) {
         showSection(hash);
     } else {
         showSection('home');
+    }
+});
+
+// Interception des clics sur les liens internes
+document.addEventListener('click', function(e) {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (anchor) {
+        const hash = anchor.getAttribute('href').substring(1);
+        
+        // Special case: "Bio" link → show home section, then scroll to bio panel
+        if (hash === 'bio') {
+            e.preventDefault();
+            const homeSection = document.getElementById('home');
+            const currentActive = document.querySelector('.section.active');
+            
+            if (currentActive && currentActive.id === 'home') {
+                // Already on home, just scroll to bio
+                const bioPanel = homeSection.querySelector('.relative.z-10');
+                if (bioPanel) bioPanel.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Switch to home, then scroll to bio after animation
+                showSection('home');
+                setTimeout(() => {
+                    const bioPanel = document.querySelector('#home .relative.z-10');
+                    if (bioPanel) bioPanel.scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            }
+            return;
+        }
+        
+        if (hash && document.getElementById(hash)) {
+            e.preventDefault();
+            showSection(hash);
+        } else if (anchor.getAttribute('href') === '#') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 });
 
@@ -316,7 +439,7 @@ function initializeTooltips() {
 // Système de traduction
 const translations = {
     fr: {
-        'nav-home': 'Accueil',
+        'nav-bio': 'Bio',
         'nav-skills': 'Compétences',
         'nav-projects': 'Projets',
         'nav-contact': 'Contact',
@@ -340,7 +463,7 @@ const translations = {
         'form-submit': 'Envoyer le message'
     },
     en: {
-        'nav-home': 'Home',
+        'nav-bio': 'Bio',
         'nav-skills': 'Skills',
         'nav-projects': 'Projects',
         'nav-contact': 'Contact',
