@@ -13,6 +13,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+        @font-face {
+            font-family: 'Osiris';
+            src: url('Osiris.woff2') format('woff2'),
+                 url('Osiris.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -171,7 +179,8 @@
 
         /* Hero Section */
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-family: 'Osiris', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 800;
             background: linear-gradient(135deg, #1e64dc, #60a5fa, #ffffff);
             -webkit-background-clip: text;
@@ -179,6 +188,7 @@
             background-clip: text;
             line-height: 1.1;
             margin-bottom: 1rem;
+            text-transform: uppercase;
         }
 
         .hero-subtitle {
@@ -567,6 +577,7 @@
             }
 
             .hero-title {
+                font-family: 'Osiris', sans-serif;
                 font-size: 2.5rem;
             }
 
@@ -1254,7 +1265,7 @@
                         </div>
                     </div>
                     <div class="text-center order-2">
-                        <div class="hero-title">Fullstack Developer</div>
+                        <div class="hero-title">FULLSTACK DEVELOPER</div>
                         <div class="hero-subtitle mb-4">
                             <span id="typed-text" class="typing-text"></span>
                         </div>
