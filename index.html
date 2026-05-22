@@ -1191,6 +1191,12 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
+
+        #sayitModal{
+            position: fixed;
+            height: 100vh;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -1776,7 +1782,7 @@
     </script>
 
     <!-- Sayit Redirect Modal -->
-    <div class="sayit-modal-overlay" id="sayitModal">
+    <div class="sayit-modal-overlay active" id="sayitModal">
         <div class="sayit-modal">
             <div class="sayit-modal-icon">
                 <i class="fas fa-external-link-alt"></i>
@@ -1793,11 +1799,15 @@
         </div>
     </div>
 
+    
     <script>
         function showSayitModal() {
+            document.body.style.overflow = 'hidden';
             document.getElementById('sayitModal').classList.add('active');
         }
+
         function closeSayitModal() {
+            document.body.style.overflow = '';
             document.getElementById('sayitModal').classList.remove('active');
         }
         function confirmSayit() {
