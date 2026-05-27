@@ -172,7 +172,7 @@
             display: block !important;
         }
 
-        /* Empêcher le scroll d'affecter les sections */
+        /* Prevent scroll from affecting sections */
         body {
             scroll-behavior: smooth;
         }
@@ -308,6 +308,44 @@
             border-color: #1e64dc;
             transform: translateX(10px);
         }
+
+        /* Project cover: blurred background derived from same image */
+        .project-cover {
+            position: relative;
+            width: 100%;
+            height: 14rem; /* matches previous h-56 */
+            overflow: hidden;
+            display: block;
+            background: #000;
+        }
+        .project-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: var(--cover);
+            background-size: cover;
+            background-position: center;
+            filter: blur(30px) saturate(120%);
+            transform: scale(1.15);
+            z-index: 0;
+        }
+        .project-cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+            z-index: 1;
+        }
+        .project-cover-img {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.45s cubic-bezier(.77,0,.18,1);
+        }
+        .project-cover:hover .project-cover-img { transform: scale(1.05); }
 
         .project-tech {
             display: inline-block;
@@ -1192,7 +1230,8 @@
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        #sayitModal{
+        #sayitModal,
+        #tikDownModal {
             position: fixed;
             height: 100vh;
             overflow: hidden;
@@ -1265,7 +1304,7 @@
                                 <div class="orbit"></div>
                                 <div class="border-layer"></div>
                                 <div class="photo">
-                                    <img src="finit.jpeg" alt="Photo du développeur">
+                                    <img src="finit.jpeg" alt="Developer photo">
                                 </div>
                             </div>
                         </div>
@@ -1538,7 +1577,7 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="window.location.href='tikDown/tikDown.html'">
+                <div class="project-row" onclick="showTikDownModal()">
                     <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
                         <img src="tikDown.png" alt="tikDown project cover"
                             class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
@@ -1548,12 +1587,14 @@
                         <span class="text-blue-400">2025</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        For downloading video in tik tok , hd and without watermark
+                        For downloading video in tik tok , HD and without watermark
                     </p>
                     <div class="flex flex-wrap">
+                        <span class="project-tech">Chrome Extension</span>
                         <span class="project-tech">HTML</span>
                         <span class="project-tech">CSS</span>
-                        <span class="project-tech">Assets</span>
+                        <span class="project-tech">JS</span>
+                        <span class="project-tech">Python</span>
                     </div>
                 </div>
                 <div class="project-row" onclick="window.location.href='gotik/gotik.html'">
@@ -1597,9 +1638,11 @@
                 </div>
 
                 <div class="project-row" onclick="window.location.href='getlike/getlike.html'">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20 bg-black p-2">
-                        <img src="getlike/GETLIKE.png" alt="Milike project cover"
-                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
+                        <div class="project-cover" style="--cover:url('getlike/GETLIKE.png')">
+                            <img src="getlike/GETLIKE.png" alt="getlike project cover"
+                                class="project-cover-img">
+                        </div>
                     </div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold">getlike.io + tiktok task automation</h3>
@@ -1618,7 +1661,7 @@
                 <div class="project-row" onclick="openProject('project2')">
                     <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
                         <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                            alt="API RESTful pour E-commerce"
+                            alt="RESTful API for E-commerce"
                             class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="flex justify-between items-start mb-4">
@@ -1640,7 +1683,7 @@
                 <div class="project-row" onclick="openProject('project3')">
                     <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
                         <img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                            alt="Système de Chat en Temps Réel"
+                            alt="Real-time Chat System"
                             class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="flex justify-between items-start mb-4">
@@ -1669,8 +1712,8 @@
                         <span class="text-blue-400">2023</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Interface de visualisation de données avec graphiques interactifs,
-                        filtres dynamiques et export de rapports.
+                        Data visualization interface with interactive charts,
+                        dynamic filters and report export.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">HTML</span>
@@ -1766,6 +1809,28 @@
 
     <script src="main.js?v=2"></script>
     <script>
+        // ── Hash navigation : ouvre la bonne section au chargement ──
+        window.addEventListener('load', () => {
+            const hash = window.location.hash; // ex: "#projects"
+            if (!hash || hash === '#home') return;
+
+            // 1) Essaie de cliquer sur le lien de nav correspondant
+            //    pour déclencher la logique de main.js
+            const navLink = document.querySelector(`a[href="${hash}"]`);
+            if (navLink) {
+                navLink.click();
+                return;
+            }
+
+            // 2) Fallback : bascule manuellement les classes active
+            const target = document.getElementById(hash.slice(1));
+            if (target && target.classList.contains('section')) {
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                target.classList.add('active');
+            }
+        });
+    </script>
+    <script>
         const hamburger   = document.getElementById('hamburger');
         const mobileMenu  = document.getElementById('mobileMenu');
 
@@ -1806,14 +1871,32 @@
             <div class="sayit-modal-icon">
                 <i class="fas fa-external-link-alt"></i>
             </div>
-            <div class="sayit-modal-title">Redirection externe</div>
+            <div class="sayit-modal-title">External Redirect</div>
             <p class="sayit-modal-text">
-                Vous allez être redirigé vers un site externe.<br>Une nouvelle fenêtre va s'ouvrir.
+                You will be redirected to an external site.<br>A new window will open.
             </p>
             <div class="sayit-modal-url">sayit.gt.tc</div>
             <div class="sayit-modal-buttons">
-                <button class="sayit-btn sayit-btn-cancel" onclick="closeSayitModal()">Annuler</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmSayit()">Continuer</button>
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeSayitModal()">Cancel</button>
+                <button class="sayit-btn sayit-btn-confirm" onclick="confirmSayit()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- tikDown Project Modal -->
+    <div class="sayit-modal-overlay" id="tikDownModal">
+        <div class="sayit-modal">
+            <div class="sayit-modal-icon">
+                <i class="fas fa-external-link-alt"></i>
+            </div>
+            <div class="sayit-modal-title">tikDown Project</div>
+            <p class="sayit-modal-text">
+                Discover tikDown : a tool to download TikTok videos in HD without watermark.
+            </p>
+            <div class="sayit-modal-url">github.com/brotiana/TikDown</div>
+            <div class="sayit-modal-buttons">
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeTikDownModal()">Close</button>
+                <button class="sayit-btn sayit-btn-confirm" onclick="confirmTikDown()">View on GitHub</button>
             </div>
         </div>
     </div>
@@ -1833,9 +1916,27 @@
             closeSayitModal();
             window.open('https://sayit.gt.tc/', '_blank');
         }
+
+        function showTikDownModal() {
+            document.body.style.overflow = 'hidden';
+            document.getElementById('tikDownModal').classList.add('active');
+        }
+
+        function closeTikDownModal() {
+            document.body.style.overflow = '';
+            document.getElementById('tikDownModal').classList.remove('active');
+        }
+
+        function confirmTikDown() {
+            closeTikDownModal();
+            window.open('https://github.com/brotiana/TikDown', '_blank');
+        }
         // Close on overlay click
         document.getElementById('sayitModal').addEventListener('click', function(e) {
             if (e.target === this) closeSayitModal();
+        });
+        document.getElementById('tikDownModal').addEventListener('click', function(e) {
+            if (e.target === this) closeTikDownModal();
         });
     </script>
 </body>

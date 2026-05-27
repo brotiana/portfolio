@@ -4,30 +4,69 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>getlike — Projet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             color-scheme: dark;
             color: #f5f7fa;
-            background: #050607;
-            font-family: Inter, "Segoe UI", sans-serif;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         html, body {
-            margin: 0;
-            padding: 0;
             min-height: 100%;
-            background: #050607;
-            color: #f5f7fa;
             overflow-x: hidden;
         }
 
         body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #030a18 0%, #060d1c 50%, #020508 100%);
+            color: #ffffff;
             display: flex;
             flex-direction: column;
+        }
+
+        /* ── Scanlines ── */
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.32) 2px,
+                rgba(0, 0, 0, 0.32) 4px
+            );
+            pointer-events: none;
+        }
+
+        /* ── Vignette ── */
+        .vignette {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 40%,
+                rgba(0, 0, 0, 0.72) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* ── Corner glow ── */
+        .corner-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 40% 40% at 0% 100%, rgba(26,111,255,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 100% 0%, rgba(0,212,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero {
@@ -36,6 +75,7 @@
             position: relative;
             display: flex;
             justify-content: center;
+            z-index: 1;
         }
 
         .project-video {
@@ -50,20 +90,29 @@
             width: min(1200px, 100%);
             margin: 0 auto;
             padding: 24px 20px 120px;
+            position: relative;
+            z-index: 1;
         }
 
         .project-subtitle {
             margin: 0 0 12px;
-            color: #8fa0b4;
-            letter-spacing: 0.08em;
+            color: #5a7fa8;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            font-family: 'Orbitron', monospace;
         }
 
         .project-title {
             margin: 0;
             font-size: clamp(2rem, 3.4vw, 3.4rem);
             line-height: 1.05;
+            background: linear-gradient(135deg, #1e64dc, #60a5fa, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
         }
 
         .details-grid {
@@ -75,20 +124,30 @@
 
         .detail {
             padding: 18px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(30, 100, 220, 0.07);
+            border: 1px solid rgba(30, 100, 220, 0.25);
+            backdrop-filter: blur(8px);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .detail:hover {
+            background: rgba(30, 100, 220, 0.13);
+            border-color: rgba(30, 100, 220, 0.5);
         }
 
         .detail strong {
             display: block;
             margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: #ffffff;
+            font-size: 0.8rem;
+            color: #60a5fa;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .detail span {
-            color: #c7d0e3;
+            color: #94a3b8;
             line-height: 1.7;
             font-size: 0.95rem;
         }
@@ -100,13 +159,17 @@
 
         .description h2 {
             margin: 0 0 12px;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: #60a5fa;
+            letter-spacing: 0.05em;
         }
 
         .description p,
         .description li {
             margin: 0;
-            color: #d3d8e2;
+            color: #94a3b8;
             line-height: 1.8;
             font-size: 1rem;
         }
@@ -114,6 +177,18 @@
         .description ul {
             padding-left: 20px;
             margin: 0;
+        }
+
+        .description li::marker {
+            color: #1e64dc;
+        }
+
+        /* Separator line with blue glow */
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30,100,220,0.5), transparent);
+            margin: 8px 0 24px;
         }
 
         .back-button {
@@ -127,18 +202,19 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            color: #ffffff;
+            background: rgba(30, 100, 220, 0.15);
+            border: 1px solid rgba(30, 100, 220, 0.35);
+            color: #60a5fa;
             text-decoration: none;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(30,100,220,0.2), 0 18px 40px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(12px);
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .back-button:hover {
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(30, 100, 220, 0.28);
+            box-shadow: 0 0 30px rgba(30,100,220,0.4), 0 18px 40px rgba(0,0,0,0.3);
         }
 
         .back-button svg {
@@ -154,7 +230,7 @@
 
         @media (max-width: 720px) {
             .project-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .details-grid {
@@ -164,6 +240,11 @@
     </style>
 </head>
 <body>
+    <!-- Background FX layers -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="corner-glow"></div>
+
     <main class="hero">
         <video class="project-video" controls playsinline preload="metadata" poster="" muted>
             <source src="GETLIKE.mp4" type="video/mp4" />
@@ -175,6 +256,7 @@
         <article>
             <p class="project-subtitle">Présentation du projet</p>
             <h1 class="project-title">Titre du projet — GetLike</h1>
+            <hr class="section-divider" />
 
             <div class="details-grid">
                 <div class="detail">
@@ -215,7 +297,7 @@
         </article>
     </section>
 
-    <a href="#" class="back-button" onclick="history.back(); return false;" aria-label="Retour à la page précédente">
+    <a href="../index.html#projects" class="back-button" aria-label="Retour aux projets">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
