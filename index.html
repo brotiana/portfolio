@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fullstack Developer Portfolio</title>
+    <!-- Masque instantané si hash présent → évite le flash de l'accueil -->
+    <script>
+        (function () {
+            var hash = window.location.hash;
+            if (hash && hash !== '#home') {
+                document.documentElement.style.visibility = 'hidden';
+            }
+        })();
+    </script>
     <script src="tailwind.js"></script>
     <script src="transition.js?v=2"></script>
     <script src="anime.min.js"></script>
@@ -1812,13 +1821,22 @@
         // ── Hash navigation : ouvre la bonne section au chargement ──
         window.addEventListener('load', () => {
             const hash = window.location.hash; // ex: "#projects"
-            if (!hash || hash === '#home') return;
+
+            const reveal = () => {
+                document.documentElement.style.visibility = '';
+            };
+
+            if (!hash || hash === '#home') {
+                reveal();
+                return;
+            }
 
             // 1) Essaie de cliquer sur le lien de nav correspondant
             //    pour déclencher la logique de main.js
             const navLink = document.querySelector(`a[href="${hash}"]`);
             if (navLink) {
                 navLink.click();
+                reveal();
                 return;
             }
 
@@ -1828,6 +1846,7 @@
                 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
                 target.classList.add('active');
             }
+            reveal();
         });
     </script>
     <script>
