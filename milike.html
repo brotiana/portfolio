@@ -278,7 +278,7 @@
                 <div class="media-item">
                     <h2>Admin Screenshot</h2>
                     <div class="media-box">
-                        <img src="Screenshot_20251207_085338.jpg" alt="Milike admin screenshot" />
+                        <img src="scrshou.png" alt="Milike admin screenshot" />
                     </div>
                 </div>
             </div>
@@ -288,15 +288,13 @@
         <section class="about-card">
             <h2>About the program</h2>
             <p>
-                Milike is a lightweight automation tool built to assist social media operators in scaling basic Instagram workflows. The project combines a small Python backend that interacts with Instagram endpoints (or a headless browser when needed) and a minimal web-based admin UI for scheduling and monitoring tasks.
+                Milike is a automation tool built to automate some action in instagram : like , follow , unfollow , comment , post story or publication , delete a post. The project combines a Python backend that interacts with Instagram private endpoints and a minimal web-based admin UI for scheduling and monitoring tasks.
             </p>
             <ul>
-                <li><strong>Core actions:</strong> automatically like posts, follow/unfollow accounts based on simple filters, post scheduled content, add comments and optionally delete posts.</li>
+                <li>Specifically in the video above, the script interacts with a Telegram bot called 'SmmKingdomtasks'. This bot pays for Instagram actions such as likes, follows, and comments. The script uses Telethon to intercept and execute these tasks.</li>
                 <li><strong>Scheduler:</strong> tasks can be scheduled or run immediately from the dashboard; the scheduler respects configurable rate limits to avoid triggering platform protections.</li>
-                <li><strong>Monitoring:</strong> an activity log shows recent actions and simple success/failure metrics; screenshots (like the one above) help verify results.</li>
-                <li><strong>Storage:</strong> uses a small SQLite database for queues, user credentials (encrypted in production) and task history.</li>
+                <li><strong>Storage:</strong> uses a small SQLite database for queues, user credentials and task history.</li>
             </ul>
-            <p style="margin-top: 0.75rem;">This demo is intended for learning and experimentation. In a production context, platform policies and legal constraints must be respected and appropriate rate-limiting, error handling and credential security must be implemented.</p>
 
             <div class="tech-row">
                 <span class="tech">Python</span>
