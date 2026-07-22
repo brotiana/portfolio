@@ -1081,7 +1081,7 @@
         ════════════════════════════════════════════════════ */
         .sayit-modal-overlay {
             position: fixed;
-            inset: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: 9999;
             background: rgba(3, 10, 24, 0.85);
             backdrop-filter: blur(8px);
@@ -1107,6 +1107,8 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            max-height: 85vh;
+            overflow-y: auto;
             box-shadow:
                 0 0 40px rgba(26, 111, 255, 0.15),
                 0 20px 60px rgba(0, 0, 0, 0.6),
@@ -1239,11 +1241,59 @@
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        #sayitModal,
-        #tikDownModal {
-            position: fixed;
-            height: 100vh;
+        /* ponytail: inset:0 de la classe .sayit-modal-overlay suffit, pas de height:100vh fixe */
+
+        /* ════════════════════════════════════════════════════
+           SHADOWMIND PROJECT MODAL
+        ════════════════════════════════════════════════════ */
+        .shadowmind-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            height: 300px;
+            margin: 0 auto 1.25rem;
+            border-radius: 12px;
             overflow: hidden;
+            background: #000;
+        }
+        .shadowmind-carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: none;
+        }
+        .shadowmind-carousel img.active {
+            z-index: 2;
+        }
+        .shadowmind-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .shadowmind-feature {
+            background: rgba(26, 111, 255, 0.08);
+            border: 1px solid rgba(26, 111, 255, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .shadowmind-feature i {
+            font-size: 1.3rem;
+            color: #00d4ff;
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        .shadowmind-feature span {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            line-height: 1.3;
         }
     </style>
 </head>
@@ -1628,6 +1678,28 @@
                     </div>
                 </div>
 
+                <div class="project-row" onclick="showShadowMindModal()">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <div class="project-cover" style="--cover:url('shadowmind.png')">
+                            <img src="shadowmind.png" alt="ShadowMind project cover"
+                                class="project-cover-img">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">ShadowMind</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Édition riche — texte, couleurs, images, audio, tableaux.<br>
+                        Lecture vocale intelligente — en français et en anglais.<br>
+                        Notes synchronisées — accessibles sur tous vos appareils.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">HTML</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">JavaScript</span>
+                    </div>
+                </div>
 
                 <div class="project-row" onclick="window.location.href='milike.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20 bg-black p-2">
@@ -1926,6 +1998,43 @@
         </div>
     </div>
 
+    <!-- ShadowMind Project Modal -->
+    <div class="sayit-modal-overlay" id="shadowMindModal">
+        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem 5rem;">
+            <div class="shadowmind-carousel" id="shadowmindCarousel">
+                <img src="shadowmind.png" alt="ShadowMind cover" class="active">
+                <img src="shadowmind1.png" alt="ShadowMind screenshot 1">
+                <img src="shadowmind2.png" alt="ShadowMind screenshot 2">
+            </div>
+            <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">ShadowMind</div>
+            <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
+                Plateforme d&#39;enregistrement de notes nouvelle g&#233;n&#233;ration.
+            </p>
+            <div class="shadowmind-features">
+                <div class="shadowmind-feature">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>&#201;dition riche<br>texte, couleurs, images, audio, tableaux</span>
+                </div>
+                <div class="shadowmind-feature">
+                    <i class="fas fa-volume-up"></i>
+                    <span>Lecture vocale<br>fran&#231;ais &amp; anglais</span>
+                </div>
+                <div class="shadowmind-feature">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Notes synchronis&#233;es<br>accessibles sur tous vos appareils</span>
+                </div>
+                <div class="shadowmind-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Stockage s&#233;curis&#233;<br>chiffr&#233; de bout en bout</span>
+                </div>
+            </div>
+            <div class="sayit-modal-buttons" style="position:absolute;bottom:1.5rem;left:0;right:0;display:flex;gap:12px;justify-content:center;z-index:10;">
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Fermer</button>
+                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Ouvrir le site</button>
+            </div>
+        </div>
+    </div>
+
     
     <script>
         function showSayitModal() {
@@ -1962,6 +2071,57 @@
         });
         document.getElementById('tikDownModal').addEventListener('click', function(e) {
             if (e.target === this) closeTikDownModal();
+        });
+
+        /* ── ShadowMind Modal ── */
+        var shadowMindInterval, shadowMindIndex = 0;
+        var shadowMindImages = ['shadowmind.png', 'shadowmind1.png', 'shadowmind2.png'];
+
+        function showShadowMindModal() {
+            document.body.style.overflow = 'hidden';
+            var modal = document.getElementById('shadowMindModal');
+            modal.classList.add('active');
+            shadowMindIndex = 0;
+            var imgs = document.querySelectorAll('#shadowmindCarousel img');
+            imgs.forEach(function(img, i) {
+                img.classList.toggle('active', i === 0);
+                img.style.transform = '';
+                img.style.transition = 'none';
+            });
+            clearInterval(shadowMindInterval);
+            shadowMindInterval = setInterval(function() {
+                shadowMindIndex = (shadowMindIndex + 1) % shadowMindImages.length;
+                var imgs = document.querySelectorAll('#shadowmindCarousel img');
+                var prev = shadowMindIndex === 0 ? imgs.length - 1 : shadowMindIndex - 1;
+                imgs[prev].style.transition = 'transform 0.6s ease';
+                imgs[prev].style.transform = 'translateX(-100%)';
+                imgs[prev].classList.remove('active');
+                imgs[shadowMindIndex].style.transition = 'none';
+                imgs[shadowMindIndex].style.transform = 'translateX(100%)';
+                imgs[shadowMindIndex].classList.add('active');
+                void imgs[shadowMindIndex].offsetHeight;
+                imgs[shadowMindIndex].style.transition = 'transform 0.6s ease';
+                imgs[shadowMindIndex].style.transform = 'translateX(0)';
+                setTimeout(function() {
+                    imgs[prev].style.transition = 'none';
+                    imgs[prev].style.transform = '';
+                }, 600);
+            }, 4000);
+        }
+
+        function closeShadowMindModal() {
+            document.body.style.overflow = '';
+            clearInterval(shadowMindInterval);
+            document.getElementById('shadowMindModal').classList.remove('active');
+        }
+
+        function confirmShadowMind() {
+            closeShadowMindModal();
+            window.open('https://shadowmind.gt.tc/', '_blank');
+        }
+
+        document.getElementById('shadowMindModal').addEventListener('click', function(e) {
+            if (e.target === this) closeShadowMindModal();
         });
     </script>
 </body>

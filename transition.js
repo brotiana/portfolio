@@ -7,13 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
         body.page-exit {
             animation: fadeOutPage 0.4s ease-in forwards;
         }
+        /* ponytail: pas de transform sur body, ça casse position:fixed des modaux */
         @keyframes fadeInPage {
-            0% { opacity: 0; transform: translateY(15px) scale(0.99); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
         @keyframes fadeOutPage {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-15px) scale(0.99); }
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
     `;
     document.head.appendChild(style);
