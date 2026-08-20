@@ -808,8 +808,8 @@
                 0 0,
                 calc(100% - 20px) 0,
                 100% 20px,
-                100% 100%,
-                20px 100%,
+                100% 100%, 
+                20px 100%, 
                 0 calc(100% - 20px)
             );
             overflow: hidden;
@@ -1286,8 +1286,7 @@
         /* ════════════════════════════════════════════════════
            SHADOWMIND PROJECT MODAL
         ════════════════════════════════════════════════════ */
-        .shadowmind-carousel,
-        .miia-carousel {
+        .shadowmind-carousel {
             position: relative;
             width: 100%;
             max-width: 560px;
@@ -1296,10 +1295,8 @@
             border-radius: 12px;
             overflow: hidden;
             background: #000;
-            cursor: pointer;
         }
-        .shadowmind-carousel img,
-        .miia-carousel img {
+        .shadowmind-carousel img {
             position: absolute;
             top: 0;
             left: 0;
@@ -1308,121 +1305,35 @@
             object-fit: contain;
             border-radius: 12px;
             transition: none;
-            cursor: pointer;
         }
-        .shadowmind-carousel img.active,
-        .miia-carousel img.active {
+        .shadowmind-carousel img.active {
             z-index: 2;
         }
-        .shadowmind-features,
-        .miia-features {
+        .shadowmind-features {
             display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
         }
-        .shadowmind-features {
-            grid-template-columns: 1fr 1fr;
-        }
-        .miia-features {
-            grid-template-columns: 1fr;
-        }
-        .shadowmind-feature,
-        .miia-feature {
+        .shadowmind-feature {
             background: rgba(26, 111, 255, 0.08);
             border: 1px solid rgba(26, 111, 255, 0.2);
             border-radius: 10px;
             padding: 0.75rem;
             text-align: center;
         }
-        .miia-feature {
-            text-align: left;
-        }
-        .shadowmind-feature i,
-        .miia-feature i {
+        .shadowmind-feature i {
             font-size: 1.3rem;
             color: #00d4ff;
             display: block;
             margin-bottom: 0.35rem;
         }
-        .shadowmind-feature span,
-        .miia-feature span {
+        .shadowmind-feature span {
             font-size: 0.8rem;
             color: #94a3b8;
             line-height: 1.3;
-        }
-
-        /* ════════════════════════════════════════════════════
-           LIGHTBOX — agrandissement des images projet
-        ════════════════════════════════════════════════════ */
-        .project-lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            background: rgba(2, 8, 20, 0.94);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            cursor: zoom-out;
-        }
-        .project-lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .project-lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 60px rgba(0, 212, 255, 0.25);
-            cursor: default;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 1.2rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 2.2rem;
-            line-height: 1;
-            cursor: pointer;
-            z-index: 2;
-            opacity: 0.8;
-            transition: opacity 0.2s ease;
-        }
-        .lightbox-close:hover {
-            opacity: 1;
-        }
-        .lightbox-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(26, 111, 255, 0.25);
-            border: 1px solid rgba(26, 111, 255, 0.5);
-            color: #fff;
-            font-size: 1.8rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-        .lightbox-arrow:hover {
-            background: rgba(26, 111, 255, 0.5);
-        }
-        .lightbox-prev {
-            left: 1.5rem;
-        }
-        .lightbox-next {
-            right: 1.5rem;
         }
         /* ════════════════════════════════════════════════════
            ZOOM AUTO 75% — Écrans desktop de hauteur ≤ 815px
@@ -1451,26 +1362,6 @@
                → vide de 25% en bas. En les passant à 100vh ÷ 0.75
                (= 133.33vh), ils recouvrent exactement l'écran après zoom.
             */
-            #home,
-            #home > * {
-                height: calc(100vh / 0.75) !important;
-                height: calc(100dvh / 0.75) !important;
-            }
-        }
-        /* ════════════════════════════════════════════════════
-           ZOOM AUTO 75% — Android portrait (largeur ≤ 480px)
-           Cible : Oppo A15s (360×800) · Vivo Y93 (360×760)
-           Applique le même dézoomage que sur desktop pour que
-           la mise en page mobile tienne correctement à l'écran.
-        ════════════════════════════════════════════════════ */
-        @media (max-width: 480px) and (min-height: 600px) {
-            html {
-                zoom: 0.75;
-                overflow-x: hidden;
-            }
-            body {
-                width: 100%;
-            }
             #home,
             #home > * {
                 height: calc(100vh / 0.75) !important;
@@ -1576,7 +1467,7 @@
         <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
             <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
                 <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Bio</h2>
-
+                
                 <div class="text-[0.95rem] md:text-lg text-gray-300 leading-relaxed md:leading-loose space-y-4 md:space-y-6 bg-white/5 border border-blue-500/20 p-6 md:p-10 rounded-2xl backdrop-blur-md shadow-2xl overflow-y-auto shrink" style="scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.5) transparent;">
                     <p>
                         My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar — a Full Stack Developer with a passion for automation and problem-solving.
@@ -1594,7 +1485,7 @@
                         I have completed more than 10 projects that I consider serious, professional work since becoming a developer. You can explore them in the <a href="#projects" class="text-blue-400 hover:text-blue-300 transition-colors font-semibold underline underline-offset-4 decoration-blue-500/50 hover:decoration-blue-400">Projects</a> section of my portfolio website.
                     </p>
                 </div>
-
+                
                 <!-- Small indicator to scroll back down or view more -->
                 <div class="mt-6 md:mt-8 flex justify-center w-full animate-bounce shrink-0">
                     <a href="#skills" class="text-gray-500 hover:text-blue-400 transition-colors">
@@ -1808,13 +1699,13 @@
                         <span class="text-blue-400">2025</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        A web app that lets people message you anonymously. You need to create an account and get your unique link, then share it on social media. You will receive a notification on your email and your dashboard whenever someone visits your link and sends you a message .
+                        A web app that lets people message you anonymously. You need to create an account and get your unique link, then share it on social media. You will receive a notification on your email and your dashboard whenever someone visits your link and sends you a message . 
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">PHP</span>
                         <span class="project-tech">MySQL</span>
                         <span class="project-tech">JS</span>
-
+                        
                     </div>
                 </div>
 
@@ -1883,30 +1774,6 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="showMIIAModal()">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
-                        <div class="project-cover" style="--cover:url('miia.png')">
-                            <img src="miia.png" alt="MIIA Editor project cover"
-                                class="project-cover-img">
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">MIIA Editor</h3>
-                        <span class="text-blue-400">2025</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        A Linux code editor with an integrated AI agent and dedicated tools designed to streamline and accelerate web app and script development.
-                    </p>
-                    <div class="flex flex-wrap">
-                        <span class="project-tech">HTML</span>
-                        <span class="project-tech">CSS</span>
-                        <span class="project-tech">JavaScript</span>
-                        <span class="project-tech">TypeScript</span>
-                        <span class="project-tech">Python</span>
-                        <span class="project-tech">Node.js</span>
-                    </div>
-                </div>
-
                 <div class="project-row" onclick="window.location.href='milike.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20 bg-black p-2">
                         <img src="milikepdp.jpg" alt="Milike project cover"
@@ -1946,28 +1813,6 @@
                     <div class="flex flex-wrap">
                         <span class="project-tech">Chrome Extension</span>
                         <span class="project-tech">JavaScript</span>
-                        <span class="project-tech">Python</span>
-                        <span class="project-tech">sql Lite</span>
-                    </div>
-                </div>
-
-                  <div class="project-row" onclick="window.location.href='getlike/getlike.html'">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
-                        <div class="project-cover" style="--cover:url('getlike/GETLIKE.png')">
-                            <img src="hc_bot.jpg" alt="getlike project cover"
-                                class="project-cover-img">
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">SmmKingdomTasks + HelpCercle_bot</h3>
-                        <span class="text-blue-400">2024</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        SmmKingdomTasks is a telegram bot that offers tasks such as liking, following, and commenting on TikTok and Instagram accounts and posts in order to earn money. This android application automates those tasks using Accessibility Service.
-                    </p>
-                    <div class="flex flex-wrap">
-                        <span class="project-tech">APK</span>
-                        <span class="project-tech">chaquopy</span>
                         <span class="project-tech">Python</span>
                         <span class="project-tech">sql Lite</span>
                     </div>
@@ -2228,7 +2073,7 @@
 
     <!-- ShadowMind Project Modal -->
     <div class="sayit-modal-overlay" id="shadowMindModal">
-        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
+        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem 5rem;">
             <div class="shadowmind-carousel" id="shadowmindCarousel">
                 <img src="shadowmind.png" alt="ShadowMind cover" class="active">
                 <img src="shadowmind1.png" alt="ShadowMind screenshot 1">
@@ -2256,55 +2101,14 @@
                     <span>Stockage s&#233;curis&#233;<br>chiffr&#233; de bout en bout</span>
                 </div>
             </div>
-            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
+            <div class="sayit-modal-buttons" style="position:absolute;bottom:1.5rem;left:0;right:0;display:flex;gap:12px;justify-content:center;z-index:10;">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Fermer</button>
                 <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Ouvrir le site</button>
             </div>
         </div>
     </div>
 
-    <!-- MIIA Editor Project Modal -->
-    <div class="sayit-modal-overlay" id="miiaModal">
-        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
-            <div class="miia-carousel" id="miiaCarousel">
-                <img src="miia.png" alt="MIIA Editor cover" class="active">
-                <img src="miia2.png" alt="MIIA Editor screenshot 1">
-                <img src="miia3.png" alt="MIIA Editor screenshot 2">
-                <img src="miia4.png" alt="MIIA Editor screenshot 3">
-            </div>
-            <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">MIIA Editor</div>
-            <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
-                Why I build another code editor when powerhouses like VS Code already exist?
-            </p>
-            <div class="miia-features">
-                <div class="miia-feature">
-                    <span><b style="color:#e2e8f0;">Custom Tooling for AI:</b> I wanted total freedom to equip the AI agent with my own specialized tools.</span>
-                </div>
-                <div class="miia-feature">
-                    <span><b style="color:#e2e8f0;">Token &amp; Cost Control:</b> To minimize AI token consumption.</span>
-                </div>
-                <div class="miia-feature">
-                    <span><b style="color:#e2e8f0;">Unrestricted Customization:</b> To build custom features, UI tweaks, and themes without running into the walls set by corporate-backed editors.</span>
-                </div>
-                <div class="miia-feature">
-                    <span><b style="color:#e2e8f0;">Skill Growth &amp; Independence:</b> To level up my engineering skills while stepping off the beaten path.</span>
-                </div>
-            </div>
-            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
-                <button class="sayit-btn sayit-btn-cancel" onclick="closeMIIAModal()">Fermer</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmMIIA()">T&#233;l&#233;charger l&#39;app</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lightbox project images -->
-    <div class="project-lightbox" id="projectLightbox">
-        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">&times;</button>
-        <button class="lightbox-arrow lightbox-prev" onclick="prevLightbox()" aria-label="Image pr&#233;c&#233;dente">&#10094;</button>
-        <img id="lightboxImg" src="" alt="Aper&#231;u agrandi">
-        <button class="lightbox-arrow lightbox-next" onclick="nextLightbox()" aria-label="Image suivante">&#10095;</button>
-    </div>
-
+    
     <script>
         function showSayitModal() {
             document.body.style.overflow = 'hidden';
@@ -2391,102 +2195,6 @@
 
         document.getElementById('shadowMindModal').addEventListener('click', function(e) {
             if (e.target === this) closeShadowMindModal();
-        });
-
-        /* ── MIIA Editor Modal ── */
-        var miiaInterval, miiaIndex = 0;
-        var miiaImages = ['miia.png', 'miia2.png', 'miia3.png', 'miia4.png'];
-
-        function showMIIAModal() {
-            document.body.style.overflow = 'hidden';
-            var modal = document.getElementById('miiaModal');
-            modal.classList.add('active');
-            miiaIndex = 0;
-            var imgs = document.querySelectorAll('#miiaCarousel img');
-            imgs.forEach(function(img, i) {
-                img.classList.toggle('active', i === 0);
-                img.style.transform = '';
-                img.style.transition = 'none';
-            });
-            clearInterval(miiaInterval);
-            miiaInterval = setInterval(function() {
-                miiaIndex = (miiaIndex + 1) % miiaImages.length;
-                var imgs = document.querySelectorAll('#miiaCarousel img');
-                var prev = miiaIndex === 0 ? imgs.length - 1 : miiaIndex - 1;
-                imgs[prev].style.transition = 'transform 0.6s ease';
-                imgs[prev].style.transform = 'translateX(-100%)';
-                imgs[prev].classList.remove('active');
-                imgs[miiaIndex].style.transition = 'none';
-                imgs[miiaIndex].style.transform = 'translateX(100%)';
-                imgs[miiaIndex].classList.add('active');
-                void imgs[miiaIndex].offsetHeight;
-                imgs[miiaIndex].style.transition = 'transform 0.6s ease';
-                imgs[miiaIndex].style.transform = 'translateX(0)';
-                setTimeout(function() {
-                    imgs[prev].style.transition = 'none';
-                    imgs[prev].style.transform = '';
-                }, 600);
-            }, 4000);
-        }
-
-        function closeMIIAModal() {
-            document.body.style.overflow = '';
-            clearInterval(miiaInterval);
-            document.getElementById('miiaModal').classList.remove('active');
-        }
-
-        function confirmMIIA() {
-            closeMIIAModal();
-            window.open('https://github.com/brotiana/MIIA-Editor/releases/download/v0.1.1/miia_0.1.0_amd64.deb', '_blank');
-        }
-
-        document.getElementById('miiaModal').addEventListener('click', function(e) {
-            if (e.target === this) closeMIIAModal();
-        });
-
-        /* ── Lightbox images projet ── */
-        var lightboxData = { images: [], index: 0 };
-
-        function openLightbox(images, index) {
-            lightboxData.images = images;
-            lightboxData.index = index;
-            document.getElementById('lightboxImg').src = images[index];
-            document.getElementById('projectLightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            document.getElementById('projectLightbox').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function nextLightbox() {
-            lightboxData.index = (lightboxData.index + 1) % lightboxData.images.length;
-            document.getElementById('lightboxImg').src = lightboxData.images[lightboxData.index];
-        }
-
-        function prevLightbox() {
-            lightboxData.index = (lightboxData.index - 1 + lightboxData.images.length) % lightboxData.images.length;
-            document.getElementById('lightboxImg').src = lightboxData.images[lightboxData.index];
-        }
-
-        document.getElementById('projectLightbox').addEventListener('click', function(e) {
-            if (e.target === this) closeLightbox();
-        });
-
-        document.getElementById('shadowmindCarousel').addEventListener('click', function() {
-            openLightbox(shadowMindImages, shadowMindIndex);
-        });
-
-        document.getElementById('miiaCarousel').addEventListener('click', function() {
-            openLightbox(miiaImages, miiaIndex);
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (!document.getElementById('projectLightbox').classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowRight') nextLightbox();
-            else if (e.key === 'ArrowLeft') prevLightbox();
         });
     </script>
 </body>
