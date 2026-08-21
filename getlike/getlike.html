@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>getlike : Projet</title>
+    <link rel="stylesheet" href="../zoom.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -237,6 +238,53 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ── Flèches verticales du workflow (longues) ── */
+        .wf-arrow {
+            position: relative;
+            width: 14px;
+            height: 34px;
+            margin: 2px auto;
+        }
+        .wf-arrow::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 9px;
+            width: 2px;
+            transform: translateX(-50%);
+            background: #1e64dc;
+            border-radius: 2px;
+        }
+        .wf-arrow::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 11px;
+            height: 11px;
+            transform: translateX(-50%) rotate(45deg);
+            border-right: 2px solid #1e64dc;
+            border-bottom: 2px solid #1e64dc;
+            border-radius: 1px;
+        }
+
+        /* ── Grand arc de boucle (retour au début) ── */
+        .wf-loop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin: 12px 0 4px;
+            color: #1e64dc;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.2em;
+        }
+        .wf-loop svg {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -278,41 +326,41 @@
                         <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">Automated Task Processing Loop</div>
                         <div style="text-align: center;">
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Chrome Extension</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Fetches all tasks from getlike.io</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Sends tasks to Telegram user</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. User Backend</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Filters completed tasks</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Returns pending tasks to Extension</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Chrome Extension</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Retrieves: task link, task ID, TikTok username</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Sends to user's Telegram</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">4. Backend</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Executes task on TikTok APK</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Uses ADB & UIAutomator2</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">5. Task Completion</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">User sends signal to Extension</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">6. Chrome Extension</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Marks task as completed</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Clicks "check" button</div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">7. Fetch Next Task</span></div>
-                            <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem;">↓</div>
+                            <div class="wf-arrow"></div>
                             <div style="margin: 12px 0; color: #94a3b8;">Process loops continuously</div>
                             <div style="color: #1e64dc; margin: 8px 0; font-size: 1.2rem; font-weight: 600;">⟲ LOOP</div>
                         </div>
