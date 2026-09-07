@@ -24,34 +24,34 @@ if idx >= 0:
             </div>
             <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">ShadowMind</div>
             <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
-                Plateforme d&#39;enregistrement de notes nouvelle g&#233;n&#233;ration.
+                Next-generation note-taking platform.
             </p>
             <div class="shadowmind-features">
                 <div class="shadowmind-feature">
                     <i class="fas fa-pen-fancy"></i>
-                    <span>&#201;dition riche<br>texte, couleurs, images, audio, tableaux</span>
+                    <span>Rich editing<br>text, colors, images, audio, tables</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-volume-up"></i>
-                    <span>Lecture vocale<br>fran&#231;ais &amp; anglais</span>
+                    <span>Text-to-speech<br>French &amp; English</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-sync-alt"></i>
-                    <span>Notes synchronis&#233;es<br>accessibles sur tous vos appareils</span>
+                    <span>Synced notes<br>available on all your devices</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-shield-alt"></i>
-                    <span>Stockage s&#233;curis&#233;<br>chiffr&#233; de bout en bout</span>
+                    <span>Secure storage<br>end-to-end encrypted</span>
                 </div>
             </div>
             <div class="sayit-modal-buttons" style="position:absolute;bottom:1.5rem;left:0;right:0;display:flex;gap:12px;justify-content:center;z-index:10;">
-                <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Fermer</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Ouvrir le site</button>
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Close</button>
+                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Open website</button>
             </div>
         </div>
     </div>
 
-    
+
     <script>'''
 
     content = content[:idx] + modal_html + content[idx + len(marker):]

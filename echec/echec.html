@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>SmmKingdomTasks + HelpCercle_bot : Projet</title>
+    <title>Chess game online : Projet</title>
     <link rel="stylesheet" href="../zoom.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -101,73 +101,58 @@
             transform: translateX(-3px);
         }
 
-        /* ── Gallery (5 images, alignées de gauche à droite + scroll horizontal) ── */
-        .gallery {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 14px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(30, 100, 220, 0.5) transparent;
-            padding-bottom: 8px;
-            margin-bottom: 2rem;
+        /* ── Gallery (une seule image visible à la fois, tous écrans) ── */
+        .gallery-wrap {
+            position: relative;
         }
 
-        .gallery::-webkit-scrollbar {
-            height: 6px;
-        }
-        .gallery::-webkit-scrollbar-track {
-            background: rgba(30, 100, 220, 0.08);
-            border-radius: 10px;
-        }
-        .gallery::-webkit-scrollbar-thumb {
-            background: rgba(30, 100, 220, 0.5);
-            border-radius: 10px;
+        .gallery {
+            position: relative;
+            display: grid;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(30, 100, 220, 0.25);
+            background: rgba(30, 100, 220, 0.04);
+            min-height: 140px;
         }
 
         .gallery figure {
+            grid-area: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0;
-            flex: 0 0 auto;
-            width: fit-content;
-            max-width: 100%;
-            scroll-snap-align: start;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(30, 100, 220, 0.25);
-            background: rgba(30, 100, 220, 0.04);
-            transition: border-color 0.25s, transform 0.25s;
+            opacity: 0;
+            transform: scale(1.04);
+            pointer-events: none;
+            transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .gallery figure:hover {
-            border-color: rgba(30, 100, 220, 0.55);
-            transform: translateY(-2px);
+        .gallery figure.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
         }
 
         .gallery img {
             width: auto;
             max-width: 100%;
             height: auto;
-            display: block;
             max-height: 520px;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            -webkit-user-drag: none;
         }
 
-        /* ── Gallery wrapper + flèches précédent / suivant ── */
-        .gallery-wrap {
-            position: relative;
-        }
-
+        /* ── Flèches overlay (grand écran) ── */
         .gallery-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             z-index: 5;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -175,23 +160,60 @@
             background: rgba(30, 100, 220, 0.45);
             border: 1px solid rgba(30, 100, 220, 0.35);
             color: #ffffff;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(30, 100, 220, 0.35);
             backdrop-filter: blur(8px);
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
         .gallery-arrow:hover { background: rgba(30, 100, 220, 0.7); }
-        .gallery-arrow:active { transform: translateY(-50%) scale(0.9); }
-        .gallery-arrow.prev { left: 8px; }
-        .gallery-arrow.next { right: 8px; }
+        .gallery-arrow:active { transform: translateY(-50%) scale(0.92); }
+        .gallery-arrow.prev { left: 12px; }
+        .gallery-arrow.next { right: 12px; }
+
+        /* ── Barre de contrôle : numérotation + flèches ── */
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .gallery-count {
+            margin: 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            color: #5a7fa8;
+            letter-spacing: 0.2em;
+        }
+
+        .gallery-nav-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(30, 100, 220, 0.2);
+            border: 1px solid rgba(30, 100, 220, 0.45);
+            color: #ffffff;
+            font-size: 1.1rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gallery-nav-btn:hover { background: rgba(30, 100, 220, 0.4); }
+        .gallery-nav-btn:active { transform: scale(0.9); }
 
         /* ── Title block ── */
         .project-subtitle {
-            margin: 0 0 12px;
+            margin: 2.2rem 0 12px;
             color: #5a7fa8;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -315,6 +337,33 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
+        /* ── Bouton voir le code ── */
+        .code-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(30,100,220,0.25), rgba(96,165,250,0.15));
+            border: 1px solid rgba(30,100,220,0.5);
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(30,100,220,0.25);
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .code-btn:hover {
+            background: linear-gradient(135deg, rgba(30,100,220,0.45), rgba(96,165,250,0.3));
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(30,100,220,0.45);
+        }
+        .code-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* ── Bottom back button ── */
         .back-button {
             position: fixed;
@@ -347,51 +396,43 @@
             height: 22px;
         }
 
-        @media (max-width: 720px) {
-            /* Sur petit écran (Android) : une seule photo à la fois, pleine largeur, snap scroll */
-            .gallery figure {
-                flex: 0 0 100%;
-                max-width: 100%;
-                width: 100%;
+        @media (max-width: 749px) {
+            /* Image pleine largeur, collée aux bords gauche et droit de l'écran */
+            .gallery-wrap {
+                margin-left: -20px;
+                margin-right: -20px;
+                width: auto;
             }
+
+            .gallery {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+
+            .gallery-arrow { display: none; }
+
             .gallery img {
-                max-height: 420px;
-                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                max-height: none;
+                object-fit: contain;
             }
+
+            /* Flèches à côté de la numérotation, en bas de la galerie */
+            .gallery-controls {
+                justify-content: center;
+                gap: 20px;
+                margin-top: 18px;
+            }
+
+            .gallery-nav-btn { display: flex; }
+
             .project-title { font-size: 1.9rem; }
             .details-grid { grid-template-columns: 1fr; }
         }
 
-        /* ── Flèches verticales du workflow (longues) ── */
-        .wf-arrow {
-            position: relative;
-            width: 14px;
-            height: 34px;
-            margin: 2px auto;
-        }
-        .wf-arrow::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 9px;
-            width: 2px;
-            transform: translateX(-50%);
-            background: #1e64dc;
-            border-radius: 2px;
-        }
-        .wf-arrow::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            width: 11px;
-            height: 11px;
-            transform: translateX(-50%) rotate(45deg);
-            border-right: 2px solid #1e64dc;
-            border-bottom: 2px solid #1e64dc;
-            border-radius: 1px;
-        }
+        /* ── Fin du style ── */
     </style>
 </head>
 <body>
@@ -413,37 +454,38 @@
             Retour au portfolio
         </a>
 
-        <!-- Gallery : les 5 images du projet + flèches précédent/suivant -->
+        <!-- Gallery : une seule image affichée à la fois (même sur grand écran) -->
         <div class="gallery-wrap">
             <div class="gallery">
-                <figure>
-                    <img src="photo_5960976859946225792_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 1" loading="lazy" />
+                <figure class="active">
+                    <img src="echec1.png" alt="Chess game online - capture 1" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225793_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 2" loading="lazy" />
+                    <img src="echec2.png" alt="Chess game online - capture 2" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225794_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 3" loading="lazy" />
+                    <img src="echec3.png" alt="Chess game online - capture 3" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225795_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 4" loading="lazy" />
+                    <img src="echec4.png" alt="Chess game online - capture 4" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225796_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 5" loading="lazy" />
+                    <img src="echec5.png" alt="Chess game online - capture 5" loading="lazy" />
                 </figure>
+                <button class="gallery-arrow prev" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-arrow next" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
             </div>
-            <button class="gallery-arrow prev" aria-label="Image précédente" onclick="scrollGallery(-1)">&#10094;</button>
-            <button class="gallery-arrow next" aria-label="Image suivante" onclick="scrollGallery(1)">&#10095;</button>
+            <div class="gallery-controls">
+                <button class="gallery-nav-btn" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <p class="gallery-count" id="gallery-count">1 / 5</p>
+                <button class="gallery-nav-btn" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+            </div>
         </div>
 
         <!-- Title -->
-        <p class="project-subtitle">Présentation du projet</p>
-        <h1 class="project-title">SmmKingdomTasks + HelpCercle_bot</h1>
-        <hr class="section-divider" />
+        <h1 class="project-title">Chess game online</h1>
 
-        <p class="project-desc">
-            SmmKingdomTasks est un bot Telegram qui propose des tâches comme liker, suivre et commenter des comptes et publications TikTok et Instagram afin de gagner de l'argent. Cette application Android automatise ces tâches grâce au service d'accessibilité (Accessibility Service).
-        </p>
+
 
         <hr class="section-divider" />
 
@@ -454,62 +496,52 @@
             </div>
             <div class="detail">
                 <strong>Plateforme</strong>
-                <span>Android (APK) · Telegram</span>
+                <span>Web</span>
             </div>
             <div class="detail">
                 <strong>Technologies</strong>
-                <span>chaquopy, Python, sql Lite</span>
+                <span>JavaScript, Node JS, PHP, MySql</span>
             </div>
         </div>
 
-        <div class="tech-row">
-            <span class="tech">APK</span>
-            <span class="tech">chaquopy</span>
-            <span class="tech">Python</span>
-            <span class="tech">sql Lite</span>
-            <span class="tech">Accessibility Service</span>
-        </div>
 
         <hr class="section-divider" />
 
         <div class="description">
             <div>
                 <h2>Project description</h2>
-                <p>SmmKingdomTasks + HelpCercle_bot est une application Android (APK) qui automatise l'exécution des tâches proposées par les bots Telegram SmmKingdomTasks et HelpCercle. Les tâches consistent à liker, suivre et commenter des comptes et publications sur TikTok et Instagram afin de gagner de l'argent.</p>
-                <p style="margin-top: 12px;">L'application s'appuie sur le service d'accessibilité Android pour interagir avec les applications sociales et exécuter les tâches automatiquement. La logique métier est embarquée via Chaquopy, qui permet d'exécuter du code Python directement dans l'application Android.</p>
+                <p>Chess Game Online is a web platform where you can play chess against other players online or practice against the computer. The game interface displays the board with full support for all chess rules : legal moves, castling, checkmate and keeps moves synced between both players in real time. </br>
+
+Players can also chat with their opponent during the game, right from the interface.</br>
+
+On the backend, the app is split into two parts: a Node.js server handles real-time communication between players through WebSockets (game rooms), while PHP and MySQL take care of data persistence like user accounts, match history, stats, and rankings.</p>
+                
             </div>
 
             <div>
-                <h2>Fonctionnalités</h2>
+                <h2>Features</h2>
                 <ul>
-                    <li>Automatisation complète des tâches de like, follow et commentaire via le service d'accessibilité.</li>
-                    <li>Interaction avec les bots Telegram SmmKingdomTasks et HelpCercle.</li>
-                    <li>Logique métier en Python embarquée avec Chaquopy.</li>
-                    <li>Persistance des données locales avec SQLite.</li>
+                    <li>Sign up and account creation.</li>
+                    <li>Invite a user to join a chess game.</li>
+                    <li>Interface listing all online users, with the ability to send them a message.</li>
+                    <li>Real-time move synchronization between players.</li>
+                    <li>Play against the computer.</li>
+                    <li>Full chess rules implemented (check, checkmate, stalemate, promotion).</li>
+                    <li>Match history, stats, and player rankings .</li>
+                    <li>Make a game public so other users can watch it live, or keep it private.</li>
+                    <li>An option to watch public games currently being played online.</li>
                 </ul>
             </div>
 
-            <div>
-                <h2>Workflow</h2>
-                <div style="margin-top: 12px; padding: 20px; background: rgba(30, 100, 220, 0.08); border: 1px solid rgba(30, 100, 220, 0.3); border-radius: 12px; font-family: 'Space Mono', monospace; font-size: 0.95rem; line-height: 2.2; color: #94a3b8;">
-                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">Boucle de traitement automatisé</div>
-                    <div style="text-align: center;">
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Bot Telegram</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Envoie les tâches (like, follow, commentaire)</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. Application Android (APK)</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Détecte la tâche via Accessibility Service</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Exécute l'action sur TikTok / Instagram</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Tâche terminée</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Confirmation envoyée au bot → gain crédité</div>
-                    </div>
-                </div>
-            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 28px;">
+            <a class="code-btn" href="https://github.com/brotiana/echec" target="_blank" rel="noopener">
+                <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                Voir le code source
+            </a>
         </div>
     </main>
 
@@ -525,15 +557,29 @@
     </a>
 
     <script>
-        // Navigation galerie : flèches précédent / suivant
-        function scrollGallery(dir) {
-            var gallery = document.querySelector('.gallery');
-            if (!gallery) return;
-            var fig = gallery.querySelector('figure');
-            var gap = 14; // même valeur que le gap CSS
-            var step = fig ? fig.offsetWidth + gap : gallery.clientWidth;
-            gallery.scrollBy({ left: dir * step, behavior: 'smooth' });
-        }
+        // Slider : une seule image affichée à la fois, quel que soit l'écran
+        (function () {
+            var slides = Array.prototype.slice.call(document.querySelectorAll('.gallery figure'));
+            var countEl = document.getElementById('gallery-count');
+            var current = 0;
+
+            function render() {
+                slides.forEach(function (s, i) {
+                    s.classList.toggle('active', i === current);
+                });
+                if (countEl && slides.length) {
+                    countEl.textContent = (current + 1) + ' / ' + slides.length;
+                }
+            }
+
+            window.changeSlide = function (dir) {
+                if (!slides.length) return;
+                current = (current + dir + slides.length) % slides.length;
+                render();
+            };
+
+            render();
+        })();
     </script>
 <script src="../scroll-restore.js"></script>
 </body>

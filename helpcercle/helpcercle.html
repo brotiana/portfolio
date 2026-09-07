@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>SmmKingdomTasks + HelpCercle_bot : Projet</title>
+    <title>HelpCercle : Projet</title>
     <link rel="stylesheet" href="../zoom.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -101,73 +101,58 @@
             transform: translateX(-3px);
         }
 
-        /* ── Gallery (5 images, alignées de gauche à droite + scroll horizontal) ── */
-        .gallery {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 14px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(30, 100, 220, 0.5) transparent;
-            padding-bottom: 8px;
-            margin-bottom: 2rem;
+        /* ── Gallery (une seule image visible à la fois, tous écrans) ── */
+        .gallery-wrap {
+            position: relative;
         }
 
-        .gallery::-webkit-scrollbar {
-            height: 6px;
-        }
-        .gallery::-webkit-scrollbar-track {
-            background: rgba(30, 100, 220, 0.08);
-            border-radius: 10px;
-        }
-        .gallery::-webkit-scrollbar-thumb {
-            background: rgba(30, 100, 220, 0.5);
-            border-radius: 10px;
+        .gallery {
+            position: relative;
+            display: grid;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(30, 100, 220, 0.25);
+            background: rgba(30, 100, 220, 0.04);
+            min-height: 140px;
         }
 
         .gallery figure {
+            grid-area: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0;
-            flex: 0 0 auto;
-            width: fit-content;
-            max-width: 100%;
-            scroll-snap-align: start;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(30, 100, 220, 0.25);
-            background: rgba(30, 100, 220, 0.04);
-            transition: border-color 0.25s, transform 0.25s;
+            opacity: 0;
+            transform: scale(1.04);
+            pointer-events: none;
+            transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .gallery figure:hover {
-            border-color: rgba(30, 100, 220, 0.55);
-            transform: translateY(-2px);
+        .gallery figure.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
         }
 
         .gallery img {
             width: auto;
             max-width: 100%;
             height: auto;
-            display: block;
             max-height: 520px;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            -webkit-user-drag: none;
         }
 
-        /* ── Gallery wrapper + flèches précédent / suivant ── */
-        .gallery-wrap {
-            position: relative;
-        }
-
+        /* ── Flèches overlay (grand écran) ── */
         .gallery-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             z-index: 5;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -175,23 +160,60 @@
             background: rgba(30, 100, 220, 0.45);
             border: 1px solid rgba(30, 100, 220, 0.35);
             color: #ffffff;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             line-height: 1;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(30, 100, 220, 0.35);
             backdrop-filter: blur(8px);
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
         .gallery-arrow:hover { background: rgba(30, 100, 220, 0.7); }
-        .gallery-arrow:active { transform: translateY(-50%) scale(0.9); }
-        .gallery-arrow.prev { left: 8px; }
-        .gallery-arrow.next { right: 8px; }
+        .gallery-arrow:active { transform: translateY(-50%) scale(0.92); }
+        .gallery-arrow.prev { left: 12px; }
+        .gallery-arrow.next { right: 12px; }
+
+        /* ── Barre de contrôle : numérotation + flèches ── */
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .gallery-count {
+            margin: 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            color: #5a7fa8;
+            letter-spacing: 0.2em;
+        }
+
+        .gallery-nav-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(30, 100, 220, 0.2);
+            border: 1px solid rgba(30, 100, 220, 0.45);
+            color: #ffffff;
+            font-size: 1.1rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gallery-nav-btn:hover { background: rgba(30, 100, 220, 0.4); }
+        .gallery-nav-btn:active { transform: scale(0.9); }
 
         /* ── Title block ── */
         .project-subtitle {
-            margin: 0 0 12px;
+            margin: 2.2rem 0 12px;
             color: #5a7fa8;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -347,51 +369,43 @@
             height: 22px;
         }
 
-        @media (max-width: 720px) {
-            /* Sur petit écran (Android) : une seule photo à la fois, pleine largeur, snap scroll */
-            .gallery figure {
-                flex: 0 0 100%;
-                max-width: 100%;
-                width: 100%;
+        @media (max-width: 749px) {
+            /* Image pleine largeur, collée aux bords gauche et droit de l'écran */
+            .gallery-wrap {
+                margin-left: -20px;
+                margin-right: -20px;
+                width: auto;
             }
+
+            .gallery {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+
+            .gallery-arrow { display: none; }
+
             .gallery img {
-                max-height: 420px;
-                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+                max-height: none;
+                object-fit: contain;
             }
+
+            /* Flèches à côté de la numérotation, en bas de la galerie */
+            .gallery-controls {
+                justify-content: center;
+                gap: 20px;
+                margin-top: 18px;
+            }
+
+            .gallery-nav-btn { display: flex; }
+
             .project-title { font-size: 1.9rem; }
             .details-grid { grid-template-columns: 1fr; }
         }
 
-        /* ── Flèches verticales du workflow (longues) ── */
-        .wf-arrow {
-            position: relative;
-            width: 14px;
-            height: 34px;
-            margin: 2px auto;
-        }
-        .wf-arrow::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 9px;
-            width: 2px;
-            transform: translateX(-50%);
-            background: #1e64dc;
-            border-radius: 2px;
-        }
-        .wf-arrow::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            width: 11px;
-            height: 11px;
-            transform: translateX(-50%) rotate(45deg);
-            border-right: 2px solid #1e64dc;
-            border-bottom: 2px solid #1e64dc;
-            border-radius: 1px;
-        }
+        /* ── Fin du style ── */
     </style>
 </head>
 <body>
@@ -413,40 +427,53 @@
             Retour au portfolio
         </a>
 
-        <!-- Gallery : les 5 images du projet + flèches précédent/suivant -->
+        <!-- Gallery : une seule image affichée à la fois (même sur grand écran) -->
         <div class="gallery-wrap">
             <div class="gallery">
-                <figure>
-                    <img src="photo_5960976859946225792_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 1" loading="lazy" />
+                <figure class="active">
+                    <img src="helpcercle1.png" alt="HelpCercle - capture 1" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225793_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 2" loading="lazy" />
+                    <img src="helpcercle2.png" alt="HelpCercle - capture 2" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225794_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 3" loading="lazy" />
+                    <img src="helpcercle3.png" alt="HelpCercle - capture 3" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225795_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 4" loading="lazy" />
+                    <img src="helpcercle4.png" alt="HelpCercle - capture 4" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225796_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 5" loading="lazy" />
+                    <img src="helpcercle6.png" alt="HelpCercle - capture 5" loading="lazy" />
                 </figure>
+                <figure>
+                    <img src="helpcercle7.png" alt="HelpCercle - capture 6" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="Helpcercle8.png" alt="HelpCercle - capture 7" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpcercle9.png" alt="HelpCercle - capture 8" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpecercle10.png" alt="HelpCercle - capture 9" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpcercle11.png" alt="HelpCercle - capture 10" loading="lazy" />
+                </figure>
+                <button class="gallery-arrow prev" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-arrow next" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
             </div>
-            <button class="gallery-arrow prev" aria-label="Image précédente" onclick="scrollGallery(-1)">&#10094;</button>
-            <button class="gallery-arrow next" aria-label="Image suivante" onclick="scrollGallery(1)">&#10095;</button>
+            <div class="gallery-controls">
+                <button class="gallery-nav-btn" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <p class="gallery-count" id="gallery-count">1 / 10</p>
+                <button class="gallery-nav-btn" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+            </div>
         </div>
 
         <!-- Title -->
         <p class="project-subtitle">Présentation du projet</p>
-        <h1 class="project-title">SmmKingdomTasks + HelpCercle_bot</h1>
+        <h1 class="project-title">HelpCercle</h1>
         <hr class="section-divider" />
-
-        <p class="project-desc">
-            SmmKingdomTasks est un bot Telegram qui propose des tâches comme liker, suivre et commenter des comptes et publications TikTok et Instagram afin de gagner de l'argent. Cette application Android automatise ces tâches grâce au service d'accessibilité (Accessibility Service).
-        </p>
-
-        <hr class="section-divider" />
-
         <div class="details-grid">
             <div class="detail">
                 <strong>Rôle</strong>
@@ -454,63 +481,46 @@
             </div>
             <div class="detail">
                 <strong>Plateforme</strong>
-                <span>Android (APK) · Telegram</span>
+                <span>Web</span>
             </div>
             <div class="detail">
                 <strong>Technologies</strong>
-                <span>chaquopy, Python, sql Lite</span>
+                <span>JavaScript, Node JS, PHP, MySql</span>
             </div>
         </div>
 
-        <div class="tech-row">
-            <span class="tech">APK</span>
-            <span class="tech">chaquopy</span>
-            <span class="tech">Python</span>
-            <span class="tech">sql Lite</span>
-            <span class="tech">Accessibility Service</span>
-        </div>
+
 
         <hr class="section-divider" />
 
         <div class="description">
             <div>
                 <h2>Project description</h2>
-                <p>SmmKingdomTasks + HelpCercle_bot est une application Android (APK) qui automatise l'exécution des tâches proposées par les bots Telegram SmmKingdomTasks et HelpCercle. Les tâches consistent à liker, suivre et commenter des comptes et publications sur TikTok et Instagram afin de gagner de l'argent.</p>
-                <p style="margin-top: 12px;">L'application s'appuie sur le service d'accessibilité Android pour interagir avec les applications sociales et exécuter les tâches automatiquement. La logique métier est embarquée via Chaquopy, qui permet d'exécuter du code Python directement dans l'application Android.</p>
+                <p>
+                  HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.</br>
+
+There are basically two types of users: the first kind sells something like a skill or an account, for example. The second kind is looking to buy that skill or a specific service, and can post a request on the platform if they can't find what they need.</br>
+
+Users who post offers can also offer services carried out by AI agents. These AI-agent-powered services could include things like audio transcription, image background removal, sending messages to a list of 1000 emails, building a website, and so on.</br>
+
+Connecting an AI agent to the HelpCercle platform requires the site admin (me) to step in, since each AI agent offer needs its own custom-built interface tailored to what it does.</br>
+                </p>
             </div>
 
             <div>
-                <h2>Fonctionnalités</h2>
+                <h2>Features</h2>
                 <ul>
-                    <li>Automatisation complète des tâches de like, follow et commentaire via le service d'accessibilité.</li>
-                    <li>Interaction avec les bots Telegram SmmKingdomTasks et HelpCercle.</li>
-                    <li>Logique métier en Python embarquée avec Chaquopy.</li>
-                    <li>Persistance des données locales avec SQLite.</li>
+                    <li>Buyers and sellers can chat with each other directly.</li>
+                    <li>Automatic deposits using cryptocurrency.</li>
+                    <li>Real-time messaging and notifications using WebSocket.</li>
+                    <li>Member profiles, transaction tracking, and history.</li>
+                    <li>Affiliate system.</li>
+                    <li>Users can offer 100% automated services powered by AI or scripts, by connecting their own server (running the system that performs the task) to the HelpCercle platform.</li>
                 </ul>
             </div>
 
-            <div>
-                <h2>Workflow</h2>
-                <div style="margin-top: 12px; padding: 20px; background: rgba(30, 100, 220, 0.08); border: 1px solid rgba(30, 100, 220, 0.3); border-radius: 12px; font-family: 'Space Mono', monospace; font-size: 0.95rem; line-height: 2.2; color: #94a3b8;">
-                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">Boucle de traitement automatisé</div>
-                    <div style="text-align: center;">
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Bot Telegram</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Envoie les tâches (like, follow, commentaire)</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. Application Android (APK)</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Détecte la tâche via Accessibility Service</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Exécute l'action sur TikTok / Instagram</div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Tâche terminée</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Confirmation envoyée au bot → gain crédité</div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </main>
 
     <a href="../index.html#projects" class="back-button" aria-label="Retour aux projets">
@@ -525,15 +535,29 @@
     </a>
 
     <script>
-        // Navigation galerie : flèches précédent / suivant
-        function scrollGallery(dir) {
-            var gallery = document.querySelector('.gallery');
-            if (!gallery) return;
-            var fig = gallery.querySelector('figure');
-            var gap = 14; // même valeur que le gap CSS
-            var step = fig ? fig.offsetWidth + gap : gallery.clientWidth;
-            gallery.scrollBy({ left: dir * step, behavior: 'smooth' });
-        }
+        // Slider : une seule image affichée à la fois, quel que soit l'écran
+        (function () {
+            var slides = Array.prototype.slice.call(document.querySelectorAll('.gallery figure'));
+            var countEl = document.getElementById('gallery-count');
+            var current = 0;
+
+            function render() {
+                slides.forEach(function (s, i) {
+                    s.classList.toggle('active', i === current);
+                });
+                if (countEl && slides.length) {
+                    countEl.textContent = (current + 1) + ' / ' + slides.length;
+                }
+            }
+
+            window.changeSlide = function (dir) {
+                if (!slides.length) return;
+                current = (current + dir + slides.length) % slides.length;
+                render();
+            };
+
+            render();
+        })();
     </script>
 <script src="../scroll-restore.js"></script>
 </body>
