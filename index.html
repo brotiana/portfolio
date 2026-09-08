@@ -1839,7 +1839,7 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="window.location.href='kvmsoft/kvmsoft.html'">
+                <div class="project-row" onclick="window.location.href='kvmsoft/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('kvmsoft/kvm.png')">
                             <img src="kvmsoft/kvm.png" alt="getlike project cover"
@@ -1929,7 +1929,7 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="window.location.href='getlike/getlike.html'">
+                <div class="project-row" onclick="window.location.href='getlike/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('getlike/GETLIKE.png')">
                             <img src="getlike/GETLIKE.png" alt="getlike project cover"
@@ -1951,7 +1951,7 @@
                     </div>
                 </div>
 
-                  <div class="project-row" onclick="window.location.href='hc_bot_apk/hc_bot.html'">
+                  <div class="project-row" onclick="window.location.href='hc_bot_apk/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('hc_bot.jpg')">
                             <img src="hc_bot.jpg" alt="getlike project cover"
@@ -1973,7 +1973,7 @@
                     </div>
                 </div>
 
-                  <div class="project-row" onclick="window.location.href='echec/echec.html'">
+                  <div class="project-row" onclick="window.location.href='echec/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('echec/echec4.png')">
                             <img src="echec/echec4.png" alt="getlike project cover"
@@ -1995,7 +1995,7 @@
                     </div>
                 </div>
 
-                  <div class="project-row" onclick="window.location.href='helpcercle/helpcercle.html'">
+                  <div class="project-row" onclick="window.location.href='helpcercle/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('helpcercle/helpcercle2.png')">
                             <img src="helpcercle/helpcercle2.png" alt="getlike project cover"
@@ -2007,7 +2007,7 @@
                         <span class="text-blue-400">2024</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        SmmKingdomTasks is a telegram bot that offers tasks such as liking, following, and commenting on TikTok and Instagram accounts and posts in order to earn money. This android application automates those tasks using Accessibility Service.
+                        HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">JS</span>
@@ -2543,6 +2543,28 @@
             });
         })();
     </script>
+
+<script>
+// Masque le nom du fichier .html dans la barre d'adresse
+(function(){
+  try{
+    var p = location.pathname;
+    var name = (p.split('/').pop()||'').toLowerCase();
+    if (name === 'index.html' || name.endsWith('.html')) {
+      var base = p.replace(/[^/]*\.html$/i, '');
+      history.replaceState(null, '', base + location.search + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+    // Service Worker : permet de rafraîchir les URL "propres" (/dossier) sans 404
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('sw.js').catch(function () {});
+        });
+    }
+</script>
 </body>
 
 </html>
