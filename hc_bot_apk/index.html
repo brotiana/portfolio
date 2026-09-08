@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>SmmKingdomTasks + HelpCercle_bot : Projet</title>
+    <title>SmmKingdomTasks + HelpCercle_bot — Project</title>
     <link rel="stylesheet" href="../zoom.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -315,6 +315,33 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
+        /* ── Action buttons (download / tutorial) ── */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(30,100,220,0.25), rgba(96,165,250,0.15));
+            border: 1px solid rgba(30,100,220,0.5);
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(30,100,220,0.25);
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .action-btn:hover {
+            background: linear-gradient(135deg, rgba(30,100,220,0.45), rgba(96,165,250,0.3));
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(30,100,220,0.45);
+        }
+        .action-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* ── Bottom back button ── */
         .back-button {
             position: fixed;
@@ -410,50 +437,46 @@
                 <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
                 <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
             </svg>
-            Retour au portfolio
+            Back to portfolio
         </a>
 
         <!-- Gallery : les 5 images du projet + flèches précédent/suivant -->
         <div class="gallery-wrap">
             <div class="gallery">
                 <figure>
-                    <img src="photo_5960976859946225792_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 1" loading="lazy" />
+                    <img src="photo_5960976859946225792_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 1" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225793_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 2" loading="lazy" />
+                    <img src="photo_5960976859946225793_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 2" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225794_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 3" loading="lazy" />
+                    <img src="photo_5960976859946225794_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 3" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225795_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 4" loading="lazy" />
+                    <img src="photo_5960976859946225795_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 4" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="photo_5960976859946225796_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - capture 5" loading="lazy" />
+                    <img src="photo_5960976859946225796_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 5" loading="lazy" />
                 </figure>
             </div>
-            <button class="gallery-arrow prev" aria-label="Image précédente" onclick="scrollGallery(-1)">&#10094;</button>
-            <button class="gallery-arrow next" aria-label="Image suivante" onclick="scrollGallery(1)">&#10095;</button>
+            <button class="gallery-arrow prev" aria-label="Previous image" onclick="scrollGallery(-1)">&#10094;</button>
+            <button class="gallery-arrow next" aria-label="Next image" onclick="scrollGallery(1)">&#10095;</button>
         </div>
 
         <!-- Title -->
-        <p class="project-subtitle">Présentation du projet</p>
+        <p class="project-subtitle">Project overview</p>
         <h1 class="project-title">SmmKingdomTasks + HelpCercle_bot</h1>
-        <hr class="section-divider" />
 
-        <p class="project-desc">
-            SmmKingdomTasks est un bot Telegram qui propose des tâches comme liker, suivre et commenter des comptes et publications TikTok et Instagram afin de gagner de l'argent. Cette application Android automatise ces tâches grâce au service d'accessibilité (Accessibility Service).
-        </p>
 
         <hr class="section-divider" />
 
         <div class="details-grid">
             <div class="detail">
-                <strong>Rôle</strong>
+                <strong>Role</strong>
                 <span>full development</span>
             </div>
             <div class="detail">
-                <strong>Plateforme</strong>
+                <strong>Platform</strong>
                 <span>Android (APK) · Telegram</span>
             </div>
             <div class="detail">
@@ -475,45 +498,73 @@
         <div class="description">
             <div>
                 <h2>Project description</h2>
-                <p>SmmKingdomTasks + HelpCercle_bot est une application Android (APK) qui automatise l'exécution des tâches proposées par les bots Telegram SmmKingdomTasks et HelpCercle. Les tâches consistent à liker, suivre et commenter des comptes et publications sur TikTok et Instagram afin de gagner de l'argent.</p>
-                <p style="margin-top: 12px;">L'application s'appuie sur le service d'accessibilité Android pour interagir avec les applications sociales et exécuter les tâches automatiquement. La logique métier est embarquée via Chaquopy, qui permet d'exécuter du code Python directement dans l'application Android.</p>
+                <p>
+                  An Android app I built to automate the daily grind of paid task bots on Telegram.<br>
+ SmmKingdomTasks bot posts simple jobs : liking, following and commenting on TikTok and Instagram accounts
+, and pays you for each one. <br>
+Instead of doing tasks manualy, this app automate all of these tasks and handles them on
+its own using Android's Accessibility Service.<br>
+Also, this application intercepts the Cloudflare verifications and calculations sent by the bot to counter automation
+ (this APK bypasses all of that using AI , allowing it to run 24/7).<br><br>
+
+This application directly uses the phone's interface : performing clicks, scrolling, opening apps ...., which
+guarantees that Instagram and TikTok
+ accounts won't be blocked, because the script acts as if it were a human.
+
+                </p>
             </div>
 
             <div>
-                <h2>Fonctionnalités</h2>
+                <h2>Features</h2>
                 <ul>
-                    <li>Automatisation complète des tâches de like, follow et commentaire via le service d'accessibilité.</li>
-                    <li>Interaction avec les bots Telegram SmmKingdomTasks et HelpCercle.</li>
-                    <li>Logique métier en Python embarquée avec Chaquopy.</li>
-                    <li>Persistance des données locales avec SQLite.</li>
+                    <li>Full automation of like, follow , comment and captcha through the Accessibility Service.</li>
+                    <li>A parameter that limits the actions to be performed, so as not to be restricted by either platform.</li>
+                    <li>A log interface and a statistics interface showing earnings gained, completed tasks, and skipped tasks.</li>
+
                 </ul>
             </div>
 
             <div>
-                <h2>Workflow</h2>
+                <h2>How it works</h2>
                 <div style="margin-top: 12px; padding: 20px; background: rgba(30, 100, 220, 0.08); border: 1px solid rgba(30, 100, 220, 0.3); border-radius: 12px; font-family: 'Space Mono', monospace; font-size: 0.95rem; line-height: 2.2; color: #94a3b8;">
-                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">Boucle de traitement automatisé</div>
+                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">The automated task loop</div>
                     <div style="text-align: center;">
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Bot Telegram</span></div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Telegram bot</span></div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Envoie les tâches (like, follow, commentaire)</div>
+                        <div style="margin: 12px 0; color: #94a3b8;">Sends a task (like / follow / comment)</div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. Application Android (APK)</span></div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. Android app (APK)</span></div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Détecte la tâche via Accessibility Service</div>
+
+                        <div style="margin: 12px 0; color: #94a3b8;">Performs the action on TikTok / Instagram</div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Exécute l'action sur TikTok / Instagram</div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Task done</span></div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Tâche terminée</span></div>
-                        <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Confirmation envoyée au bot → gain crédité</div>
+                        <div style="margin: 12px 0; color: #94a3b8;">Sending "Completed" to the bot → credit lands in your balance</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:6px;">
+            <a class="action-btn" href="https://t.me/helpCercle1" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download the APK
+            </a>
+            <a class="action-btn" href="https://t.me/installationCMD" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                App tutorials
+            </a>
+        </div>
     </main>
 
-    <a href="../#projects" class="back-button" aria-label="Retour aux projets">
+    <a href="../#projects" class="back-button" aria-label="Back to projects">
         <svg width="22px" height="22px" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
              xmlns="http://www.w3.org/2000/svg"
              style="transform: rotate(90deg);">
