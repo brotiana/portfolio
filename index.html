@@ -596,6 +596,60 @@
             box-shadow: 0 10px 35px rgba(26, 111, 255, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
         }
 
+        /* ── Bouton "plaque de blindage" (View my projects) ── */
+        .b7 {
+            --metal: #1b2436;
+            --metal-hi: #43536e;
+            --line: #1a6fff;
+            --dim: #8fa3c4;
+            --blue-dim: rgba(26, 111, 255, 0.45);
+            --glow: rgba(26, 111, 255, 0.45);
+            width: 252px; /* 140px × 1.8 */
+            height: 46px;
+            position: relative;
+            background: var(--metal);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .b7 .plate {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, var(--metal-hi) 0%, var(--metal) 45%, var(--metal-hi) 100%);
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 13.8px, 100% 46px, 14px 46px, 0 32.2px);
+            transition: transform .3s;
+            border: 1px solid var(--line);
+        }
+        .b7 .plate2 {
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 13.8px, 100% 46px, 14px 46px, 0 32.2px);
+            background: transparent;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--dim);
+        }
+
+        /* traits diagonaux — coïncident exactement avec les 2 arêtes inclinées */
+        .b7 .edge {
+            position: absolute;
+            width: 17.7px;
+            height: 2px;
+            background: #1a6fff;
+            box-shadow: 0 0 5px rgba(26, 111, 255, .5);
+            transform-origin: left center;
+            transition: transform .3s;
+        }
+        .b7 .edgeTR { left: calc(100% - 14px); top: -1px; transform: rotate(44.6deg); }
+        .b7 .edgeBL { left: 0px; top: 31.2px; transform: rotate(44.6deg); }
+
+        .b7:hover .plate { transform: translate(4px, -4px); box-shadow: -4px 4px 0 var(--blue-dim), 0 0 16px var(--glow); }
+        .b7:hover .plate2 { color: #5b95ff; }
+        .b7:hover .edgeTR { transform: translate(4px, -4px) rotate(44.6deg); }
+        .b7:hover .edgeBL { transform: translate(4px, -4px) rotate(44.6deg); }
+
         @keyframes pulse-dot {
             0%, 100% { box-shadow: 0 0 5px #22c55e; }
             50% { box-shadow: 0 0 20px #22c55e, 0 0 40px rgba(34,197,94,0.3); }
@@ -1559,12 +1613,12 @@
                             Passionate about creating innovative and high-performance web applications. I turn ideas into
                             concrete solutions using modern technologies.
                         </p>
-                        <div class="flex flex-wrap gap-4 justify-center">
-                            <button class="btn-primary">
-                                View my projects
-                            </button>
-                            <button class="btn-primary">
-                                Contact me
+                        <div class="flex flex-wrap gap-6 justify-center">
+                            <button class="b7" aria-label="View my projects" onclick="showSection('projects')">
+                                <span class="plate"></span>
+                                <span class="edge edgeTR"></span>
+                                <span class="edge edgeBL"></span>
+                                <span class="plate2" style="font-size:12px; letter-spacing:2px;">VIEW MY PROJECTS</span>
                             </button>
                         </div>
                     </div>
