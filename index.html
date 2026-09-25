@@ -1524,6 +1524,16 @@
             */
             body {
                 width: 100%;
+                /* Le body gardait height:100vh → zoomé à 75%, il ne
+                   couvrait que les 75% du haut. On compense sa hauteur
+                   comme pour #home afin qu'il remplisse tout l'écran. */
+                height: calc(100vh / 0.75);
+                height: calc(100dvh / 0.75);
+            }
+            /* Toutes les sections plein écran couvrent l'écran après zoom */
+            .section {
+                min-height: calc(100vh / 0.75);
+                min-height: calc(100dvh / 0.75);
             }
             /*
                Compense le vide en bas sur Accueil + Bio :
@@ -1551,6 +1561,16 @@
             }
             body {
                 width: 100%;
+                /* Le body gardait height:100vh → zoomé à 75%, il ne
+                   couvrait que les 75% du haut. On compense sa hauteur
+                   comme pour #home afin qu'il remplisse tout l'écran. */
+                height: calc(100vh / 0.75);
+                height: calc(100dvh / 0.75);
+            }
+            /* Toutes les sections plein écran couvrent l'écran après zoom */
+            .section {
+                min-height: calc(100vh / 0.75);
+                min-height: calc(100dvh / 0.75);
             }
             #home,
             #home > * {
@@ -1924,7 +1944,7 @@
                         <span class="project-tech">CSS</span>
                         <span class="project-tech">JavaScript</span>
                         <span class="project-tech">PHP</span>
-                   
+
                     </div>
                 </div>
 
@@ -2568,15 +2588,32 @@
                 history.scrollRestoration = 'manual';
             }
 
+            // Position de scroll réelle. Selon le contexte, le conteneur qui
+            // défile est la fenêtre OU <body> (cas des écrans où le zoom 75%
+            // est actif → window.scrollY vaut alors toujours 0).
+            function getScrollTop() {
+                return window.scrollY ||
+                       document.documentElement.scrollTop ||
+                       document.body.scrollTop || 0;
+            }
+
             // Sauvegarde avant de quitter la page (clic sur un projet, etc.)
             function save() {
                 try {
-                    sessionStorage.setItem(KEY, window.scrollY);
+                    sessionStorage.setItem(KEY, getScrollTop());
                 } catch (e) {}
             }
             window.addEventListener('beforeunload', save);
             // pagehide couvre aussi le cas bfcache (où beforeunload ne se déclenche pas)
             window.addEventListener('pagehide', save);
+
+            // Sécurité : sauvegarde aussi au clic sur un projet (position exacte
+            // au moment du clic, avant toute navigation).
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.closest && e.target.closest('.project-row')) {
+                    save();
+                }
+            }, true);
 
             function restore() {
                 var saved = null;
@@ -2610,7 +2647,13 @@
                     }
                 }
 
-                function apply() { window.scrollTo(0, pos); }
+                function apply() {
+                    // Applique la position sur tous les conteneurs possibles :
+                    // en zoom 75% c'est <body> qui défile, ailleurs la fenêtre.
+                    window.scrollTo(0, pos);
+                    if (document.documentElement) document.documentElement.scrollTop = pos;
+                    if (document.body) document.body.scrollTop = pos;
+                }
                 apply();
                 requestAnimationFrame(apply);
                 // Ré-applique pendant ~2s (attente du layout / images)
