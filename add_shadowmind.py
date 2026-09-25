@@ -46,7 +46,7 @@ if idx >= 0:
             </div>
             <div class="sayit-modal-buttons" style="position:absolute;bottom:1.5rem;left:0;right:0;display:flex;gap:12px;justify-content:center;z-index:10;">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Close</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Open website</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmShadowMind()">Open website</button>
             </div>
         </div>
     </div>

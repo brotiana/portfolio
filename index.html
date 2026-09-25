@@ -42,7 +42,7 @@
             color: #ffffff;
             overflow-x: hidden;
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
         }
 
         /* ── Scanlines ── */
@@ -594,6 +594,21 @@
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 35px rgba(26, 111, 255, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        /* ── Bouton "Send Message" (fond transparent, bordure couleur du bouton) ── */
+        .btn-primary.send-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            box-shadow: none;
+        }
+        .btn-primary.send-btn::before {
+            display: none;
+        }
+        .btn-primary.send-btn:hover {
+            background: rgba(26, 111, 255, 0.12);
+            box-shadow: 0 0 20px rgba(26, 111, 255, 0.35);
+            transform: translateY(-3px);
         }
 
         /* ── Bouton "plaque de blindage" (View my projects) ── */
@@ -1335,6 +1350,18 @@
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
+        /* Variante transparente : seule la bordure garde la couleur du bouton */
+        .sayit-btn-confirm.btn-outline {
+            background: transparent;
+            border: 2px solid #1a6fff;
+            box-shadow: none;
+        }
+        .sayit-btn-confirm.btn-outline:hover {
+            background: rgba(26, 111, 255, 0.12);
+            box-shadow: 0 0 20px rgba(26, 111, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
         /* ponytail: inset:0 de la classe .sayit-modal-overlay suffit, pas de height:100vh fixe */
 
         /* ════════════════════════════════════════════════════
@@ -1531,6 +1558,7 @@
                 height: calc(100dvh / 0.75) !important;
             }
         }
+
     </style>
 </head>
 
@@ -1885,7 +1913,6 @@
                     </div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold">ShadowMind</h3>
-                        <span class="text-blue-400">2025</span>
                     </div>
                     <p class="text-gray-400 mb-4">
                         Rich editing : text, colors, images, audio, tables.<br>
@@ -1896,6 +1923,8 @@
                         <span class="project-tech">HTML</span>
                         <span class="project-tech">CSS</span>
                         <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">PHP</span>
+                   
                     </div>
                 </div>
 
@@ -1986,6 +2015,7 @@
                         <span class="project-tech">chaquopy</span>
                         <span class="project-tech">Python</span>
                         <span class="project-tech">sql Lite</span>
+                        <span class="project-tech">JAVA</span>
                     </div>
                 </div>
 
@@ -2129,13 +2159,7 @@
                         </div>
                     </div>
 
-                    <!-- Availability badge -->
-                    <div class="contact-card" style="text-align:center; padding:1.25rem;">
-                        <div style="display:inline-flex; align-items:center; gap:0.5rem;">
-                            <span style="width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e; animation: pulse-dot 2s ease-in-out infinite;"></span>
-                            <span style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:#94a3b8;">Currently Available</span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- Right column — Form (3/5 width) -->
@@ -2149,7 +2173,10 @@
                             </div>
                             <input type="text" id="subject" name="subject" placeholder="Subject" class="form-input" required>
                             <textarea id="message" name="message" placeholder="Tell me about your project..." class="form-input" required></textarea>
-                            <button type="submit" class="btn-primary w-full" style="margin-top:0.5rem;">
+                            <!-- Champ anti-spam (invisible pour les humains) -->
+                            <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true"
+                                style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; opacity:0; pointer-events:none;">
+                            <button type="submit" class="btn-primary w-full send-btn" style="margin-top:0.5rem;">
                                 <i class="fas fa-paper-plane" style="margin-right:10px;"></i>Send Message
                             </button>
                         </form>
@@ -2160,7 +2187,8 @@
         </div>
     </section>
 
-    <script src="main.js?v=2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="main.js?v=4"></script>
     <script>
         // ── Hash navigation : ouvre la bonne section au chargement ──
         window.addEventListener('load', () => {
@@ -2241,7 +2269,7 @@
             <div class="sayit-modal-url">sayit.gt.tc</div>
             <div class="sayit-modal-buttons">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeSayitModal()">Cancel</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmSayit()">Continue</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmSayit()">Continue</button>
             </div>
         </div>
     </div>
@@ -2296,7 +2324,7 @@
             </div>
             <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Close</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Open website</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmShadowMind()">Open website</button>
             </div>
         </div>
     </div>
@@ -2330,7 +2358,7 @@
             </div>
             <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeMIIAModal()">CLOSE</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmMIIA()">Download app</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmMIIA()">Download app</button>
             </div>
         </div>
     </div>
