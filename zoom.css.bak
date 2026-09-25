@@ -1,0 +1,36 @@
+/* ════════════════════════════════════════════════════
+   ZOOM AUTO 80% — Fichier partagé par toutes les pages de projet
+   Équivalent au dézoomage navigateur (Ctrl + - à 80%)
+   Appliqué à : getlike, gotik, hc_bot_apk, kvmsoft, tikDown, milike
+════════════════════════════════════════════════════ */
+
+/* ── Desktop : écrans de hauteur ≤ 815px ── */
+@media (min-width: 769px) and (max-height: 815px) {
+    html {
+        zoom: 0.8;
+        overflow-x: hidden;
+    }
+    /*
+       body en width:100vw (qui inclut la scrollbar et se calcule
+       sur le viewport non zoomé) créerait un vide à droite et
+       pousserait la scrollbar au centre. width:100% colle à la
+       largeur zoomée du html → plus de vide, scrollbar à droite.
+    */
+    body {
+        width: 100%;
+    }
+}
+
+/* ── Android portrait (largeur ≤ 480px) ──
+   Cible : Oppo A15s (360×800) · Vivo Y93 (360×760)
+   Applique le même dézoomage que sur desktop pour que la mise
+   en page mobile tienne correctement à l'écran. */
+@media (max-width: 480px) and (min-height: 600px) {
+    html {
+        zoom: 0.8;
+        overflow-x: hidden;
+    }
+    body {
+        width: 100%;
+    }
+}

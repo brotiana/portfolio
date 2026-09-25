@@ -31,7 +31,7 @@
             flex-direction: column;
         }
 
-        
+        /* ── Background FX ── */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -76,7 +76,7 @@
             z-index: 1;
         }
 
-        
+        /* ── Top back link ── */
         .back-top {
             display: inline-flex;
             align-items: center;
@@ -101,7 +101,7 @@
             transform: translateX(-3px);
         }
 
-        
+        /* ── Gallery (une seule image visible à la fois, tous écrans) ── */
         .gallery-wrap {
             position: relative;
         }
@@ -145,7 +145,7 @@
             -webkit-user-drag: none;
         }
 
-        
+        /* ── Flèches overlay (grand écran) ── */
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -174,7 +174,7 @@
         .gallery-arrow.prev { left: 12px; }
         .gallery-arrow.next { right: 12px; }
 
-        
+        /* ── Barre de contrôle : numérotation + flèches ── */
         .gallery-controls {
             display: flex;
             align-items: center;
@@ -211,7 +211,7 @@
         .gallery-nav-btn:hover { background: rgba(30, 100, 220, 0.4); }
         .gallery-nav-btn:active { transform: scale(0.9); }
 
-        
+        /* ── Title block ── */
         .project-subtitle {
             margin: 2.2rem 0 12px;
             color: #5a7fa8;
@@ -241,7 +241,7 @@
             margin-top: 14px;
         }
 
-        
+        /* ── Divider ── */
         .section-divider {
             border: none;
             height: 1px;
@@ -249,7 +249,7 @@
             margin: 24px 0;
         }
 
-        
+        /* ── Details grid ── */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -287,7 +287,7 @@
             font-size: 0.95rem;
         }
 
-        
+        /* ── Description sections ── */
         .description {
             display: grid;
             gap: 24px;
@@ -319,7 +319,7 @@
             color: #1e64dc;
         }
 
-        
+        /* ── Tech tags ── */
         .tech-row {
             display: flex;
             flex-wrap: wrap;
@@ -337,7 +337,7 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
-        
+        /* ── Bouton voir le code ── */
         .code-btn {
             display: inline-flex;
             align-items: center;
@@ -364,7 +364,7 @@
             height: 20px;
         }
 
-        
+        /* ── Bottom back button ── */
         .back-button {
             position: fixed;
             right: 18px;
@@ -397,7 +397,7 @@
         }
 
         @media (max-width: 749px) {
-            
+            /* Image pleine largeur, collée aux bords gauche et droit de l'écran */
             .gallery-wrap {
                 margin-left: -20px;
                 margin-right: -20px;
@@ -419,7 +419,7 @@
                 object-fit: contain;
             }
 
-            
+            /* Flèches à côté de la numérotation, en bas de la galerie */
             .gallery-controls {
                 justify-content: center;
                 gap: 20px;
@@ -432,18 +432,18 @@
             .details-grid { grid-template-columns: 1fr; }
         }
 
-        
+        /* ── Fin du style ── */
     </style>
 </head>
 <body>
-    
+    <!-- Background FX layers -->
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div class="corner-glow"></div>
 
     <main class="main-content">
 
-        
+        <!-- Top back link -->
         <a class="back-top" href="../#projects">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -454,7 +454,7 @@
             Retour au portfolio
         </a>
 
-        
+        <!-- Gallery : une seule image affichée à la fois (même sur grand écran) -->
         <div class="gallery-wrap">
             <div class="gallery">
                 <figure class="active">
@@ -482,7 +482,7 @@
             </div>
         </div>
 
-        
+        <!-- Title -->
         <h1 class="project-title">Chess game online</h1>
 
 
@@ -557,7 +557,7 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
     </a>
 
     <script>
-        
+        // Slider : une seule image affichée à la fois, quel que soit l'écran
         (function () {
             var slides = Array.prototype.slice.call(document.querySelectorAll('.gallery figure'));
             var countEl = document.getElementById('gallery-count');
@@ -584,7 +584,7 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
 <script src="../scroll-restore.js"></script>
 
 <script>
-
+// Masque le nom du fichier .html dans la barre d'adresse
 (function(){
   try{
     var p = location.pathname;

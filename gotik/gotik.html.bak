@@ -20,7 +20,7 @@
         .note{color:var(--muted);margin-top:.75rem}
         .subsection{margin-top:1rem;color:#d1d5db;line-height:1.55}
         .subsection h3{margin-bottom:.4rem;color:#c084fc}
-        
+        /* responsive small tweaks */
         @media (max-width:480px){
             .title{font-size:1.25rem}
             .gh-btn{padding:.45rem .75rem}
@@ -32,7 +32,7 @@
         <a class="back" href="../index.html">← Retour au portfolio</a>
         <div class="topbar">
             <div class="title">Gotik</div>
-            
+            <!-- Replace the href below with your actual GitHub repository URL -->
             <a class="gh-btn" href="https://github.com/your-username/gotik" target="_blank" rel="noopener noreferrer">Voir le code source sur GitHub</a>
         </div>
 
@@ -40,14 +40,14 @@
 
         <div class="media">
             <h2 style="margin:0.6rem 0 0.4rem 0;font-size:1.1rem">Démo vidéo</h2>
-            
+            <!-- Video file located at workspace root; poster uses the cover image -->
             <video controls poster="../gotik.png">
                 <source src="../2025-12-11 14-37-46.mkv" type="video/x-matroska">
                 Votre navigateur ne supporte pas la balise vidéo.
             </video>
         </div>
 
-        
+        <!-- Explanations / subtitles -->
         <section class="subsection">
             <h3>À propos</h3>
             <p>Gotik est un petit projet de démonstration. Cette page montre la couverture du projet et une courte vidéo de démonstration.</p>

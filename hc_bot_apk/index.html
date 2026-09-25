@@ -31,7 +31,7 @@
             flex-direction: column;
         }
 
-        /* ── Background FX ── */
+        
         .scanlines {
             position: fixed;
             inset: 0;
@@ -76,7 +76,7 @@
             z-index: 1;
         }
 
-        /* ── Top back link ── */
+        
         .back-top {
             display: inline-flex;
             align-items: center;
@@ -101,7 +101,7 @@
             transform: translateX(-3px);
         }
 
-        /* ── Gallery (5 images, alignées de gauche à droite + scroll horizontal) ── */
+        
         .gallery {
             display: flex;
             flex-direction: row;
@@ -156,7 +156,7 @@
             object-fit: contain;
         }
 
-        /* ── Gallery wrapper + flèches précédent / suivant ── */
+        
         .gallery-wrap {
             position: relative;
         }
@@ -189,7 +189,7 @@
         .gallery-arrow.prev { left: 8px; }
         .gallery-arrow.next { right: 8px; }
 
-        /* ── Title block ── */
+        
         .project-subtitle {
             margin: 0 0 12px;
             color: #5a7fa8;
@@ -219,7 +219,7 @@
             margin-top: 14px;
         }
 
-        /* ── Divider ── */
+        
         .section-divider {
             border: none;
             height: 1px;
@@ -227,7 +227,7 @@
             margin: 24px 0;
         }
 
-        /* ── Details grid ── */
+        
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -265,7 +265,7 @@
             font-size: 0.95rem;
         }
 
-        /* ── Description sections ── */
+        
         .description {
             display: grid;
             gap: 24px;
@@ -297,7 +297,7 @@
             color: #1e64dc;
         }
 
-        /* ── Tech tags ── */
+        
         .tech-row {
             display: flex;
             flex-wrap: wrap;
@@ -315,7 +315,7 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
-        /* ── Action buttons (download / tutorial) ── */
+        
         .action-btn {
             display: inline-flex;
             align-items: center;
@@ -342,7 +342,7 @@
             height: 20px;
         }
 
-        /* ── Bottom back button ── */
+        
         .back-button {
             position: fixed;
             right: 18px;
@@ -375,7 +375,7 @@
         }
 
         @media (max-width: 720px) {
-            /* Sur petit écran (Android) : une seule photo à la fois, pleine largeur, snap scroll */
+            
             .gallery figure {
                 flex: 0 0 100%;
                 max-width: 100%;
@@ -389,7 +389,7 @@
             .details-grid { grid-template-columns: 1fr; }
         }
 
-        /* ── Flèches verticales du workflow (longues) ── */
+        
         .wf-arrow {
             position: relative;
             width: 14px;
@@ -422,14 +422,14 @@
     </style>
 </head>
 <body>
-    <!-- Background FX layers -->
+    
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div class="corner-glow"></div>
 
     <main class="main-content">
 
-        <!-- Top back link -->
+        
         <a class="back-top" href="../#projects">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -440,7 +440,7 @@
             Back to portfolio
         </a>
 
-        <!-- Gallery : les 5 images du projet + flèches précédent/suivant -->
+        
         <div class="gallery-wrap">
             <div class="gallery">
                 <figure>
@@ -463,7 +463,7 @@
             <button class="gallery-arrow next" aria-label="Next image" onclick="scrollGallery(1)">&#10095;</button>
         </div>
 
-        <!-- Title -->
+        
         <p class="project-subtitle">Project overview</p>
         <h1 class="project-title">SmmKingdomTasks + HelpCercle_bot</h1>
 
@@ -576,12 +576,12 @@ guarantees that Instagram and TikTok
     </a>
 
     <script>
-        // Navigation galerie : flèches précédent / suivant
+        
         function scrollGallery(dir) {
             var gallery = document.querySelector('.gallery');
             if (!gallery) return;
             var fig = gallery.querySelector('figure');
-            var gap = 14; // même valeur que le gap CSS
+            var gap = 14; 
             var step = fig ? fig.offsetWidth + gap : gallery.clientWidth;
             gallery.scrollBy({ left: dir * step, behavior: 'smooth' });
         }
@@ -589,7 +589,7 @@ guarantees that Instagram and TikTok
 <script src="../scroll-restore.js"></script>
 
 <script>
-// Masque le nom du fichier .html dans la barre d'adresse
+
 (function(){
   try{
     var p = location.pathname;

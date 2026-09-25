@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Chess game online : Projet</title>
+    <title>HelpCercle : Projet</title>
     <link rel="stylesheet" href="../zoom.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -31,7 +31,7 @@
             flex-direction: column;
         }
 
-        
+        /* ── Background FX ── */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -76,7 +76,7 @@
             z-index: 1;
         }
 
-        
+        /* ── Top back link ── */
         .back-top {
             display: inline-flex;
             align-items: center;
@@ -101,7 +101,7 @@
             transform: translateX(-3px);
         }
 
-        
+        /* ── Gallery (une seule image visible à la fois, tous écrans) ── */
         .gallery-wrap {
             position: relative;
         }
@@ -145,7 +145,7 @@
             -webkit-user-drag: none;
         }
 
-        
+        /* ── Flèches overlay (grand écran) ── */
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -174,7 +174,7 @@
         .gallery-arrow.prev { left: 12px; }
         .gallery-arrow.next { right: 12px; }
 
-        
+        /* ── Barre de contrôle : numérotation + flèches ── */
         .gallery-controls {
             display: flex;
             align-items: center;
@@ -211,7 +211,7 @@
         .gallery-nav-btn:hover { background: rgba(30, 100, 220, 0.4); }
         .gallery-nav-btn:active { transform: scale(0.9); }
 
-        
+        /* ── Title block ── */
         .project-subtitle {
             margin: 2.2rem 0 12px;
             color: #5a7fa8;
@@ -241,7 +241,7 @@
             margin-top: 14px;
         }
 
-        
+        /* ── Divider ── */
         .section-divider {
             border: none;
             height: 1px;
@@ -249,7 +249,7 @@
             margin: 24px 0;
         }
 
-        
+        /* ── Details grid ── */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -287,7 +287,7 @@
             font-size: 0.95rem;
         }
 
-        
+        /* ── Description sections ── */
         .description {
             display: grid;
             gap: 24px;
@@ -319,7 +319,7 @@
             color: #1e64dc;
         }
 
-        
+        /* ── Tech tags ── */
         .tech-row {
             display: flex;
             flex-wrap: wrap;
@@ -337,34 +337,7 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
-        
-        .code-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, rgba(30,100,220,0.25), rgba(96,165,250,0.15));
-            border: 1px solid rgba(30,100,220,0.5);
-            color: #ffffff;
-            font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
-            letter-spacing: 0.06em;
-            text-decoration: none;
-            box-shadow: 0 0 20px rgba(30,100,220,0.25);
-            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-        }
-        .code-btn:hover {
-            background: linear-gradient(135deg, rgba(30,100,220,0.45), rgba(96,165,250,0.3));
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(30,100,220,0.45);
-        }
-        .code-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        
+        /* ── Bottom back button ── */
         .back-button {
             position: fixed;
             right: 18px;
@@ -397,7 +370,7 @@
         }
 
         @media (max-width: 749px) {
-            
+            /* Image pleine largeur, collée aux bords gauche et droit de l'écran */
             .gallery-wrap {
                 margin-left: -20px;
                 margin-right: -20px;
@@ -419,7 +392,7 @@
                 object-fit: contain;
             }
 
-            
+            /* Flèches à côté de la numérotation, en bas de la galerie */
             .gallery-controls {
                 justify-content: center;
                 gap: 20px;
@@ -432,18 +405,18 @@
             .details-grid { grid-template-columns: 1fr; }
         }
 
-        
+        /* ── Fin du style ── */
     </style>
 </head>
 <body>
-    
+    <!-- Background FX layers -->
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div class="corner-glow"></div>
 
     <main class="main-content">
 
-        
+        <!-- Top back link -->
         <a class="back-top" href="../#projects">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -454,41 +427,53 @@
             Retour au portfolio
         </a>
 
-        
+        <!-- Gallery : une seule image affichée à la fois (même sur grand écran) -->
         <div class="gallery-wrap">
             <div class="gallery">
                 <figure class="active">
-                    <img src="echec1.png" alt="Chess game online - capture 1" loading="lazy" />
+                    <img src="helpcercle1.png" alt="HelpCercle - capture 1" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="echec2.png" alt="Chess game online - capture 2" loading="lazy" />
+                    <img src="helpcercle2.png" alt="HelpCercle - capture 2" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="echec3.png" alt="Chess game online - capture 3" loading="lazy" />
+                    <img src="helpcercle3.png" alt="HelpCercle - capture 3" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="echec4.png" alt="Chess game online - capture 4" loading="lazy" />
+                    <img src="helpcercle4.png" alt="HelpCercle - capture 4" loading="lazy" />
                 </figure>
                 <figure>
-                    <img src="echec5.png" alt="Chess game online - capture 5" loading="lazy" />
+                    <img src="helpcercle6.png" alt="HelpCercle - capture 5" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpcercle7.png" alt="HelpCercle - capture 6" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="Helpcercle8.png" alt="HelpCercle - capture 7" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpcercle9.png" alt="HelpCercle - capture 8" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpecercle10.png" alt="HelpCercle - capture 9" loading="lazy" />
+                </figure>
+                <figure>
+                    <img src="helpcercle11.png" alt="HelpCercle - capture 10" loading="lazy" />
                 </figure>
                 <button class="gallery-arrow prev" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
                 <button class="gallery-arrow next" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
             </div>
             <div class="gallery-controls">
                 <button class="gallery-nav-btn" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
-                <p class="gallery-count" id="gallery-count">1 / 5</p>
+                <p class="gallery-count" id="gallery-count">1 / 10</p>
                 <button class="gallery-nav-btn" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
             </div>
         </div>
 
-        
-        <h1 class="project-title">Chess game online</h1>
-
-
-
+        <!-- Title -->
+        <p class="project-subtitle">Présentation du projet</p>
+        <h1 class="project-title">HelpCercle</h1>
         <hr class="section-divider" />
-
         <div class="details-grid">
             <div class="detail">
                 <strong>Rôle</strong>
@@ -505,45 +490,46 @@
         </div>
 
 
+
         <hr class="section-divider" />
 
         <div class="description">
             <div>
                 <h2>Project description</h2>
-                <p>Chess Game Online is a web platform where you can play chess against other players online or practice against the computer. The game interface displays the board with full support for all chess rules : legal moves, castling, checkmate and keeps moves synced between both players in real time. </br>
+                <p>
+                  HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.</br>
 
-Players can also chat with their opponent during the game, right from the interface.</br>
+There are basically two types of users: the first kind sells something like a skill or an account, for example. The second kind is looking to buy that skill or a specific service, and can post a request on the platform if they can't find what they need.</br>
 
-On the backend, the app is split into two parts: a Node.js server handles real-time communication between players through WebSockets (game rooms), while PHP and MySQL take care of data persistence like user accounts, match history, stats, and rankings.</p>
-                
+Users who post offers can also offer services carried out by AI agents. These AI-agent-powered services could include things like audio transcription, image background removal, sending messages to a list of 1000 emails, building a website, and so on.</br>
+
+Connecting an AI agent to the HelpCercle platform requires the site admin (me) to step in, since each AI agent offer needs its own custom-built interface tailored to what it does.</br>
+                </p>
             </div>
 
             <div>
                 <h2>Features</h2>
                 <ul>
-                    <li>Sign up and account creation.</li>
-                    <li>Invite a user to join a chess game.</li>
-                    <li>Interface listing all online users, with the ability to send them a message.</li>
-                    <li>Real-time move synchronization between players.</li>
-                    <li>Play against the computer.</li>
-                    <li>Full chess rules implemented (check, checkmate, stalemate, promotion).</li>
-                    <li>Match history, stats, and player rankings .</li>
-                    <li>Make a game public so other users can watch it live, or keep it private.</li>
-                    <li>An option to watch public games currently being played online.</li>
+                    <li>Buyers and sellers can chat with each other directly.</li>
+                    <li>Automatic deposits using cryptocurrency.</li>
+                    <li>Real-time messaging and notifications using WebSocket.</li>
+                    <li>Member profiles, transaction tracking, and history.</li>
+                    <li>Affiliate system.</li>
+                    <li>Users can offer 100% automated services powered by AI or scripts, by connecting their own server (running the system that performs the task) to the HelpCercle platform.</li>
                 </ul>
             </div>
 
         </div>
 
-        <div style="text-align: center; margin-top: 28px;">
-            <a class="code-btn" href="https://github.com/brotiana/echec" target="_blank" rel="noopener">
-                <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                Voir le code source
-            </a>
+        <div style="margin-top:2rem; padding:22px 24px; background:rgba(30,100,220,0.07); border:1px solid rgba(30,100,220,0.3); border-radius:12px; line-height:1.8; color:#94a3b8;">
+            <p style="margin:0; font-size:0.97rem;">
+                <b style="color:#60a5fa; font-family:'Orbitron',monospace; letter-spacing:0.05em; text-transform:uppercase; display:block; margin-bottom:8px; font-size:0.8rem;">Note</b>
+                The website is not hosted yet, as we are still sorting out the legal paperwork. I also can't show the source code because this is a big and serious project for me. I prefer to present the project with the images at the top only.
+            </p>
         </div>
+
     </main>
+
 
     <a href="../#projects" class="back-button" aria-label="Retour aux projets">
         <svg width="22px" height="22px" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
@@ -557,7 +543,7 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
     </a>
 
     <script>
-        
+        // Slider : une seule image affichée à la fois, quel que soit l'écran
         (function () {
             var slides = Array.prototype.slice.call(document.querySelectorAll('.gallery figure'));
             var countEl = document.getElementById('gallery-count');
@@ -584,7 +570,7 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
 <script src="../scroll-restore.js"></script>
 
 <script>
-
+// Masque le nom du fichier .html dans la barre d'adresse
 (function(){
   try{
     var p = location.pathname;

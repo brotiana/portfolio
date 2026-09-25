@@ -21,7 +21,7 @@
             color: #ffffff;
         }
 
-        
+        /* ── Background FX ── */
         .scanlines {
             position: fixed; inset: 0; z-index: 0;
             background: repeating-linear-gradient(
@@ -43,7 +43,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Layout ── */
         .container {
             max-width: 960px;
             margin: 0 auto;
@@ -52,7 +52,7 @@
             z-index: 1;
         }
 
-        
+        /* ── Top back link ── */
         .back-top {
             display: inline-flex;
             align-items: center;
@@ -77,7 +77,7 @@
             transform: translateX(-3px);
         }
 
-        
+        /* ── Hero image ── */
         .hero-image-wrap {
             width: 100%;
             border-radius: 16px;
@@ -93,7 +93,7 @@
             display: block;
             object-fit: contain;
         }
-        
+        /* Subtle blue gradient overlay on the image bottom */
         .hero-image-wrap::after {
             content: '';
             position: absolute;
@@ -103,7 +103,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Title block ── */
         .project-label {
             font-family: 'Orbitron', monospace;
             font-size: 0.72rem;
@@ -132,7 +132,7 @@
             max-width: 780px;
         }
 
-        
+        /* ── Divider ── */
         .divider {
             border: none;
             height: 1px;
@@ -140,7 +140,7 @@
             margin: 1.75rem 0;
         }
 
-        
+        /* ── Details grid ── */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -175,7 +175,7 @@
             font-size: 0.93rem;
         }
 
-        
+        /* ── Modes grid ── */
         .modes-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -210,7 +210,7 @@
             line-height: 1.6;
         }
 
-        
+        /* ── About card ── */
         .about-card {
             background: rgba(30,100,220,0.06);
             border: 1px solid rgba(30,100,220,0.22);
@@ -236,7 +236,7 @@
         }
         .about-card p:last-of-type { margin-bottom: 0; }
 
-        
+        /* ── Install block ── */
         .install-block {
             background: rgba(0,0,0,0.35);
             border: 1px solid rgba(30,100,220,0.2);
@@ -252,7 +252,7 @@
         }
         .install-block i { color: #3b82f6; font-size: 0.9rem; }
 
-        
+        /* ── Shortcut badge ── */
         .shortcut {
             display: inline-flex;
             align-items: center;
@@ -275,7 +275,7 @@
             color: #60a5fa;
         }
 
-        
+        /* ── Tech tags ── */
         .tech-row { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 8px; }
         .tech {
             display: inline-block;
@@ -287,7 +287,7 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
-        
+        /* ── Bottom back button ── */
         .back-button {
             position: fixed;
             right: 18px;
@@ -327,7 +327,7 @@
 
     <div class="container">
 
-        
+        <!-- Top back link -->
         <a class="back-top" href="../#projects">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -338,12 +338,12 @@
             Back to projects
         </a>
 
-        
+        <!-- Hero image -->
         <div class="hero-image-wrap">
             <img src="kvm.png" alt="KVMSoft interface preview" />
         </div>
 
-        
+        <!-- Title -->
         <p class="project-label">Project Presentation</p>
         <h1>KVMSoft — Network Keyboard Sharing</h1>
         <p class="project-desc">
@@ -352,7 +352,7 @@
 
         <hr class="divider" />
 
-        
+        <!-- Details grid -->
         <div class="details-grid">
             <div class="detail-card">
                 <strong>Role</strong>
@@ -372,7 +372,7 @@
             </div>
         </div>
 
-        
+        <!-- How it works -->
         <div class="about-card" style="margin-bottom: 1.5rem;">
             <p class="section-title">How it works</p>
 
@@ -399,7 +399,7 @@
             </div>
         </div>
 
-        
+        <!-- About -->
         <div class="about-card">
             <p class="section-title">About the project</p>
             <p>
@@ -427,7 +427,7 @@
             </div>
         </div>
 
-        
+        <!-- GitHub button -->
         <div style="display:flex; justify-content:center; margin-top: 2.5rem;">
             <a href="https://github.com/brotiana/kvmsoft" target="_blank" rel="noopener noreferrer"
                style="
@@ -458,7 +458,7 @@
 
     </div>
 
-    
+    <!-- Bottom back button -->
     <a href="../#projects" class="back-button" aria-label="Back to projects">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -471,7 +471,7 @@
 <script src="../scroll-restore.js"></script>
 
 <script>
-
+// Masque le nom du fichier .html dans la barre d'adresse
 (function(){
   try{
     var p = location.pathname;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fullstack Developer Portfolio</title>
-    
+    <!-- Masque instantané si hash présent → évite le flash de l'accueil -->
     <script>
         (function () {
             var hash = window.location.hash;
@@ -45,7 +45,7 @@
             min-height: 100vh;
         }
 
-        
+        /* ── Scanlines ── */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -60,7 +60,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Vignette ── */
         .vignette {
             position: fixed;
             inset: 0;
@@ -73,7 +73,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Lueurs bleues d'angle ── */
         .corner-glow {
             position: fixed;
             inset: 0;
@@ -86,7 +86,7 @@
 
 
 
-        
+        /* Navigation */
         .nav-container {
             position: fixed;
             top: 0;
@@ -128,7 +128,7 @@
             transform: translateY(-2px);
         }
 
-        
+        /* Language Selector */
         .lang-selector {
             display: flex;
             align-items: center;
@@ -167,7 +167,7 @@
             line-height: 1;
         }
 
-        
+        /* Sections */
         .section {
             min-height: 100vh;
             padding: 100px 2rem 2rem;
@@ -181,23 +181,32 @@
             display: block !important;
         }
 
-        
+        /* Masquage permanent de la scrollbar INTERNE de l'accueil
+           (#home a overflow-y:auto en style inline) — en CSS global,
+           hors media query, pour qu'elle ne s'affiche JAMAIS, même
+           brièvement pendant la navigation entre onglets.
+           Le défilement interne (molette, tactile, scroll-snap)
+           reste fonctionnel. */
         #home {
-            scrollbar-width: none;        
-            -ms-overflow-style: none;     
+            scrollbar-width: none;        /* Firefox */
+            -ms-overflow-style: none;     /* ancien Edge/IE */
         }
-        #home::-webkit-scrollbar {        
+        #home::-webkit-scrollbar {        /* Chrome / Safari */
             display: none;
             width: 0;
             height: 0;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           SCROLLBAR STYLISÉE — couleurs du thème (bleu)
+           Remplace la scrollbar native blanc-gris partout
+           (page + éléments internes défilants).
+        ════════════════════════════════════════════════════ */
         * {
-            scrollbar-width: thin;                 
-            scrollbar-color: #1e64dc #0a0f1e;      
+            scrollbar-width: thin;                 /* Firefox */
+            scrollbar-color: #1e64dc #0a0f1e;      /* Firefox */
         }
-        ::-webkit-scrollbar {                      
+        ::-webkit-scrollbar {                      /* Chrome / Safari / Edge */
             width: 10px;
             height: 10px;
         }
@@ -212,12 +221,12 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg, #00d4ff, #60a5fa);
         }
-        
+        /* Prevent scroll from affecting sections */
         body {
             scroll-behavior: smooth;
         }
 
-        
+        /* Hero Section */
         .hero-title {
             font-family: 'Osiris', sans-serif;
             font-size: clamp(3rem, 8vw, 5rem);
@@ -256,7 +265,7 @@
             }
         }
 
-        
+        /* Skills Grid */
         .skill-card {
             display: flex;
             flex-direction: column;
@@ -332,7 +341,7 @@
             text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
-        
+        /* Projects */
         .project-row {
             background: rgba(30, 100, 220, 0.05);
             border: 1px solid rgba(30, 100, 220, 0.2);
@@ -349,11 +358,11 @@
             transform: translateX(10px);
         }
 
-        
+        /* Project cover: blurred background derived from same image */
         .project-cover {
             position: relative;
             width: 100%;
-            height: 14rem; 
+            height: 14rem; /* matches previous h-56 */
             overflow: hidden;
             display: block;
             background: #000;
@@ -397,8 +406,10 @@
             margin: 0.25rem;
         }
 
-        
-        
+        /* Contact Form */
+        /* ════════════════════════════════════════════════════
+           CONTACT SECTION — Premium Redesign
+        ════════════════════════════════════════════════════ */
         .contact-wrapper {
             position: relative;
         }
@@ -433,7 +444,7 @@
             margin-bottom: 3rem;
         }
 
-        
+        /* Contact info cards */
         .contact-card {
             background: rgba(8, 13, 26, 0.7);
             border: 1px solid rgba(26, 111, 255, 0.2);
@@ -499,7 +510,7 @@
             margin-top: 2px;
         }
 
-        
+        /* Social icons */
         .social-row {
             display: flex;
             gap: 0.75rem;
@@ -527,7 +538,7 @@
             box-shadow: 0 8px 25px rgba(26, 111, 255, 0.4);
         }
 
-        
+        /* Form card */
         .form-input {
             background: rgba(8, 13, 26, 0.6);
             border: 1px solid rgba(26, 111, 255, 0.15);
@@ -646,7 +657,7 @@
             color: #60a5fa;
         }
 
-        
+        /* Responsive */
         @media (max-width: 768px) {
             .section {
                 padding: 80px 1rem 2rem;
@@ -705,7 +716,9 @@
             }
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           C07 — PARTICLE ORBIT PROFILE PHOTO
+        ════════════════════════════════════════════════════ */
         .id-badge {
             font-family: 'Space Mono', monospace;
             font-size: 10px;
@@ -767,7 +780,9 @@
             z-index: 3; pointer-events: none;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           NAVBAR WRAPPER
+        ════════════════════════════════════════════════════ */
         .navbar-wrapper {
             width: 100%;
             max-width: 960px;
@@ -778,7 +793,7 @@
             z-index: 1000;
         }
 
-        
+        /* ─── NAVBAR BASE ─────────────────────────────────── */
         .navbar {
             display: flex;
             align-items: center;
@@ -800,7 +815,7 @@
             overflow: hidden;
         }
 
-        
+        /* Scan line animation */
         .navbar::before {
             content: '';
             position: absolute;
@@ -816,7 +831,7 @@
             z-index: 0;
         }
 
-        
+        /* Bottom glow line */
         .navbar::after {
             content: '';
             position: absolute;
@@ -845,7 +860,7 @@
             50%       { opacity: 1; }
         }
 
-        
+        /* ─── CORNER BRACKETS ────────────────────────────── */
         .corner {
             position: absolute;
             width: 10px;
@@ -861,7 +876,7 @@
         .corner.br { bottom: 5px; right: 5px;   border-width: 0 1px 1px 0; }
         .navbar:hover .corner { border-color: #00d4ff; }
 
-        
+        /* ─── NAV LINKS ──────────────────────────────────── */
         .nav-links {
             display: flex;
             gap: 36px;
@@ -886,7 +901,7 @@
             overflow: hidden;
         }
 
-        
+        /* Glitch clone layer */
         .nav-links a::before {
             content: attr(data-text);
             position: absolute;
@@ -898,7 +913,7 @@
             pointer-events: none;
         }
 
-        
+        /* Underline flicker */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -915,7 +930,7 @@
         .nav-links a:hover::before    { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
         .nav-links a:hover::after     { width: 100%; }
 
-        
+        /* ─── HOME ICON ──────────────────────────────────── */
         .home-icon {
             width: 52px;
             height: 52px;
@@ -956,7 +971,9 @@
             z-index: 1;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           HAMBURGER BUTTON  (hidden on desktop)
+        ════════════════════════════════════════════════════ */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -983,14 +1000,16 @@
             transition: all 0.35s cubic-bezier(.77,0,.18,1);
             transform-origin: center;
         }
-        
+        /* Hamburger → X animation */
         .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #00d4ff; }
         .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
         .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #00d4ff; }
 
-        
+        /* ════════════════════════════════════════════════════
+           MOBILE DROPDOWN MENU
+        ════════════════════════════════════════════════════ */
         .mobile-menu {
-            display: none;           
+            display: none;           /* shown only in mobile */
             flex-direction: column;
             background: rgba(8, 13, 26, 0.95);
             backdrop-filter: blur(10px);
@@ -1040,7 +1059,9 @@
             opacity: 0.4;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           RESPONSIVE BREAKPOINTS
+        ════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
             .navbar {
                 padding: 0 24px;
@@ -1095,7 +1116,9 @@
             .mobile-menu a { font-size: 9px; padding: 12px 24px; letter-spacing: 2px; }
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           SAYIT REDIRECT MODAL
+        ════════════════════════════════════════════════════ */
         .sayit-modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -1137,7 +1160,7 @@
             transform: scale(1) translateY(0);
         }
 
-        
+        /* Top glow line */
         .sayit-modal::before {
             content: '';
             position: absolute;
@@ -1149,7 +1172,7 @@
             border-radius: 2px;
         }
 
-        
+        /* Corner accents */
         .sayit-modal::after {
             content: '';
             position: absolute;
@@ -1258,9 +1281,11 @@
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        
+        /* ponytail: inset:0 de la classe .sayit-modal-overlay suffit, pas de height:100vh fixe */
 
-        
+        /* ════════════════════════════════════════════════════
+           SHADOWMIND PROJECT MODAL
+        ════════════════════════════════════════════════════ */
         .shadowmind-carousel {
             position: relative;
             width: 100%;
@@ -1310,17 +1335,33 @@
             color: #94a3b8;
             line-height: 1.3;
         }
-        
+        /* ════════════════════════════════════════════════════
+           ZOOM AUTO 75% — Écrans desktop de hauteur ≤ 815px
+           Équivalent au dézoomage navigateur (Ctrl + - à 75%)
+        ════════════════════════════════════════════════════ */
         @media (min-width: 769px) and (max-height: 815px) {
             html {
                 zoom: 0.75;
                 overflow-x: hidden;
             }
-            
+            /*
+               Correction de l'artefact du zoom sur html :
+               body en width:100vw (qui inclut la scrollbar et
+               se calcule sur le viewport non zoomé) créait un
+               vide à droite et poussait la scrollbar au centre.
+               width:100% colle exactement à la largeur zoomée
+               du html → plus de vide, scrollbar à droite.
+            */
             body {
                 width: 100%;
             }
-            
+            /*
+               Compense le vide en bas sur Accueil + Bio :
+               ces panneaux ont une hauteur fixe 100vh (style inline).
+               Zoomés à 75%, ils ne couvrent que 75% de l'écran
+               → vide de 25% en bas. En les passant à 100vh ÷ 0.75
+               (= 133.33vh), ils recouvrent exactement l'écran après zoom.
+            */
             #home,
             #home > * {
                 height: calc(100vh / 0.75) !important;
@@ -1334,36 +1375,36 @@
     <div class="scanlines"></div>
     <div class="corner-glow"></div>
     <div class="vignette"></div>
-    
+    <!-- ════════════════ NAVBAR ════════════════ -->
     <div class="navbar-wrapper">
-        
+        <!-- MAIN BAR -->
         <nav class="navbar" id="navbar">
-            
+            <!-- Corner brackets -->
             <span class="corner tl"></span>
             <span class="corner tr"></span>
             <span class="corner bl"></span>
             <span class="corner br"></span>
 
-            
+            <!-- LEFT LINKS -->
             <ul class="nav-links">
                 <li><a href="#bio" data-text="Bio">Bio</a></li>
                 <li><a href="#skills" data-text="Skills">Skills</a></li>
             </ul>
 
-            
+            <!-- CENTER HOME ICON -->
             <div class="home-icon" title="Home" id="homeIconBtn" style="cursor:pointer;">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </div>
 
-            
+            <!-- RIGHT LINKS -->
             <ul class="nav-links">
                 <li><a href="#projects" data-text="Projects">Projects</a></li>
                 <li><a href="#contact" data-text="Contact">Contact</a></li>
             </ul>
 
-            
+            <!-- HAMBURGER (mobile only) -->
             <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -1371,7 +1412,7 @@
             </button>
         </nav>
 
-        
+        <!-- MOBILE DROPDOWN -->
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
             <a href="#bio" data-text="Bio">Bio</a>
             <a href="#skills" data-text="Skills">Skills</a>
@@ -1381,9 +1422,9 @@
         </div>
     </div>
 
-    
+    <!-- Home Section -->
     <section id="home" class="section active" style="padding: 0; min-height: 0; height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; scroll-snap-type: y mandatory; scroll-behavior: smooth;">
-        
+        <!-- Hero Element (Sticky Layer) -->
         <div class="sticky w-full flex items-center justify-center z-0 pt-20 pb-10" style="top: -25vh; height: 100vh; height: 100dvh; scroll-snap-align: start;">
             <div class="max-w-7xl mx-auto px-4 sm:px-8">
                 <div class="flex flex-col items-center justify-center gap-6 md:gap-10">
@@ -1422,7 +1463,7 @@
             </div>
         </div>
 
-        
+        <!-- Bio Slide-Up Reveal Panel -->
         <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
             <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
                 <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Bio</h2>
@@ -1445,7 +1486,7 @@
                     </p>
                 </div>
                 
-                
+                <!-- Small indicator to scroll back down or view more -->
                 <div class="mt-6 md:mt-8 flex justify-center w-full animate-bounce shrink-0">
                     <a href="#skills" class="text-gray-500 hover:text-blue-400 transition-colors">
                         <i class="fas fa-chevron-down text-2xl md:text-3xl"></i>
@@ -1455,7 +1496,7 @@
         </div>
     </section>
 
-    
+    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Skills</h2>
@@ -1593,7 +1634,7 @@
                 </div>
             </div>
 
-            
+            <!-- What can I do with these skills -->
             <div class="mt-28 w-full">
                 <h3 class="text-3xl font-bold text-center mb-12 text-blue-400">What can I do with these skills?</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 max-w-5xl mx-auto">
@@ -1642,7 +1683,7 @@
         </div>
     </section>
 
-    
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Projects</h2>
@@ -1845,21 +1886,21 @@
         </div>
     </section>
 
-    
-    
+    <!-- Contact Section -->
+    <!-- Contact Section — Premium Redesign -->
     <section id="contact" class="section">
         <div class="max-w-5xl mx-auto contact-wrapper" style="padding-top: 2rem;">
 
-            
+            <!-- Title -->
             <div class="contact-title">Get In Touch</div>
             <p class="contact-subtitle">Have a project in mind? Let's build something amazing together.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-                
+                <!-- Left column — Info (2/5 width) -->
                 <div class="lg:col-span-2 flex flex-col gap-6">
 
-                    
+                    <!-- Contact details card -->
                     <div class="contact-card">
                         <div class="contact-info-item">
                             <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
@@ -1884,7 +1925,7 @@
                         </div>
                     </div>
 
-                    
+                    <!-- Social card -->
                     <div class="contact-card">
                         <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1rem;">Connect with me</div>
                         <div class="social-row">
@@ -1895,7 +1936,7 @@
                         </div>
                     </div>
 
-                    
+                    <!-- Availability badge -->
                     <div class="contact-card" style="text-align:center; padding:1.25rem;">
                         <div style="display:inline-flex; align-items:center; gap:0.5rem;">
                             <span style="width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e; animation: pulse-dot 2s ease-in-out infinite;"></span>
@@ -1904,7 +1945,7 @@
                     </div>
                 </div>
 
-                
+                <!-- Right column — Form (3/5 width) -->
                 <div class="lg:col-span-3">
                     <div class="contact-card" style="padding: 2.5rem;">
                         <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1.75rem;">Send me a message</div>
@@ -1928,9 +1969,9 @@
 
     <script src="main.js?v=2"></script>
     <script>
-        
+        // ── Hash navigation : ouvre la bonne section au chargement ──
         window.addEventListener('load', () => {
-            const hash = window.location.hash; 
+            const hash = window.location.hash; // ex: "#projects"
 
             const reveal = () => {
                 document.documentElement.style.visibility = '';
@@ -1941,8 +1982,8 @@
                 return;
             }
 
-            
-            
+            // 1) Essaie de cliquer sur le lien de nav correspondant
+            //    pour déclencher la logique de main.js
             const navLink = document.querySelector(`a[href="${hash}"]`);
             if (navLink) {
                 navLink.click();
@@ -1950,7 +1991,7 @@
                 return;
             }
 
-            
+            // 2) Fallback : bascule manuellement les classes active
             const target = document.getElementById(hash.slice(1));
             if (target && target.classList.contains('section')) {
                 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1971,7 +2012,7 @@
                 mobileMenu.setAttribute('aria-hidden', !isOpen);
             });
 
-            
+            // Close menu when a link is clicked
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.remove('open');
@@ -1981,7 +2022,7 @@
                 });
             });
 
-            
+            // Close on outside click
             document.addEventListener('click', (e) => {
                 const navbarWrapper = document.querySelector('.navbar-wrapper');
                 if (navbarWrapper && !navbarWrapper.contains(e.target)) {
@@ -1994,7 +2035,7 @@
         }
     </script>
 
-    
+    <!-- Sayit Redirect Modal -->
     <div class="sayit-modal-overlay" id="sayitModal">
         <div class="sayit-modal">
             <div class="sayit-modal-icon">
@@ -2012,7 +2053,7 @@
         </div>
     </div>
 
-    
+    <!-- tikDown Project Modal -->
     <div class="sayit-modal-overlay" id="tikDownModal">
         <div class="sayit-modal">
             <div class="sayit-modal-icon">
@@ -2030,7 +2071,7 @@
         </div>
     </div>
 
-    
+    <!-- ShadowMind Project Modal -->
     <div class="sayit-modal-overlay" id="shadowMindModal">
         <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem 5rem;">
             <div class="shadowmind-carousel" id="shadowmindCarousel">
@@ -2097,7 +2138,7 @@
             closeTikDownModal();
             window.open('https://github.com/brotiana/TikDown', '_blank');
         }
-        
+        // Close on overlay click
         document.getElementById('sayitModal').addEventListener('click', function(e) {
             if (e.target === this) closeSayitModal();
         });
@@ -2105,7 +2146,7 @@
             if (e.target === this) closeTikDownModal();
         });
 
-        
+        /* ── ShadowMind Modal ── */
         var shadowMindInterval, shadowMindIndex = 0;
         var shadowMindImages = ['shadowmind.png', 'shadowmind1.png', 'shadowmind2.png'];
 

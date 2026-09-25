@@ -31,7 +31,7 @@
             flex-direction: column;
         }
 
-        
+        /* ── Scanlines ── */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -46,7 +46,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Vignette ── */
         .vignette {
             position: fixed;
             inset: 0;
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Corner glow ── */
         .corner-glow {
             position: fixed;
             inset: 0;
@@ -184,7 +184,7 @@
             color: #1e64dc;
         }
 
-        
+        /* Separator line with blue glow */
         .section-divider {
             border: none;
             height: 1px;
@@ -239,7 +239,7 @@
             }
         }
 
-        
+        /* ── Flèches verticales du workflow (longues) ── */
         .wf-arrow {
             position: relative;
             width: 14px;
@@ -270,7 +270,7 @@
             border-radius: 1px;
         }
 
-        
+        /* ── Grand arc de boucle (retour au début) ── */
         .wf-loop {
             display: flex;
             flex-direction: column;
@@ -288,7 +288,7 @@
     </style>
 </head>
 <body>
-    
+    <!-- Background FX layers -->
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div class="corner-glow"></div>
@@ -397,7 +397,7 @@
 <script src="../scroll-restore.js"></script>
 
 <script>
-
+// Masque le nom du fichier .html dans la barre d'adresse
 (function(){
   try{
     var p = location.pathname;

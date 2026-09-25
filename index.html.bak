@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fullstack Developer Portfolio</title>
-    
+    <!-- Masque instantané si hash présent → évite le flash de l'accueil -->
     <script>
         (function () {
             var hash = window.location.hash;
@@ -42,10 +42,10 @@
             color: #ffffff;
             overflow-x: hidden;
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
         }
 
-        
+        /* ── Scanlines ── */
         .scanlines {
             position: fixed;
             inset: 0;
@@ -60,7 +60,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Vignette ── */
         .vignette {
             position: fixed;
             inset: 0;
@@ -73,7 +73,7 @@
             pointer-events: none;
         }
 
-        
+        /* ── Lueurs bleues d'angle ── */
         .corner-glow {
             position: fixed;
             inset: 0;
@@ -86,7 +86,7 @@
 
 
 
-        
+        /* Navigation */
         .nav-container {
             position: fixed;
             top: 0;
@@ -128,7 +128,7 @@
             transform: translateY(-2px);
         }
 
-        
+        /* Language Selector */
         .lang-selector {
             display: flex;
             align-items: center;
@@ -167,7 +167,7 @@
             line-height: 1;
         }
 
-        
+        /* Sections */
         .section {
             min-height: 100vh;
             padding: 100px 2rem 2rem;
@@ -181,23 +181,32 @@
             display: block !important;
         }
 
-        
+        /* Masquage permanent de la scrollbar INTERNE de l'accueil
+           (#home a overflow-y:auto en style inline) — en CSS global,
+           hors media query, pour qu'elle ne s'affiche JAMAIS, même
+           brièvement pendant la navigation entre onglets.
+           Le défilement interne (molette, tactile, scroll-snap)
+           reste fonctionnel. */
         #home {
-            scrollbar-width: none;        
-            -ms-overflow-style: none;     
+            scrollbar-width: none;        /* Firefox */
+            -ms-overflow-style: none;     /* ancien Edge/IE */
         }
-        #home::-webkit-scrollbar {        
+        #home::-webkit-scrollbar {        /* Chrome / Safari */
             display: none;
             width: 0;
             height: 0;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           SCROLLBAR STYLISÉE — couleurs du thème (bleu)
+           Remplace la scrollbar native blanc-gris partout
+           (page + éléments internes défilants).
+        ════════════════════════════════════════════════════ */
         * {
-            scrollbar-width: thin;                 
-            scrollbar-color: #1e64dc #0a0f1e;      
+            scrollbar-width: thin;                 /* Firefox */
+            scrollbar-color: #1e64dc #0a0f1e;      /* Firefox */
         }
-        ::-webkit-scrollbar {                      
+        ::-webkit-scrollbar {                      /* Chrome / Safari / Edge */
             width: 10px;
             height: 10px;
         }
@@ -212,12 +221,12 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg, #00d4ff, #60a5fa);
         }
-        
+        /* Prevent scroll from affecting sections */
         body {
             scroll-behavior: smooth;
         }
 
-        
+        /* Hero Section */
         .hero-title {
             font-family: 'Osiris', sans-serif;
             font-size: clamp(3rem, 8vw, 5rem);
@@ -256,7 +265,7 @@
             }
         }
 
-        
+        /* Skills Grid */
         .skill-card {
             display: flex;
             flex-direction: column;
@@ -332,7 +341,7 @@
             text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
         }
 
-        
+        /* Projects */
         .project-row {
             background: rgba(30, 100, 220, 0.05);
             border: 1px solid rgba(30, 100, 220, 0.2);
@@ -349,11 +358,11 @@
             transform: translateX(10px);
         }
 
-        
+        /* Project cover: blurred background derived from same image */
         .project-cover {
             position: relative;
             width: 100%;
-            height: 14rem; 
+            height: 14rem; /* matches previous h-56 */
             overflow: hidden;
             display: block;
             background: #000;
@@ -397,8 +406,10 @@
             margin: 0.25rem;
         }
 
-        
-        
+        /* Contact Form */
+        /* ════════════════════════════════════════════════════
+           CONTACT SECTION — Premium Redesign
+        ════════════════════════════════════════════════════ */
         .contact-wrapper {
             position: relative;
         }
@@ -433,7 +444,7 @@
             margin-bottom: 3rem;
         }
 
-        
+        /* Contact info cards */
         .contact-card {
             background: rgba(8, 13, 26, 0.7);
             border: 1px solid rgba(26, 111, 255, 0.2);
@@ -499,7 +510,7 @@
             margin-top: 2px;
         }
 
-        
+        /* Social icons */
         .social-row {
             display: flex;
             gap: 0.75rem;
@@ -527,7 +538,7 @@
             box-shadow: 0 8px 25px rgba(26, 111, 255, 0.4);
         }
 
-        
+        /* Form card */
         .form-input {
             background: rgba(8, 13, 26, 0.6);
             border: 1px solid rgba(26, 111, 255, 0.15);
@@ -584,6 +595,75 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 35px rgba(26, 111, 255, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
         }
+
+        /* ── Bouton "Send Message" (fond transparent, bordure couleur du bouton) ── */
+        .btn-primary.send-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            box-shadow: none;
+        }
+        .btn-primary.send-btn::before {
+            display: none;
+        }
+        .btn-primary.send-btn:hover {
+            background: rgba(26, 111, 255, 0.12);
+            box-shadow: 0 0 20px rgba(26, 111, 255, 0.35);
+            transform: translateY(-3px);
+        }
+
+        /* ── Bouton "plaque de blindage" (View my projects) ── */
+        .b7 {
+            --metal: #1b2436;
+            --metal-hi: #43536e;
+            --line: #1a6fff;
+            --dim: #8fa3c4;
+            --blue-dim: rgba(26, 111, 255, 0.45);
+            --glow: rgba(26, 111, 255, 0.45);
+            width: 252px; /* 140px × 1.8 */
+            height: 46px;
+            position: relative;
+            background: var(--metal);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .b7 .plate {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, var(--metal-hi) 0%, var(--metal) 45%, var(--metal-hi) 100%);
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 13.8px, 100% 46px, 14px 46px, 0 32.2px);
+            transition: transform .3s;
+            border: 1px solid var(--line);
+        }
+        .b7 .plate2 {
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 13.8px, 100% 46px, 14px 46px, 0 32.2px);
+            background: transparent;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--dim);
+        }
+
+        /* traits diagonaux — coïncident exactement avec les 2 arêtes inclinées */
+        .b7 .edge {
+            position: absolute;
+            width: 17.7px;
+            height: 2px;
+            background: #1a6fff;
+            box-shadow: 0 0 5px rgba(26, 111, 255, .5);
+            transform-origin: left center;
+            transition: transform .3s;
+        }
+        .b7 .edgeTR { left: calc(100% - 14px); top: -1px; transform: rotate(44.6deg); }
+        .b7 .edgeBL { left: 0px; top: 31.2px; transform: rotate(44.6deg); }
+
+        .b7:hover .plate { transform: translate(4px, -4px); box-shadow: -4px 4px 0 var(--blue-dim), 0 0 16px var(--glow); }
+        .b7:hover .plate2 { color: #5b95ff; }
+        .b7:hover .edgeTR { transform: translate(4px, -4px) rotate(44.6deg); }
+        .b7:hover .edgeBL { transform: translate(4px, -4px) rotate(44.6deg); }
 
         @keyframes pulse-dot {
             0%, 100% { box-shadow: 0 0 5px #22c55e; }
@@ -646,7 +726,7 @@
             color: #60a5fa;
         }
 
-        
+        /* Responsive */
         @media (max-width: 768px) {
             .section {
                 padding: 80px 1rem 2rem;
@@ -705,7 +785,9 @@
             }
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           C07 — PARTICLE ORBIT PROFILE PHOTO
+        ════════════════════════════════════════════════════ */
         .id-badge {
             font-family: 'Space Mono', monospace;
             font-size: 10px;
@@ -767,7 +849,9 @@
             z-index: 3; pointer-events: none;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           NAVBAR WRAPPER
+        ════════════════════════════════════════════════════ */
         .navbar-wrapper {
             width: 100%;
             max-width: 960px;
@@ -778,7 +862,7 @@
             z-index: 1000;
         }
 
-        
+        /* ─── NAVBAR BASE ─────────────────────────────────── */
         .navbar {
             display: flex;
             align-items: center;
@@ -793,14 +877,14 @@
                 0 0,
                 calc(100% - 20px) 0,
                 100% 20px,
-                100% 100%, 
-                20px 100%, 
+                100% 100%,
+                20px 100%,
                 0 calc(100% - 20px)
             );
             overflow: hidden;
         }
 
-        
+        /* Scan line animation */
         .navbar::before {
             content: '';
             position: absolute;
@@ -816,7 +900,7 @@
             z-index: 0;
         }
 
-        
+        /* Bottom glow line */
         .navbar::after {
             content: '';
             position: absolute;
@@ -845,7 +929,7 @@
             50%       { opacity: 1; }
         }
 
-        
+        /* ─── CORNER BRACKETS ────────────────────────────── */
         .corner {
             position: absolute;
             width: 10px;
@@ -861,7 +945,7 @@
         .corner.br { bottom: 5px; right: 5px;   border-width: 0 1px 1px 0; }
         .navbar:hover .corner { border-color: #00d4ff; }
 
-        
+        /* ─── NAV LINKS ──────────────────────────────────── */
         .nav-links {
             display: flex;
             gap: 36px;
@@ -886,7 +970,7 @@
             overflow: hidden;
         }
 
-        
+        /* Glitch clone layer */
         .nav-links a::before {
             content: attr(data-text);
             position: absolute;
@@ -898,7 +982,7 @@
             pointer-events: none;
         }
 
-        
+        /* Underline flicker */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -915,7 +999,7 @@
         .nav-links a:hover::before    { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
         .nav-links a:hover::after     { width: 100%; }
 
-        
+        /* ─── HOME ICON ──────────────────────────────────── */
         .home-icon {
             width: 52px;
             height: 52px;
@@ -956,7 +1040,9 @@
             z-index: 1;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           HAMBURGER BUTTON  (hidden on desktop)
+        ════════════════════════════════════════════════════ */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -983,14 +1069,16 @@
             transition: all 0.35s cubic-bezier(.77,0,.18,1);
             transform-origin: center;
         }
-        
+        /* Hamburger → X animation */
         .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: #00d4ff; }
         .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
         .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: #00d4ff; }
 
-        
+        /* ════════════════════════════════════════════════════
+           MOBILE DROPDOWN MENU
+        ════════════════════════════════════════════════════ */
         .mobile-menu {
-            display: none;           
+            display: none;           /* shown only in mobile */
             flex-direction: column;
             background: rgba(8, 13, 26, 0.95);
             backdrop-filter: blur(10px);
@@ -1040,7 +1128,9 @@
             opacity: 0.4;
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           RESPONSIVE BREAKPOINTS
+        ════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
             .navbar {
                 padding: 0 24px;
@@ -1095,7 +1185,9 @@
             .mobile-menu a { font-size: 9px; padding: 12px 24px; letter-spacing: 2px; }
         }
 
-        
+        /* ════════════════════════════════════════════════════
+           SAYIT REDIRECT MODAL
+        ════════════════════════════════════════════════════ */
         .sayit-modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -1137,7 +1229,7 @@
             transform: scale(1) translateY(0);
         }
 
-        
+        /* Top glow line */
         .sayit-modal::before {
             content: '';
             position: absolute;
@@ -1149,7 +1241,7 @@
             border-radius: 2px;
         }
 
-        
+        /* Corner accents */
         .sayit-modal::after {
             content: '';
             position: absolute;
@@ -1258,10 +1350,25 @@
             box-shadow: 0 8px 30px rgba(26, 111, 255, 0.5), 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
-        
+        /* Variante transparente : seule la bordure garde la couleur du bouton */
+        .sayit-btn-confirm.btn-outline {
+            background: transparent;
+            border: 2px solid #1a6fff;
+            box-shadow: none;
+        }
+        .sayit-btn-confirm.btn-outline:hover {
+            background: rgba(26, 111, 255, 0.12);
+            box-shadow: 0 0 20px rgba(26, 111, 255, 0.35);
+            transform: translateY(-2px);
+        }
 
-        
-        .shadowmind-carousel {
+        /* ponytail: inset:0 de la classe .sayit-modal-overlay suffit, pas de height:100vh fixe */
+
+        /* ════════════════════════════════════════════════════
+           SHADOWMIND PROJECT MODAL
+        ════════════════════════════════════════════════════ */
+        .shadowmind-carousel,
+        .miia-carousel {
             position: relative;
             width: 100%;
             max-width: 560px;
@@ -1270,8 +1377,10 @@
             border-radius: 12px;
             overflow: hidden;
             background: #000;
+            cursor: pointer;
         }
-        .shadowmind-carousel img {
+        .shadowmind-carousel img,
+        .miia-carousel img {
             position: absolute;
             top: 0;
             left: 0;
@@ -1280,53 +1389,196 @@
             object-fit: contain;
             border-radius: 12px;
             transition: none;
+            cursor: pointer;
         }
-        .shadowmind-carousel img.active {
+        .shadowmind-carousel img.active,
+        .miia-carousel img.active {
             z-index: 2;
         }
-        .shadowmind-features {
+        .shadowmind-features,
+        .miia-features {
             display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
         }
-        .shadowmind-feature {
+        .shadowmind-features {
+            grid-template-columns: 1fr 1fr;
+        }
+        .miia-features {
+            grid-template-columns: 1fr;
+        }
+        .shadowmind-feature,
+        .miia-feature {
             background: rgba(26, 111, 255, 0.08);
             border: 1px solid rgba(26, 111, 255, 0.2);
             border-radius: 10px;
             padding: 0.75rem;
             text-align: center;
         }
-        .shadowmind-feature i {
+        .miia-feature {
+            text-align: left;
+        }
+        .shadowmind-feature i,
+        .miia-feature i {
             font-size: 1.3rem;
             color: #00d4ff;
             display: block;
             margin-bottom: 0.35rem;
         }
-        .shadowmind-feature span {
+        .shadowmind-feature span,
+        .miia-feature span {
             font-size: 0.8rem;
             color: #94a3b8;
             line-height: 1.3;
         }
-        
+
+        /* ════════════════════════════════════════════════════
+           LIGHTBOX — agrandissement des images projet
+        ════════════════════════════════════════════════════ */
+        .project-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(2, 8, 20, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            cursor: zoom-out;
+        }
+        .project-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .project-lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.25);
+            cursor: default;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 111, 255, 0.25);
+            border: 1px solid rgba(26, 111, 255, 0.5);
+            color: #fff;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .lightbox-arrow:hover {
+            background: rgba(26, 111, 255, 0.5);
+        }
+        .lightbox-prev {
+            left: 1.5rem;
+        }
+        .lightbox-next {
+            right: 1.5rem;
+        }
+        /* ════════════════════════════════════════════════════
+           ZOOM AUTO 75% — Écrans desktop de hauteur ≤ 815px
+           Équivalent au dézoomage navigateur (Ctrl + - à 75%)
+        ════════════════════════════════════════════════════ */
         @media (min-width: 769px) and (max-height: 815px) {
             html {
                 zoom: 0.75;
                 overflow-x: hidden;
             }
-            
+            /*
+               Correction de l'artefact du zoom sur html :
+               body en width:100vw (qui inclut la scrollbar et
+               se calcule sur le viewport non zoomé) créait un
+               vide à droite et poussait la scrollbar au centre.
+               width:100% colle exactement à la largeur zoomée
+               du html → plus de vide, scrollbar à droite.
+            */
             body {
                 width: 100%;
+                /* Le body gardait height:100vh → zoomé à 75%, il ne
+                   couvrait que les 75% du haut. On compense sa hauteur
+                   comme pour #home afin qu'il remplisse tout l'écran. */
+                height: calc(100vh / 0.75);
+                height: calc(100dvh / 0.75);
             }
-            
+            /* Toutes les sections plein écran couvrent l'écran après zoom */
+            .section {
+                min-height: calc(100vh / 0.75);
+                min-height: calc(100dvh / 0.75);
+            }
+            /*
+               Compense le vide en bas sur Accueil + Bio :
+               ces panneaux ont une hauteur fixe 100vh (style inline).
+               Zoomés à 75%, ils ne couvrent que 75% de l'écran
+               → vide de 25% en bas. En les passant à 100vh ÷ 0.75
+               (= 133.33vh), ils recouvrent exactement l'écran après zoom.
+            */
             #home,
             #home > * {
                 height: calc(100vh / 0.75) !important;
                 height: calc(100dvh / 0.75) !important;
             }
         }
+        /* ════════════════════════════════════════════════════
+           ZOOM AUTO 75% — Android portrait (largeur ≤ 480px)
+           Cible : Oppo A15s (360×800) · Vivo Y93 (360×760)
+           Applique le même dézoomage que sur desktop pour que
+           la mise en page mobile tienne correctement à l'écran.
+        ════════════════════════════════════════════════════ */
+        @media (max-width: 480px) and (min-height: 600px) {
+            html {
+                zoom: 0.75;
+                overflow-x: hidden;
+            }
+            body {
+                width: 100%;
+                /* Le body gardait height:100vh → zoomé à 75%, il ne
+                   couvrait que les 75% du haut. On compense sa hauteur
+                   comme pour #home afin qu'il remplisse tout l'écran. */
+                height: calc(100vh / 0.75);
+                height: calc(100dvh / 0.75);
+            }
+            /* Toutes les sections plein écran couvrent l'écran après zoom */
+            .section {
+                min-height: calc(100vh / 0.75);
+                min-height: calc(100dvh / 0.75);
+            }
+            #home,
+            #home > * {
+                height: calc(100vh / 0.75) !important;
+                height: calc(100dvh / 0.75) !important;
+            }
+        }
+
     </style>
 </head>
 
@@ -1334,36 +1586,36 @@
     <div class="scanlines"></div>
     <div class="corner-glow"></div>
     <div class="vignette"></div>
-    
+    <!-- ════════════════ NAVBAR ════════════════ -->
     <div class="navbar-wrapper">
-        
+        <!-- MAIN BAR -->
         <nav class="navbar" id="navbar">
-            
+            <!-- Corner brackets -->
             <span class="corner tl"></span>
             <span class="corner tr"></span>
             <span class="corner bl"></span>
             <span class="corner br"></span>
 
-            
+            <!-- LEFT LINKS -->
             <ul class="nav-links">
                 <li><a href="#bio" data-text="Bio">Bio</a></li>
                 <li><a href="#skills" data-text="Skills">Skills</a></li>
             </ul>
 
-            
+            <!-- CENTER HOME ICON -->
             <div class="home-icon" title="Home" id="homeIconBtn" style="cursor:pointer;">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </div>
 
-            
+            <!-- RIGHT LINKS -->
             <ul class="nav-links">
                 <li><a href="#projects" data-text="Projects">Projects</a></li>
                 <li><a href="#contact" data-text="Contact">Contact</a></li>
             </ul>
 
-            
+            <!-- HAMBURGER (mobile only) -->
             <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -1371,7 +1623,7 @@
             </button>
         </nav>
 
-        
+        <!-- MOBILE DROPDOWN -->
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
             <a href="#bio" data-text="Bio">Bio</a>
             <a href="#skills" data-text="Skills">Skills</a>
@@ -1381,9 +1633,9 @@
         </div>
     </div>
 
-    
+    <!-- Home Section -->
     <section id="home" class="section active" style="padding: 0; min-height: 0; height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; scroll-snap-type: y mandatory; scroll-behavior: smooth;">
-        
+        <!-- Hero Element (Sticky Layer) -->
         <div class="sticky w-full flex items-center justify-center z-0 pt-20 pb-10" style="top: -25vh; height: 100vh; height: 100dvh; scroll-snap-align: start;">
             <div class="max-w-7xl mx-auto px-4 sm:px-8">
                 <div class="flex flex-col items-center justify-center gap-6 md:gap-10">
@@ -1409,12 +1661,12 @@
                             Passionate about creating innovative and high-performance web applications. I turn ideas into
                             concrete solutions using modern technologies.
                         </p>
-                        <div class="flex flex-wrap gap-4 justify-center">
-                            <button class="btn-primary">
-                                View my projects
-                            </button>
-                            <button class="btn-primary">
-                                Contact me
+                        <div class="flex flex-wrap gap-6 justify-center">
+                            <button class="b7" aria-label="View my projects" onclick="showSection('projects')">
+                                <span class="plate"></span>
+                                <span class="edge edgeTR"></span>
+                                <span class="edge edgeBL"></span>
+                                <span class="plate2" style="font-size:12px; letter-spacing:2px;">VIEW MY PROJECTS</span>
                             </button>
                         </div>
                     </div>
@@ -1422,20 +1674,20 @@
             </div>
         </div>
 
-        
+        <!-- Bio Slide-Up Reveal Panel -->
         <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
             <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
                 <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Bio</h2>
-                
+
                 <div class="text-[0.95rem] md:text-lg text-gray-300 leading-relaxed md:leading-loose space-y-4 md:space-y-6 bg-white/5 border border-blue-500/20 p-6 md:p-10 rounded-2xl backdrop-blur-md shadow-2xl overflow-y-auto shrink" style="scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.5) transparent;">
                     <p>
-                        My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar — a Full Stack Developer with a passion for automation and problem-solving.
+                        My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar , a Full Stack Developer with a passion for automation and problem-solving.
                     </p>
                     <p>
                         Four years ago, I started doing tasks on the Internet across several platforms to earn some income. After a while, I began wondering: <em class="text-blue-300 font-medium tracking-wide">"what if I automated these tasks?"</em>
                     </p>
                     <p>
-                        That's when I started researching and learning how to automate things in browsers and on Android phones. I realized that being a developer was making my life much easier, so I became deeply interested in it — and that's what drove me toward becoming a Full Stack Developer.
+                        That's when I started researching and learning how to automate things in browsers and on Android phones. I realized that being a developer was making my life much easier, so I became deeply interested in it , and that's what drove me toward becoming a Full Stack Developer.
                     </p>
                     <p>
                         In 2025, I earned my Bachelor's degree in Software Engineering, and I am now a Master's student at CNTEMAD. During that journey, I also learned to use AI, because the way of building things changed completely once it arrived.
@@ -1444,8 +1696,8 @@
                         I have completed more than 10 projects that I consider serious, professional work since becoming a developer. You can explore them in the <a href="#projects" class="text-blue-400 hover:text-blue-300 transition-colors font-semibold underline underline-offset-4 decoration-blue-500/50 hover:decoration-blue-400">Projects</a> section of my portfolio website.
                     </p>
                 </div>
-                
-                
+
+                <!-- Small indicator to scroll back down or view more -->
                 <div class="mt-6 md:mt-8 flex justify-center w-full animate-bounce shrink-0">
                     <a href="#skills" class="text-gray-500 hover:text-blue-400 transition-colors">
                         <i class="fas fa-chevron-down text-2xl md:text-3xl"></i>
@@ -1455,7 +1707,7 @@
         </div>
     </section>
 
-    
+    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Skills</h2>
@@ -1593,7 +1845,7 @@
                 </div>
             </div>
 
-            
+            <!-- What can I do with these skills -->
             <div class="mt-28 w-full">
                 <h3 class="text-3xl font-bold text-center mb-12 text-blue-400">What can I do with these skills?</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 max-w-5xl mx-auto">
@@ -1642,54 +1894,16 @@
         </div>
     </section>
 
-    
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl font-bold text-center mb-16 text-blue-400">My Projects</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                <div class="project-row" onclick="showSayitModal()">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
-                        <img src="sayit.png">
-                    </div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">Sayit</h3>
-                        <span class="text-blue-400">2025</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        A web app that lets people message you anonymously. You need to create an account and get your unique link, then share it on social media. You will receive a notification on your email and your dashboard whenever someone visits your link and sends you a message . 
-                    </p>
-                    <div class="flex flex-wrap">
-                        <span class="project-tech">PHP</span>
-                        <span class="project-tech">MySQL</span>
-                        <span class="project-tech">JS</span>
-                        
-                    </div>
-                </div>
 
-                <div class="project-row" onclick="showTikDownModal()">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
-                        <img src="tikDown.png" alt="tikDown project cover"
-                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
-                    </div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">tikDown</h3>
-                        <span class="text-blue-400">2025</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        For downloading video in tik tok , HD and without watermark
-                    </p>
-                    <div class="flex flex-wrap">
-                        <span class="project-tech">Chrome Extension</span>
-                        <span class="project-tech">HTML</span>
-                        <span class="project-tech">CSS</span>
-                        <span class="project-tech">JS</span>
-                        <span class="project-tech">Python</span>
-                    </div>
-                </div>
 
-                <div class="project-row" onclick="window.location.href='kvmsoft/kvmsoft.html'">
+                <div class="project-row" onclick="window.location.href='kvmsoft/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('kvmsoft/kvm.png')">
                             <img src="kvmsoft/kvm.png" alt="getlike project cover"
@@ -1701,7 +1915,7 @@
                         <span class="text-blue-400">2024</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        KVMSoft lets you type on a computer using the keyboard of another machine, over a local network or VPN — no cables, no extra hardware required.
+                        KVMSoft lets you type on a computer using the keyboard of another machine, over a local network or VPN , no cables and no extra hardware required.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">JavaScript</span>
@@ -1719,17 +1933,42 @@
                     </div>
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-2xl font-bold">ShadowMind</h3>
-                        <span class="text-blue-400">2025</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Édition riche — texte, couleurs, images, audio, tableaux.<br>
-                        Lecture vocale intelligente — en français et en anglais.<br>
-                        Notes synchronisées — accessibles sur tous vos appareils.
+                        Rich editing : text, colors, images, audio, tables.<br>
+                        Smart voice reading : in French and English.<br>
+                        Synced notes : accessible across all your devices.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">HTML</span>
                         <span class="project-tech">CSS</span>
                         <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">PHP</span>
+
+                    </div>
+                </div>
+
+                <div class="project-row" onclick="showMIIAModal()">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <div class="project-cover" style="--cover:url('miia.png')">
+                            <img src="miia.png" alt="MIIA Editor project cover"
+                                class="project-cover-img">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">MIIA Editor</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        A Linux code editor with an integrated AI agent and dedicated tools designed to streamline and accelerate web app and script development.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">HTML</span>
+                        <span class="project-tech">CSS</span>
+                        <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">TypeScript</span>
+                        <span class="project-tech">Python</span>
+                        <span class="project-tech">Node.js</span>
                     </div>
                 </div>
 
@@ -1755,7 +1994,7 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="window.location.href='getlike/getlike.html'">
+                <div class="project-row" onclick="window.location.href='getlike/index.html'">
                     <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
                         <div class="project-cover" style="--cover:url('getlike/GETLIKE.png')">
                             <img src="getlike/GETLIKE.png" alt="getlike project cover"
@@ -1777,89 +2016,134 @@
                     </div>
                 </div>
 
-                <div class="project-row" onclick="openProject('project2')">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
-                        <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                            alt="RESTful API for E-commerce"
-                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+                  <div class="project-row" onclick="window.location.href='hc_bot_apk/index.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
+                        <div class="project-cover" style="--cover:url('hc_bot.jpg')">
+                            <img src="hc_bot.jpg" alt="getlike project cover"
+                                class="project-cover-img">
+                        </div>
                     </div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">RESTful API for E-commerce</h3>
+                        <h3 class="text-2xl font-bold">SmmKingdomTasks + HelpCercle_bot</h3>
                         <span class="text-blue-400">2024</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Complete REST API for an e-commerce platform handling products, carts, payments and third-party
-                        integrations.
+                        SmmKingdomTasks is a telegram bot that offers tasks such as liking, following, and commenting on TikTok and Instagram accounts and posts in order to earn money. This android application automates those tasks using Accessibility Service.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">APK</span>
+                        <span class="project-tech">chaquopy</span>
+                        <span class="project-tech">Python</span>
+                        <span class="project-tech">sql Lite</span>
+                        <span class="project-tech">JAVA</span>
+                    </div>
+                </div>
+
+                  <div class="project-row" onclick="window.location.href='echec/index.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
+                        <div class="project-cover" style="--cover:url('echec/echec4.png')">
+                            <img src="echec/echec4.png" alt="getlike project cover"
+                                class="project-cover-img">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Chess game online</h3>
+                        <span class="text-blue-400">2024</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        A web platform where you can play chess against other players online or practice against the computer. Players can chat with their opponent during the game, right from the interface. It contain an option to let a user watch public games currently being played online.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">JS</span>
+                        <span class="project-tech">Node JS</span>
+                        <span class="project-tech">PHP</span>
+                        <span class="project-tech">MySql</span>
+                    </div>
+                </div>
+
+                  <div class="project-row" onclick="window.location.href='helpcercle/index.html'">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-purple-500/20">
+                        <div class="project-cover" style="--cover:url('helpcercle/helpcercle2.png')">
+                            <img src="helpcercle/helpcercle2.png" alt="getlike project cover"
+                                class="project-cover-img">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">HelpCercle</h3>
+                        <span class="text-blue-400">2024</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="project-tech">JS</span>
+                        <span class="project-tech">Node JS</span>
+                        <span class="project-tech">PHP</span>
+                        <span class="project-tech">MySql</span>
+                    </div>
+                </div>
+
+                <div class="project-row" onclick="showSayitModal()">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
+                        <img src="sayit.png">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold">Sayit</h3>
+                        <span class="text-blue-400">2025</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        A web app that lets people message you anonymously. You need to create an account and get your unique link, then share it on social media. You will receive a notification on your email and your dashboard whenever someone visits your link and sends you a message .
                     </p>
                     <div class="flex flex-wrap">
                         <span class="project-tech">PHP</span>
                         <span class="project-tech">MySQL</span>
-                        <span class="project-tech">Python</span>
-                        <span class="project-tech">n8n</span>
+                        <span class="project-tech">JS</span>
+
                     </div>
                 </div>
 
-                <div class="project-row" onclick="openProject('project3')">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
-                        <img src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                            alt="Real-time Chat System"
-                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
+                <div class="project-row" onclick="showTikDownModal()">
+                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20 bg-black p-2">
+                        <img src="tikDown.png" alt="tikDown project cover"
+                            class="w-full h-56 object-contain transform hover:scale-105 transition-transform duration-500 bg-black">
                     </div>
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">Real-time Chat System</h3>
-                        <span class="text-blue-400">2023</span>
+                        <h3 class="text-2xl font-bold">tikDown</h3>
+                        <span class="text-blue-400">2025</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Instant messaging application with private chat rooms, file sharing and push notifications.
+                        For downloading video in tik tok , HD and without watermark
                     </p>
                     <div class="flex flex-wrap">
-                        <span class="project-tech">JavaScript</span>
-                        <span class="project-tech">CSS</span>
-                        <span class="project-tech">SQLite</span>
-                        <span class="project-tech">Python</span>
-                    </div>
-                </div>
-
-                <div class="project-row" onclick="openProject('project4')">
-                    <div class="mb-4 overflow-hidden rounded-xl border border-blue-500/20">
-                        <img src="https://images.pexels.com/photos/1181670/pexels-photo-1181670.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                            alt="Dashboard Analytics"
-                            class="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-bold">Dashboard Analytics</h3>
-                        <span class="text-blue-400">2023</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        Data visualization interface with interactive charts,
-                        dynamic filters and report export.
-                    </p>
-                    <div class="flex flex-wrap">
+                        <span class="project-tech">Chrome Extension</span>
                         <span class="project-tech">HTML</span>
                         <span class="project-tech">CSS</span>
-                        <span class="project-tech">JavaScript</span>
+                        <span class="project-tech">JS</span>
                         <span class="project-tech">Python</span>
                     </div>
+                </div>
+
+
                 </div>
             </div>
         </div>
     </section>
 
-    
-    
+    <!-- Contact Section -->
+    <!-- Contact Section — Premium Redesign -->
     <section id="contact" class="section">
         <div class="max-w-5xl mx-auto contact-wrapper" style="padding-top: 2rem;">
 
-            
+            <!-- Title -->
             <div class="contact-title">Get In Touch</div>
             <p class="contact-subtitle">Have a project in mind? Let's build something amazing together.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-                
+                <!-- Left column — Info (2/5 width) -->
                 <div class="lg:col-span-2 flex flex-col gap-6">
 
-                    
+                    <!-- Contact details card -->
                     <div class="contact-card">
                         <div class="contact-info-item">
                             <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
@@ -1884,7 +2168,7 @@
                         </div>
                     </div>
 
-                    
+                    <!-- Social card -->
                     <div class="contact-card">
                         <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1rem;">Connect with me</div>
                         <div class="social-row">
@@ -1895,16 +2179,10 @@
                         </div>
                     </div>
 
-                    
-                    <div class="contact-card" style="text-align:center; padding:1.25rem;">
-                        <div style="display:inline-flex; align-items:center; gap:0.5rem;">
-                            <span style="width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e; animation: pulse-dot 2s ease-in-out infinite;"></span>
-                            <span style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:#94a3b8;">Currently Available</span>
-                        </div>
-                    </div>
+
                 </div>
 
-                
+                <!-- Right column — Form (3/5 width) -->
                 <div class="lg:col-span-3">
                     <div class="contact-card" style="padding: 2.5rem;">
                         <div style="font-family:'Orbitron',monospace; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:#5a7fa8; margin-bottom:1.75rem;">Send me a message</div>
@@ -1915,7 +2193,10 @@
                             </div>
                             <input type="text" id="subject" name="subject" placeholder="Subject" class="form-input" required>
                             <textarea id="message" name="message" placeholder="Tell me about your project..." class="form-input" required></textarea>
-                            <button type="submit" class="btn-primary w-full" style="margin-top:0.5rem;">
+                            <!-- Champ anti-spam (invisible pour les humains) -->
+                            <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true"
+                                style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; opacity:0; pointer-events:none;">
+                            <button type="submit" class="btn-primary w-full send-btn" style="margin-top:0.5rem;">
                                 <i class="fas fa-paper-plane" style="margin-right:10px;"></i>Send Message
                             </button>
                         </form>
@@ -1926,11 +2207,12 @@
         </div>
     </section>
 
-    <script src="main.js?v=2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="main.js?v=4"></script>
     <script>
-        
+        // ── Hash navigation : ouvre la bonne section au chargement ──
         window.addEventListener('load', () => {
-            const hash = window.location.hash; 
+            const hash = window.location.hash; // ex: "#projects"
 
             const reveal = () => {
                 document.documentElement.style.visibility = '';
@@ -1941,8 +2223,8 @@
                 return;
             }
 
-            
-            
+            // 1) Essaie de cliquer sur le lien de nav correspondant
+            //    pour déclencher la logique de main.js
             const navLink = document.querySelector(`a[href="${hash}"]`);
             if (navLink) {
                 navLink.click();
@@ -1950,7 +2232,7 @@
                 return;
             }
 
-            
+            // 2) Fallback : bascule manuellement les classes active
             const target = document.getElementById(hash.slice(1));
             if (target && target.classList.contains('section')) {
                 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1971,7 +2253,7 @@
                 mobileMenu.setAttribute('aria-hidden', !isOpen);
             });
 
-            
+            // Close menu when a link is clicked
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.remove('open');
@@ -1981,7 +2263,7 @@
                 });
             });
 
-            
+            // Close on outside click
             document.addEventListener('click', (e) => {
                 const navbarWrapper = document.querySelector('.navbar-wrapper');
                 if (navbarWrapper && !navbarWrapper.contains(e.target)) {
@@ -1994,7 +2276,7 @@
         }
     </script>
 
-    
+    <!-- Sayit Redirect Modal -->
     <div class="sayit-modal-overlay" id="sayitModal">
         <div class="sayit-modal">
             <div class="sayit-modal-icon">
@@ -2007,12 +2289,12 @@
             <div class="sayit-modal-url">sayit.gt.tc</div>
             <div class="sayit-modal-buttons">
                 <button class="sayit-btn sayit-btn-cancel" onclick="closeSayitModal()">Cancel</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmSayit()">Continue</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmSayit()">Continue</button>
             </div>
         </div>
     </div>
 
-    
+    <!-- tikDown Project Modal -->
     <div class="sayit-modal-overlay" id="tikDownModal">
         <div class="sayit-modal">
             <div class="sayit-modal-icon">
@@ -2030,9 +2312,9 @@
         </div>
     </div>
 
-    
+    <!-- ShadowMind Project Modal -->
     <div class="sayit-modal-overlay" id="shadowMindModal">
-        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem 5rem;">
+        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
             <div class="shadowmind-carousel" id="shadowmindCarousel">
                 <img src="shadowmind.png" alt="ShadowMind cover" class="active">
                 <img src="shadowmind1.png" alt="ShadowMind screenshot 1">
@@ -2040,34 +2322,75 @@
             </div>
             <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">ShadowMind</div>
             <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
-                Plateforme d&#39;enregistrement de notes nouvelle g&#233;n&#233;ration.
+                Next-generation note-taking platform.
             </p>
             <div class="shadowmind-features">
                 <div class="shadowmind-feature">
                     <i class="fas fa-pen-fancy"></i>
-                    <span>&#201;dition riche<br>texte, couleurs, images, audio, tableaux</span>
+                    <span>Rich editing<br>text, colors, images, audio, tables</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-volume-up"></i>
-                    <span>Lecture vocale<br>fran&#231;ais &amp; anglais</span>
+                    <span>Text-to-speech<br>French &amp; English</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-sync-alt"></i>
-                    <span>Notes synchronis&#233;es<br>accessibles sur tous vos appareils</span>
+                    <span>Synced notes<br>available on all your devices</span>
                 </div>
                 <div class="shadowmind-feature">
                     <i class="fas fa-shield-alt"></i>
-                    <span>Stockage s&#233;curis&#233;<br>chiffr&#233; de bout en bout</span>
+                    <span>Secure storage<br>end-to-end encrypted</span>
                 </div>
             </div>
-            <div class="sayit-modal-buttons" style="position:absolute;bottom:1.5rem;left:0;right:0;display:flex;gap:12px;justify-content:center;z-index:10;">
-                <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Fermer</button>
-                <button class="sayit-btn sayit-btn-confirm" onclick="confirmShadowMind()">Ouvrir le site</button>
+            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeShadowMindModal()">Close</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmShadowMind()">Open website</button>
             </div>
         </div>
     </div>
 
-    
+    <!-- MIIA Editor Project Modal -->
+    <div class="sayit-modal-overlay" id="miiaModal">
+        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
+            <div class="miia-carousel" id="miiaCarousel">
+                <img src="miia.png" alt="MIIA Editor cover" class="active">
+                <img src="miia2.png" alt="MIIA Editor screenshot 1">
+                <img src="miia3.png" alt="MIIA Editor screenshot 2">
+                <img src="miia4.png" alt="MIIA Editor screenshot 3">
+            </div>
+            <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">MIIA Editor</div>
+            <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
+                Why I build another code editor when powerhouses like VS Code already exist?
+            </p>
+            <div class="miia-features">
+                <div class="miia-feature">
+                    <span><b style="color:#e2e8f0;">Custom Tooling for AI:</b> I wanted total freedom to equip the AI agent with my own specialized tools.</span>
+                </div>
+                <div class="miia-feature">
+                    <span><b style="color:#e2e8f0;">Token &amp; Cost Control:</b> To minimize AI token consumption.</span>
+                </div>
+                <div class="miia-feature">
+                    <span><b style="color:#e2e8f0;">Unrestricted Customization:</b> To build custom features, UI tweaks, and themes without running into the walls set by corporate-backed editors.</span>
+                </div>
+                <div class="miia-feature">
+                    <span><b style="color:#e2e8f0;">Skill Growth &amp; Independence:</b> To level up my engineering skills while stepping off the beaten path.</span>
+                </div>
+            </div>
+            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
+                <button class="sayit-btn sayit-btn-cancel" onclick="closeMIIAModal()">CLOSE</button>
+                <button class="sayit-btn sayit-btn-confirm btn-outline" onclick="confirmMIIA()">Download app</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox project images -->
+    <div class="project-lightbox" id="projectLightbox">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">&times;</button>
+        <button class="lightbox-arrow lightbox-prev" onclick="prevLightbox()" aria-label="Image pr&#233;c&#233;dente">&#10094;</button>
+        <img id="lightboxImg" src="" alt="Aper&#231;u agrandi">
+        <button class="lightbox-arrow lightbox-next" onclick="nextLightbox()" aria-label="Image suivante">&#10095;</button>
+    </div>
+
     <script>
         function showSayitModal() {
             document.body.style.overflow = 'hidden';
@@ -2097,7 +2420,7 @@
             closeTikDownModal();
             window.open('https://github.com/brotiana/TikDown', '_blank');
         }
-        
+        // Close on overlay click
         document.getElementById('sayitModal').addEventListener('click', function(e) {
             if (e.target === this) closeSayitModal();
         });
@@ -2105,7 +2428,7 @@
             if (e.target === this) closeTikDownModal();
         });
 
-        
+        /* ── ShadowMind Modal ── */
         var shadowMindInterval, shadowMindIndex = 0;
         var shadowMindImages = ['shadowmind.png', 'shadowmind1.png', 'shadowmind2.png'];
 
@@ -2155,7 +2478,220 @@
         document.getElementById('shadowMindModal').addEventListener('click', function(e) {
             if (e.target === this) closeShadowMindModal();
         });
+
+        /* ── MIIA Editor Modal ── */
+        var miiaInterval, miiaIndex = 0;
+        var miiaImages = ['miia.png', 'miia2.png', 'miia3.png', 'miia4.png'];
+
+        function showMIIAModal() {
+            document.body.style.overflow = 'hidden';
+            var modal = document.getElementById('miiaModal');
+            modal.classList.add('active');
+            miiaIndex = 0;
+            var imgs = document.querySelectorAll('#miiaCarousel img');
+            imgs.forEach(function(img, i) {
+                img.classList.toggle('active', i === 0);
+                img.style.transform = '';
+                img.style.transition = 'none';
+            });
+            clearInterval(miiaInterval);
+            miiaInterval = setInterval(function() {
+                miiaIndex = (miiaIndex + 1) % miiaImages.length;
+                var imgs = document.querySelectorAll('#miiaCarousel img');
+                var prev = miiaIndex === 0 ? imgs.length - 1 : miiaIndex - 1;
+                imgs[prev].style.transition = 'transform 0.6s ease';
+                imgs[prev].style.transform = 'translateX(-100%)';
+                imgs[prev].classList.remove('active');
+                imgs[miiaIndex].style.transition = 'none';
+                imgs[miiaIndex].style.transform = 'translateX(100%)';
+                imgs[miiaIndex].classList.add('active');
+                void imgs[miiaIndex].offsetHeight;
+                imgs[miiaIndex].style.transition = 'transform 0.6s ease';
+                imgs[miiaIndex].style.transform = 'translateX(0)';
+                setTimeout(function() {
+                    imgs[prev].style.transition = 'none';
+                    imgs[prev].style.transform = '';
+                }, 600);
+            }, 4000);
+        }
+
+        function closeMIIAModal() {
+            document.body.style.overflow = '';
+            clearInterval(miiaInterval);
+            document.getElementById('miiaModal').classList.remove('active');
+        }
+
+        function confirmMIIA() {
+            closeMIIAModal();
+            window.open('https://github.com/brotiana/MIIA-Editor/releases/download/v0.1.1/miia_0.1.0_amd64.deb', '_blank');
+        }
+
+        document.getElementById('miiaModal').addEventListener('click', function(e) {
+            if (e.target === this) closeMIIAModal();
+        });
+
+        /* ── Lightbox images projet ── */
+        var lightboxData = { images: [], index: 0 };
+
+        function openLightbox(images, index) {
+            lightboxData.images = images;
+            lightboxData.index = index;
+            document.getElementById('lightboxImg').src = images[index];
+            document.getElementById('projectLightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('projectLightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function nextLightbox() {
+            lightboxData.index = (lightboxData.index + 1) % lightboxData.images.length;
+            document.getElementById('lightboxImg').src = lightboxData.images[lightboxData.index];
+        }
+
+        function prevLightbox() {
+            lightboxData.index = (lightboxData.index - 1 + lightboxData.images.length) % lightboxData.images.length;
+            document.getElementById('lightboxImg').src = lightboxData.images[lightboxData.index];
+        }
+
+        document.getElementById('projectLightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        document.getElementById('shadowmindCarousel').addEventListener('click', function() {
+            openLightbox(shadowMindImages, shadowMindIndex);
+        });
+
+        document.getElementById('miiaCarousel').addEventListener('click', function() {
+            openLightbox(miiaImages, miiaIndex);
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('projectLightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowRight') nextLightbox();
+            else if (e.key === 'ArrowLeft') prevLightbox();
+        });
     </script>
+
+    <script>
+        // ── Sauvegarde / restauration de la position de scroll ──
+        // Au clic sur un projet, la position est sauvegardée ; au retour
+        // vers le portfolio, on atterrit exactement là où on était.
+        (function () {
+            var KEY = 'portfolioScrollPos';
+
+            // Désactive la restauration auto du navigateur (on gère nous-mêmes)
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            // Position de scroll réelle. Selon le contexte, le conteneur qui
+            // défile est la fenêtre OU <body> (cas des écrans où le zoom 75%
+            // est actif → window.scrollY vaut alors toujours 0).
+            function getScrollTop() {
+                return window.scrollY ||
+                       document.documentElement.scrollTop ||
+                       document.body.scrollTop || 0;
+            }
+
+            // Sauvegarde avant de quitter la page (clic sur un projet, etc.)
+            function save() {
+                try {
+                    sessionStorage.setItem(KEY, getScrollTop());
+                } catch (e) {}
+            }
+            window.addEventListener('beforeunload', save);
+            // pagehide couvre aussi le cas bfcache (où beforeunload ne se déclenche pas)
+            window.addEventListener('pagehide', save);
+
+            // Sécurité : sauvegarde aussi au clic sur un projet (position exacte
+            // au moment du clic, avant toute navigation).
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.closest && e.target.closest('.project-row')) {
+                    save();
+                }
+            }, true);
+
+            function restore() {
+                var saved = null;
+                try { saved = sessionStorage.getItem(KEY); } catch (e) {}
+                if (saved === null) return;
+                try { sessionStorage.removeItem(KEY); } catch (e) {}
+
+                var pos = parseInt(saved, 10) || 0;
+
+                // Réafficher la section ciblée par le hash (ex: #projects)
+                // car main.js ne montre que "home" au chargement.
+                var hash = window.location.hash.substring(1);
+                if (hash && document.getElementById(hash)) {
+                    var section = document.getElementById(hash);
+                    if (!section.classList.contains('active')) {
+                        try {
+                            if (typeof showSection === 'function') {
+                                showSection(hash);
+                            } else {
+                                throw new Error('showSection indisponible');
+                            }
+                        } catch (err) {
+                            // Fallback manuel si showSection échoue
+                            document.querySelectorAll('.section').forEach(function (s) {
+                                s.classList.remove('active');
+                                s.style.display = 'none';
+                            });
+                            section.classList.add('active');
+                            section.style.display = 'block';
+                        }
+                    }
+                }
+
+                function apply() {
+                    // Applique la position sur tous les conteneurs possibles :
+                    // en zoom 75% c'est <body> qui défile, ailleurs la fenêtre.
+                    window.scrollTo(0, pos);
+                    if (document.documentElement) document.documentElement.scrollTop = pos;
+                    if (document.body) document.body.scrollTop = pos;
+                }
+                apply();
+                requestAnimationFrame(apply);
+                // Ré-applique pendant ~2s (attente du layout / images)
+                var tries = 0;
+                var timer = setInterval(function () {
+                    apply();
+                    if (++tries > 20) clearInterval(timer);
+                }, 100);
+            }
+
+            window.addEventListener('load', restore);
+            window.addEventListener('pageshow', function (e) {
+                if (e.persisted) restore();
+            });
+        })();
+    </script>
+
+<script>
+// Masque le nom du fichier .html dans la barre d'adresse
+(function(){
+  try{
+    var p = location.pathname;
+    var name = (p.split('/').pop()||'').toLowerCase();
+    if (name === 'index.html' || name.endsWith('.html')) {
+      var base = p.replace(/[^/]*\.html$/i, '');
+      history.replaceState(null, '', base + location.search + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+    // Service Worker : permet de rafraîchir les URL "propres" (/dossier) sans 404
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('sw.js').catch(function () {});
+        });
+    }
+</script>
 </body>
 
 </html>

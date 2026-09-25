@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const url = this.getAttribute('href');
             const target = this.getAttribute('target');
             
-            
+            // Allow default behavior for anchor links, external targets, mailto, etc.
             if (url && 
                 !url.startsWith('#') && 
                 !url.startsWith('mailto:') && 
@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 !url.startsWith('javascript:') && 
                 target !== '_blank') {
                 
-                
+                // Only intercept navigation to other pages or same domain
                 e.preventDefault();
                 document.body.classList.add('page-exit');
                 setTimeout(() => {
                     window.location.href = url;
-                }, 400); 
+                }, 400); // 400ms matches the fadeOutPage animation duration
             }
         });
     });
