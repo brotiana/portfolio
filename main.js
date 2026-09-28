@@ -39,8 +39,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const homeIconBtn = document.getElementById('homeIconBtn');
     if (homeIconBtn) {
-        homeIconBtn.addEventListener('click', function() {
-            showSection('home');
+        homeIconBtn.addEventListener('click', function () {
+            // L'icône Accueil = toujours revenir sur le hero (haut de #home).
+            // Quand on est déjà sur l'accueil (ex. panneau Bio), showSection('home')
+            // ne fait rien (même section) : il faut remonter le défilement de #home.
+            sectionScrollMemory['home'] = 0;
+            const currentActive = document.querySelector('.section.active');
+            if (currentActive && currentActive.id === 'home') {
+                const home = document.getElementById('home');
+                if (home) {
+                    // On neutralise le scroll-snap pendant la remontée : sinon il
+                    // vise un point d'ancrage intermédiaire (le hero est sticky
+                    // avec top:-25vh) et laisse le panneau Bio encore ~75% visible.
+                    const snap = home.style.scrollSnapType;
+                    home.style.scrollSnapType = 'none';
+                    home.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.setTimeout(function () {
+                        home.scrollTop = 0;
+                        home.style.scrollSnapType = snap;
+                    }, 600);
+                }
+            } else {
+                showSection('home');
+            }
         });
     }
 
