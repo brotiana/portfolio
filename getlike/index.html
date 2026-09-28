@@ -31,7 +31,7 @@
             flex-direction: column;
         }
 
-        
+
         .scanlines {
             position: fixed;
             inset: 0;
@@ -46,7 +46,7 @@
             pointer-events: none;
         }
 
-        
+
         .vignette {
             position: fixed;
             inset: 0;
@@ -59,7 +59,7 @@
             pointer-events: none;
         }
 
-        
+
         .corner-glow {
             position: fixed;
             inset: 0;
@@ -184,7 +184,7 @@
             color: #1e64dc;
         }
 
-        
+
         .section-divider {
             border: none;
             height: 1px;
@@ -239,7 +239,7 @@
             }
         }
 
-        
+
         .wf-arrow {
             position: relative;
             width: 14px;
@@ -270,7 +270,7 @@
             border-radius: 1px;
         }
 
-        
+
         .wf-loop {
             display: flex;
             flex-direction: column;
@@ -288,23 +288,19 @@
     </style>
 </head>
 <body>
-    
+
     <div class="scanlines"></div>
     <div class="vignette"></div>
     <div class="corner-glow"></div>
 
     <main class="hero">
-        <iframe class="project-video" src="https://www.youtube.com/embed/bGBgrpuyACw"
-            title="GetLike.io + tiktok task automation - demo"
-            style="aspect-ratio:16/9; height:auto; border:0; display:block;"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
+        <div class="yt-lite project-video" data-yt="bGBgrpuyACw"
+            data-title="GetLike.io + tiktok task automation - demo"
+            role="button" tabindex="0" aria-label="Lire la vidéo"></div>
     </main>
 
     <section class="main-content">
         <article>
-            <p class="project-subtitle">Présentation du projet</p>
             <h1 class="project-title">GetLike.io + tiktok task automation</h1>
             <hr class="section-divider" />
 
@@ -395,6 +391,7 @@
         </svg>
     </a>
 <script src="../scroll-restore.js"></script>
+<script src="../youtube-lite.js"></script>
 
 <script>
 

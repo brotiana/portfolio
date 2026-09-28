@@ -21,7 +21,7 @@
             color: #ffffff;
         }
 
-        
+
         .scanlines {
             position: fixed; inset: 0; z-index: 0;
             background: repeating-linear-gradient(
@@ -43,7 +43,7 @@
             pointer-events: none;
         }
 
-        
+
         .container {
             max-width: 960px;
             margin: 0 auto;
@@ -52,7 +52,7 @@
             z-index: 1;
         }
 
-        
+
         .back-top {
             display: inline-flex;
             align-items: center;
@@ -78,7 +78,7 @@
         }
         .back-top svg { flex-shrink: 0; }
 
-        
+
         .project-label {
             font-family: 'Orbitron', monospace;
             font-size: 0.72rem;
@@ -107,7 +107,7 @@
             max-width: 780px;
         }
 
-        
+
         .divider {
             border: none;
             height: 1px;
@@ -115,7 +115,7 @@
             margin: 1.75rem 0;
         }
 
-        
+
         .media-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -166,7 +166,7 @@
             min-height: 500px;
         }
 
-        
+
         .about-card {
             background: rgba(30,100,220,0.06);
             border: 1px solid rgba(30,100,220,0.22);
@@ -202,7 +202,7 @@
         .about-card ul li::marker { color: #1e64dc; }
         .about-card strong { color: #c7d8f5; }
 
-        
+
         .tech-row { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 8px; }
         .tech {
             display: inline-block;
@@ -214,7 +214,7 @@
             border: 1px solid rgba(30,100,220,0.3);
         }
 
-        
+
         .back-button {
             position: fixed;
             right: 18px;
@@ -240,7 +240,7 @@
             box-shadow: 0 0 30px rgba(30,100,220,0.4), 0 18px 40px rgba(0,0,0,0.3);
         }
 
-        
+
         @media (max-width: 768px) {
             .media-grid { grid-template-columns: 1fr; }
             .media-item { width: 100%; max-width: 100%; }
@@ -248,7 +248,7 @@
             .media-box video, .media-box img, .media-box iframe { max-height: 420px; }
         }
 
-        
+
         @media (max-width: 449px) {
             .media-grid {
                 margin-left: -20px;
@@ -281,7 +281,7 @@
 
     <div class="container">
 
-        
+
         <a class="back-top" href="../index.html#projects">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -292,24 +292,21 @@
             Back to projects
         </a>
 
-        
-        <p class="project-label">Présentation du projet</p>
+
         <h1>Milike — Instagram Automation Tool</h1>
         <p class="project-desc">A project that automates common Instagram actions for growth experiments and content management. Below you'll find a short screen recording of the script in action and a screenshot of the app interface.</p>
 
         <hr class="divider" />
 
-        
+
         <section style="margin-bottom: 1.75rem;">
             <div class="media-grid">
                 <div class="media-item">
                     <h2>Screen Recording</h2>
                     <div class="media-box">
-                        <iframe src="https://www.youtube.com/embed/ocrlINq1Wlk"
-                            title="Milike demo video"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
+                        <div class="yt-lite" data-yt="ocrlINq1Wlk"
+                            data-title="Milike demo video"
+                            role="button" tabindex="0" aria-label="Lire la vidéo"></div>
                     </div>
                 </div>
                 <div class="media-item">
@@ -321,7 +318,7 @@
             </div>
         </section>
 
-        
+
         <section class="about-card">
             <h2>About the program</h2>
             <p>
@@ -343,7 +340,7 @@
 
     </div>
 
-    
+
     <a href="../index.html#projects" class="back-button" aria-label="Retour aux projets">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -354,5 +351,6 @@
     </a>
 
 <script src="scroll-restore.js"></script>
+<script src="youtube-lite.js"></script>
 </body>
 </html>

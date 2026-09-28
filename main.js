@@ -11,7 +11,7 @@ const CONTACT_EMAIL       = 'gtiana337@gmail.com';
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     const homeSection = document.getElementById('home');
     if (homeSection) {
         homeSection.style.display = 'block';
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         homeSection.style.transform = 'none';
     }
 
-    
+
     const allSections = document.querySelectorAll('.section');
     allSections.forEach(section => {
         if (!section.classList.contains('active')) {
@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeScrollAnimations();
 
-    
+
     changeLanguage(currentLanguage);
     initializeTypingEffect();
 
-    
+
     const homeIconBtn = document.getElementById('homeIconBtn');
     if (homeIconBtn) {
         homeIconBtn.addEventListener('click', function() {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    
+
     let isNavigating = false;
     window.addEventListener('scroll', function() {
         if (isNavigating) return;
@@ -52,14 +52,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// ── Mémoire de scroll par section ──────────────────────────────────
+// Chaque section conserve sa dernière position de défilement : quand on
+// revient dessus, on repart là où on s'était arrêté.
+// NB : selon l'écran le conteneur qui défile est la fenêtre OU <body>
+// (cas du zoom 75%), et #home a son propre défilement interne.
+var sectionScrollMemory = {};
+
+function getPageScroll() {
+    return window.scrollY ||
+           document.documentElement.scrollTop ||
+           document.body.scrollTop || 0;
+}
+
+function setPageScroll(y) {
+    window.scrollTo(0, y);
+    if (document.documentElement) document.documentElement.scrollTop = y;
+    if (document.body) document.body.scrollTop = y;
+}
+
+function getSectionScroll(section) {
+    if (!section) return 0;
+    // #home défile en interne ; les autres sections utilisent le défilement page.
+    if (section.id === 'home') return section.scrollTop || 0;
+    return getPageScroll();
+}
+
+function setSectionScroll(section, y) {
+    if (!section) return;
+    if (section.id === 'home') {
+        section.scrollTop = y;
+    } else {
+        setPageScroll(y);
+    }
+}
+
 function showSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (!targetSection) return;
 
     const currentActive = document.querySelector('.section.active');
 
-    
+
     if (currentActive && currentActive.id === sectionId) return;
+
+    // Mémorise la position de la section qu'on quitte (AVANT de la masquer,
+    // sinon la hauteur du contenu change et la position serait perdue).
+    if (currentActive) {
+        sectionScrollMemory[currentActive.id] = getSectionScroll(currentActive);
+    }
 
     const displayNew = () => {
         const sections = document.querySelectorAll('.section');
@@ -71,7 +112,12 @@ function showSection(sectionId) {
         targetSection.classList.add('active');
         targetSection.style.display = 'block';
         targetSection.style.opacity = '0';
-        window.scrollTo({ top: 0 });
+        // Restaure la dernière position mémorisée de la section cible.
+        var savedScroll = sectionScrollMemory[targetSection.id] || 0;
+        setSectionScroll(targetSection, savedScroll);
+        requestAnimationFrame(function () {
+            setSectionScroll(targetSection, savedScroll);
+        });
 
         anime({
             targets: targetSection,
@@ -95,7 +141,7 @@ function showSection(sectionId) {
         displayNew();
     }
 
-    
+
     if (window.location.hash !== `#${sectionId}`) {
         window.history.pushState(null, null, `#${sectionId}`);
     }
@@ -103,14 +149,13 @@ function showSection(sectionId) {
 
 
 function animateSectionElements(sectionId) {
-    
+
 }
 
 
 function initializeTypingEffect() {
     const getTypingTexts = () => {
         return [
-            translations[currentLanguage]['hero-subtitle-1'],
             translations[currentLanguage]['hero-subtitle-2'],
             translations[currentLanguage]['hero-subtitle-3'],
             translations[currentLanguage]['hero-subtitle-4']
@@ -160,7 +205,7 @@ function resetTypingEffect() {
 
 
 function initializeAnimations() {
-    
+
     const skillCards = document.querySelectorAll('.skill-card');
     skillCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
@@ -213,7 +258,7 @@ function handleContactSubmit(e) {
 
     const form = e.target;
 
-    
+
     if (form.botcheck && form.botcheck.value) return;
 
     const formData = new FormData(form);
@@ -230,7 +275,7 @@ function handleContactSubmit(e) {
     submitBtn.innerHTML = 'Sending...';
     submitBtn.disabled = true;
 
-    
+
     if (typeof emailjs === 'undefined') {
         restoreButton();
         showNotification('Email service unavailable. Please try again later.', 'error');
@@ -298,7 +343,7 @@ function showNotification(message, type = 'info') {
 
 
 function initializeScrollAnimations() {
-    
+
     const revealCSS = document.createElement('style');
     revealCSS.textContent = `
         .reveal-item {
@@ -316,7 +361,7 @@ function initializeScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
-                
+
                 const parent = entry.target.parentElement;
                 const siblings = Array.from(parent.children).filter(c => c.classList.contains('reveal-item'));
                 const idx = siblings.indexOf(entry.target);
@@ -327,7 +372,7 @@ function initializeScrollAnimations() {
         });
     }, { threshold: 0.1 });
 
-    
+
     function observeItems() {
         document.querySelectorAll('.skill-card, .project-row, #skills .grid > div:not(.skill-card)').forEach(el => {
             if (!el.classList.contains('reveal-item')) {
@@ -337,13 +382,13 @@ function initializeScrollAnimations() {
         });
     }
 
-    
+
     observeItems();
     const origShowSection = window._origShowSection || showSection;
     if (!window._origShowSection) {
         window._origShowSection = showSection;
     }
-    
+
     const mutObs = new MutationObserver(() => {
         observeItems();
     });
@@ -373,18 +418,18 @@ document.addEventListener('click', function(e) {
     if (anchor) {
         const hash = anchor.getAttribute('href').substring(1);
 
-        
+
         if (hash === 'bio') {
             e.preventDefault();
             const homeSection = document.getElementById('home');
             const currentActive = document.querySelector('.section.active');
 
             if (currentActive && currentActive.id === 'home') {
-                
+
                 const bioPanel = homeSection.querySelector('.relative.z-10');
                 if (bioPanel) bioPanel.scrollIntoView({ behavior: 'smooth' });
             } else {
-                
+
                 showSection('home');
                 setTimeout(() => {
                     const bioPanel = document.querySelector('#home .relative.z-10');
@@ -489,7 +534,6 @@ const translations = {
         'nav-projects': 'Projets',
         'nav-contact': 'Contact',
         'hero-title': 'Développeur Fullstack',
-        'hero-subtitle-1': 'Développeur Fullstack',
         'hero-subtitle-2': 'Créateur de solutions web',
         'hero-subtitle-3': 'Passionné par l\'innovation',
         'hero-subtitle-4': 'Expert en technologies modernes',
@@ -513,10 +557,9 @@ const translations = {
         'nav-projects': 'Projects',
         'nav-contact': 'Contact',
         'hero-title': 'Fullstack Developer',
-        'hero-subtitle-1': 'Fullstack Developer',
         'hero-subtitle-2': 'Web solutions creator',
         'hero-subtitle-3': 'Passionate about innovation',
-        'hero-subtitle-4': 'Expert in modern technologies',
+        'hero-subtitle-4': 'Automation Expert',
         'hero-description': 'Passionate about creating innovative and performant web applications. I transform ideas into concrete solutions with modern technologies.',
         'hero-projects-btn': 'View my projects',
         'hero-contact-btn': 'Contact me',
@@ -540,14 +583,14 @@ function changeLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('language', lang);
 
-    
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     document.getElementById(`lang-${lang}`)?.classList.add('active');
     document.getElementById(`lang-${lang}-mobile`)?.classList.add('active');
 
-    
+
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
@@ -555,27 +598,27 @@ function changeLanguage(lang) {
         }
     });
 
-    
+
     updateComplexTexts(lang);
 
-    
+
     resetTypingEffect();
 }
 
 function updateComplexTexts(lang) {
-    
+
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle && translations[lang]['hero-title']) {
         heroTitle.textContent = translations[lang]['hero-title'];
     }
 
-    
+
     const heroDesc = document.querySelector('#home p.text-xl');
     if (heroDesc && translations[lang]['hero-description']) {
         heroDesc.textContent = translations[lang]['hero-description'];
     }
 
-    
+
     const skillsTitle = document.querySelector('#skills h2');
     if (skillsTitle && translations[lang]['skills-title']) {
         skillsTitle.textContent = translations[lang]['skills-title'];
