@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTypingEffect();
 
 
+    // Aimantation « hero <-> Bio » de l'accueil (gérée en JS, cf. plus bas)
+    initHomeSnap();
+
     const homeIconBtn = document.getElementById('homeIconBtn');
     if (homeIconBtn) {
         homeIconBtn.addEventListener('click', function () {
@@ -46,19 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sectionScrollMemory['home'] = 0;
             const currentActive = document.querySelector('.section.active');
             if (currentActive && currentActive.id === 'home') {
-                const home = document.getElementById('home');
-                if (home) {
-                    // On neutralise le scroll-snap pendant la remontée : sinon il
-                    // vise un point d'ancrage intermédiaire (le hero est sticky
-                    // avec top:-25vh) et laisse le panneau Bio encore ~75% visible.
-                    const snap = home.style.scrollSnapType;
-                    home.style.scrollSnapType = 'none';
-                    home.scrollTo({ top: 0, behavior: 'smooth' });
-                    window.setTimeout(function () {
-                        home.scrollTop = 0;
-                        home.style.scrollSnapType = snap;
-                    }, 600);
-                }
+                // Remonter en douceur vers le hero (animation maison : homeAnimateTo)
+                homeAnimateTo(0);
             } else {
                 showSection('home');
             }
@@ -106,6 +98,144 @@ function setSectionScroll(section, y) {
     } else {
         setPageScroll(y);
     }
+}
+
+// ── Accueil : aimantation « hero <-> Bio » (animée en JS) ───────────
+// Le scroll-snap CSS n'a aucun cran en haut (le hero est sticky top:-25vh),
+// on gère donc l'aimantation nous-mêmes, avec une animation bien visible.
+var homeSnapAnim = false;
+var homeSnapTimer = null;
+var homeSnapLastY = 0;
+var homeSnapDir = 1;
+var homeSnapRAF = null;
+
+function homeEase(t) {                       // easeInOutCubic : hésitation + glisse
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function homeAnimateTo(target, duration) {
+    var home = document.getElementById('home');
+    if (!home) return;
+    var start = home.scrollTop;
+    var delta = target - start;
+    if (Math.abs(delta) < 1) return;
+    var dur = duration || 577;      // 750 / 1.3 ≈ 577 ms (effet accéléré ×1.3)
+    var t0 = null;
+    homeSnapAnim = true;
+    function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        home.scrollTop = start + delta * homeEase(p);
+        if (p < 1) {
+            homeSnapRAF = requestAnimationFrame(step);
+        } else {
+            home.scrollTop = target;
+            homeSnapLastY = target;
+            homeSnapAnim = false;
+        }
+    }
+    homeSnapRAF = requestAnimationFrame(step);
+}
+
+function initHomeSnap() {
+    var home = document.getElementById('home');
+    if (!home) return;
+
+    // On pilote nous-mêmes : plus de snap CSS ni de défilement animé natif
+    home.style.scrollSnapType = 'none';
+    home.style.scrollBehavior = 'auto';
+    homeSnapLastY = home.scrollTop;
+
+    function homeMax() { return home.scrollHeight - home.clientHeight; }
+
+    // Un élément interne (ex. la zone de texte du Bio) peut-il encore défiler ?
+    function innerCanScroll(node, dir) {
+        var el = node;
+        while (el && el !== home) {
+            var sh = el.scrollHeight, ch = el.clientHeight;
+            if (sh > ch + 1) {
+                if (dir > 0 && el.scrollTop + ch < sh - 1) return true;
+                if (dir < 0 && el.scrollTop > 1) return true;
+            }
+            el = el.parentElement;
+        }
+        return false;
+    }
+
+    // Une intention de défilement -> TOUJOURS la même transition animée entre
+    // les deux crans (hero <-> Bio), quel que soit l'outil (molette, clavier,
+    // tactile). On empêche ainsi le défilement natif « jusqu'au milieu ».
+    function go(dir) {
+        if (homeSnapAnim) return false;
+        var max = homeMax();
+        if (max <= 1) return false;
+        homeAnimateTo(dir < 0 ? 0 : max);
+        return true;
+    }
+
+    // 1) Molette souris / trackpad
+    home.addEventListener('wheel', function (e) {
+        if (!e.deltaY) return;
+        var dir = e.deltaY > 0 ? 1 : -1;
+        if (innerCanScroll(e.target, dir)) return;      // laisser la zone interne défiler
+        e.preventDefault();
+        go(dir);
+    }, { passive: false });
+
+    // 2) Clavier : flèches, Page suiv./préc., Espace (quand l'accueil est affiché)
+    document.addEventListener('keydown', function (e) {
+        var active = document.querySelector('.section.active');
+        if (!active || active.id !== 'home') return;
+
+        var dir = (e.key === 'ArrowDown' || e.key === 'PageDown' ||
+                   e.key === ' ' || e.key === 'Spacebar') ? 1
+                : (e.key === 'ArrowUp' || e.key === 'PageUp') ? -1 : 0;
+        if (!dir) return;
+
+        var tag = (e.target && e.target.tagName || '').toLowerCase();
+        if ((e.key === ' ' || e.key === 'Spacebar') &&
+            (tag === 'a' || tag === 'button' || tag === 'input' || tag === 'textarea')) {
+            return;                                     // laisser le bouton/lien agir
+        }
+        if (innerCanScroll(e.target, dir)) return;
+        if (go(dir)) e.preventDefault();
+    });
+
+    // 3) Tactile (on bloque le défilement natif pour garder le même effet)
+    var touchY = null;
+    home.addEventListener('touchstart', function (e) {
+        touchY = e.touches[0].clientY;
+    }, { passive: true });
+    home.addEventListener('touchmove', function (e) {
+        if (touchY === null) return;
+        var dy = touchY - e.touches[0].clientY;         // doigt vers le haut -> descendre
+        if (Math.abs(dy) < 12) return;
+        var dir = dy > 0 ? 1 : -1;
+        if (innerCanScroll(e.target, dir)) return;
+        e.preventDefault();
+        touchY = null;
+        go(dir);
+    }, { passive: false });
+    home.addEventListener('touchend', function () { touchY = null; }, { passive: true });
+
+    // Filet de sécurité : défilement non intercepté -> aimantation au cran
+    home.addEventListener('scroll', function () {
+        if (homeSnapAnim) return;                       // on ignore nos animations
+        var y = home.scrollTop;
+        if (y !== homeSnapLastY) {
+            homeSnapDir = y > homeSnapLastY ? 1 : -1;
+            homeSnapLastY = y;
+        }
+        clearTimeout(homeSnapTimer);
+        homeSnapTimer = setTimeout(function () {
+            if (homeSnapAnim) return;
+            var max = homeMax();
+            if (max <= 1) return;
+            var pos = home.scrollTop;
+            if (pos <= 1 || pos >= max - 1) return;      // déjà sur un cran
+            homeAnimateTo(homeSnapDir > 0 ? max : 0);
+        }, 120);
+    }, { passive: true });
 }
 
 function showSection(sectionId) {
