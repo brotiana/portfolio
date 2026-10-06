@@ -768,7 +768,7 @@ const translations = {
         'skills-cap-title': 'Que puis-je faire avec ces compétences ?',
         'cap-1': 'Créer des sites web modernes et complets',
         'cap-2': 'Scraper et extraire des données web',
-        'cap-3': 'Manipuler et stocker des données en base',
+        'cap-3': 'Manipuler et stocker des données sur des bases de donneés',
         'cap-4': 'Automatiser des actions sur sites web, PC et Android',
         'cap-5': 'Créer des applications Android, Linux et Windows avec des technologies web',
         'cap-6': 'Créer des bots pour Facebook, Instagram, Telegram, Gmail et WhatsApp',

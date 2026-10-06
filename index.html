@@ -424,7 +424,15 @@
         .project-row {
             background: rgba(30, 100, 220, 0.05);
             border: 1px solid rgba(30, 100, 220, 0.2);
-            border-radius: 12px;
+            border-radius: 0;
+            clip-path: polygon(
+                0 0,
+                calc(100% - 20px) 0,
+                100% 20px,
+                100% 100%,
+                20px 100%,
+                0 calc(100% - 20px)
+            );
             padding: 2rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
@@ -480,7 +488,7 @@
             background: rgba(30, 100, 220, 0.2);
             color: #60a5fa;
             padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            border-radius: 0;
             font-size: 0.875rem;
             margin: 0.25rem;
         }
@@ -1737,7 +1745,7 @@
 
                 <div class="text-[0.95rem] md:text-lg text-gray-300 leading-relaxed md:leading-loose space-y-4 md:space-y-6 bg-white/5 border border-blue-500/20 p-6 md:p-10 rounded-2xl backdrop-blur-md shadow-2xl overflow-y-auto shrink" style="scrollbar-width: thin; scrollbar-color: rgba(96,165,250,0.5) transparent;">
                     <p>
-                        My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar , a Full Stack Developer with a passion for creation, automation and problem-solving.
+                        My name is <span class="text-white font-bold drop-shadow-md">Tiana</span>, I'm from Madagascar , a Full Stack Developer with a passion for automation and problem-solving.
                     </p>
                     <p>
                         Four years ago, I started doing tasks on the Internet across several platforms to earn some income. After a while, I began wondering: <em class="text-blue-300 font-medium tracking-wide">"what if I automated these tasks?"</em>
