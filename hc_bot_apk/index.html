@@ -437,7 +437,7 @@
                 <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
                 <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
             </svg>
-            Back to portfolio
+            <span data-i18n="back-top">Back to portfolio</span>
         </a>
 
         
@@ -459,12 +459,12 @@
                     <img src="photo_5960976859946225796_y.jpg" alt="SmmKingdomTasks + HelpCercle_bot - screenshot 5" loading="lazy" />
                 </figure>
             </div>
-            <button class="gallery-arrow prev" aria-label="Previous image" onclick="scrollGallery(-1)">&#10094;</button>
-            <button class="gallery-arrow next" aria-label="Next image" onclick="scrollGallery(1)">&#10095;</button>
+            <button class="gallery-arrow prev" aria-label="Previous image" data-i18n-aria="prev" onclick="scrollGallery(-1)">&#10094;</button>
+            <button class="gallery-arrow next" aria-label="Next image" data-i18n-aria="next" onclick="scrollGallery(1)">&#10095;</button>
         </div>
 
         
-        <p class="project-subtitle">Project overview</p>
+        <p class="project-subtitle" data-i18n="subtitle">Project overview</p>
         <h1 class="project-title">SmmKingdomTasks + HelpCercle_bot</h1>
 
 
@@ -472,15 +472,15 @@
 
         <div class="details-grid">
             <div class="detail">
-                <strong>Role</strong>
-                <span>full development</span>
+                <strong data-i18n="role-label">Role</strong>
+                <span data-i18n="role-value">full development</span>
             </div>
             <div class="detail">
-                <strong>Platform</strong>
+                <strong data-i18n="platform-label">Platform</strong>
                 <span>Android (APK) · Telegram</span>
             </div>
             <div class="detail">
-                <strong>Technologies</strong>
+                <strong data-i18n="tech-label">Technologies</strong>
                 <span>chaquopy, Python, sql Lite</span>
             </div>
         </div>
@@ -490,15 +490,15 @@
             <span class="tech">chaquopy</span>
             <span class="tech">Python</span>
             <span class="tech">sql Lite</span>
-            <span class="tech">Accessibility Service</span>
+            <span class="tech" data-i18n="tech-a11y">Accessibility Service</span>
         </div>
 
         <hr class="section-divider" />
 
         <div class="description">
             <div>
-                <h2>Project description</h2>
-                <p>
+                <h2 data-i18n="desc-title">Project description</h2>
+                <p data-i18n="desc-text">
                   An Android app I built to automate the daily grind of paid task bots on Telegram.<br>
  SmmKingdomTasks bot posts simple jobs : liking, following and commenting on TikTok and Instagram accounts
 , and pays you for each one. <br>
@@ -515,32 +515,32 @@ guarantees that Instagram and TikTok
             </div>
 
             <div>
-                <h2>Features</h2>
+                <h2 data-i18n="features-title">Features</h2>
                 <ul>
-                    <li>Full automation of like, follow , comment and captcha through the Accessibility Service.</li>
-                    <li>A parameter that limits the actions to be performed, so as not to be restricted by either platform.</li>
-                    <li>A log interface and a statistics interface showing earnings gained, completed tasks, and skipped tasks.</li>
+                    <li data-i18n="f1">Full automation of like, follow , comment and captcha through the Accessibility Service.</li>
+                    <li data-i18n="f2">A parameter that limits the actions to be performed, so as not to be restricted by either platform.</li>
+                    <li data-i18n="f3">A log interface and a statistics interface showing earnings gained, completed tasks, and skipped tasks.</li>
 
                 </ul>
             </div>
 
             <div>
-                <h2>How it works</h2>
+                <h2 data-i18n="how-title">How it works</h2>
                 <div style="margin-top: 12px; padding: 20px; background: rgba(30, 100, 220, 0.08); border: 1px solid rgba(30, 100, 220, 0.3); border-radius: 12px; font-family: 'Space Mono', monospace; font-size: 0.95rem; line-height: 2.2; color: #94a3b8;">
-                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;">The automated task loop</div>
+                    <div style="text-align: center; margin-bottom: 16px; color: #60a5fa; font-weight: 600;" data-i18n="w1">The automated task loop</div>
                     <div style="text-align: center;">
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">1. Telegram bot</span></div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;" data-i18n="w2">1. Telegram bot</span></div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Sends a task (like / follow / comment)</div>
+                        <div style="margin: 12px 0; color: #94a3b8;" data-i18n="w3">Sends a task (like / follow / comment)</div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">2. This APK</span></div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;" data-i18n="w4">2. This APK</span></div>
                         <div class="wf-arrow"></div>
 
-                        <div style="margin: 12px 0; color: #94a3b8;">Performs the action on TikTok / Instagram</div>
+                        <div style="margin: 12px 0; color: #94a3b8;" data-i18n="w5">Performs the action on TikTok / Instagram</div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;">3. Task done</span></div>
+                        <div style="margin: 12px 0;"><span style="background: rgba(30, 100, 220, 0.3); padding: 8px 12px; border-radius: 6px; display: inline-block;" data-i18n="w6">3. Task done</span></div>
                         <div class="wf-arrow"></div>
-                        <div style="margin: 12px 0; color: #94a3b8;">Sending "Completed" to the bot → credit lands in your balance</div>
+                        <div style="margin: 12px 0; color: #94a3b8;" data-i18n="w7">Sending "Completed" to the bot → credit lands in your balance</div>
                     </div>
                 </div>
             </div>
@@ -553,18 +553,18 @@ guarantees that Instagram and TikTok
                     <polyline points="7 10 12 15 17 10"/>
                     <line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
-                Download the APK
+                <span data-i18n="btn-apk">Download the APK</span>
             </a>
             <a class="action-btn" href="https://t.me/installationCMD" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8 5v14l11-7z"/>
                 </svg>
-                App tutorials
+                <span data-i18n="btn-tuto">App tutorials</span>
             </a>
         </div>
     </main>
 
-    <a href="../#projects" class="back-button" aria-label="Back to projects">
+    <a href="../#projects" class="back-button" aria-label="Back to projects" data-i18n-aria="back-projects">
         <svg width="22px" height="22px" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
              xmlns="http://www.w3.org/2000/svg"
              style="transform: rotate(90deg);">
@@ -586,6 +586,109 @@ guarantees that Instagram and TikTok
             gallery.scrollBy({ left: dir * step, behavior: 'smooth' });
         }
     </script>
+<script>
+(function () {
+    var T = {
+        fr: {
+            "page-title": "SmmKingdomTasks + HelpCercle_bot — Projet",
+            "back-top": "Retour au portfolio",
+            "back-projects": "Retour aux projets",
+            "prev": "Image précédente",
+            "next": "Image suivante",
+            "alt": "SmmKingdomTasks + HelpCercle_bot - capture ",
+            "subtitle": "Aperçu du projet",
+            "role-label": "Rôle",
+            "role-value": "Développement complet",
+            "platform-label": "Plateforme",
+            "tech-label": "Technologies",
+            "tech-a11y": "Service d'accessibilité",
+            "desc-title": "Description du projet",
+            "desc-text": "Une application Android que j'ai créée pour automatiser le travail répétitif des bots de tâches rémunérées sur Telegram.<br>\nLe bot SmmKingdomTasks publie des tâches simples : liker, suivre et commenter des comptes TikTok et Instagram, et vous paie pour chacune. <br>\nAu lieu de réaliser les tâches manuellement, cette application les automatise toutes et les traite d'elle-même grâce au service d'accessibilité d'Android.<br>\nCette application intercepte aussi les vérifications Cloudflare et les calculs envoyés par le bot pour contrer l'automatisation (cet APK contourne tout cela grâce à l'IA, ce qui lui permet de tourner 24h/24 et 7j/7).<br><br>\nCette application utilise directement l'interface du téléphone : clics, défilement, ouverture d'applications..., ce qui garantit que les comptes Instagram et TikTok ne seront pas bloqués, car le script agit comme un humain.",
+            "features-title": "Fonctionnalités",
+            "how-title": "Comment ça marche",
+            "btn-apk": "Télécharger l'APK",
+            "btn-tuto": "Tutoriels de l'application",
+            "w1": "La boucle de tâches automatisée",
+            "w2": "1. Bot Telegram",
+            "w3": "Envoie une tâche (like / follow / commentaire)",
+            "w4": "2. Cet APK",
+            "w5": "Effectue l'action sur TikTok / Instagram",
+            "w6": "3. Tâche terminée",
+            "w7": "Envoi de « Completed » au bot → le crédit arrive sur votre solde",
+            "f1": "Automatisation complète du like, du follow, du commentaire et du captcha via le service d'accessibilité.",
+            "f2": "Un paramètre qui limite les actions à effectuer, afin de ne pas être restreint par l'une ou l'autre plateforme.",
+            "f3": "Une interface de logs et une interface de statistiques affichant les gains obtenus, les tâches terminées et les tâches ignorées."
+        },
+        en: {
+            "page-title": "SmmKingdomTasks + HelpCercle_bot — Project",
+            "back-top": "Back to portfolio",
+            "back-projects": "Back to projects",
+            "prev": "Previous image",
+            "next": "Next image",
+            "alt": "SmmKingdomTasks + HelpCercle_bot - screenshot ",
+            "subtitle": "Project overview",
+            "role-label": "Role",
+            "role-value": "Full development",
+            "platform-label": "Platform",
+            "tech-label": "Technologies",
+            "tech-a11y": "Accessibility Service",
+            "desc-title": "Project description",
+            "desc-text": "An Android app I built to automate the daily grind of paid task bots on Telegram.<br>\n SmmKingdomTasks bot posts simple jobs : liking, following and commenting on TikTok and Instagram accounts\n, and pays you for each one. <br>\nInstead of doing tasks manualy, this app automate all of these tasks and handles them on\nits own using Android's Accessibility Service.<br>\nAlso, this application intercepts the Cloudflare verifications and calculations sent by the bot to counter automation\n (this APK bypasses all of that using AI , allowing it to run 24/7).<br><br>\n\nThis application directly uses the phone's interface : performing clicks, scrolling, opening apps ...., which\nguarantees that Instagram and TikTok\n accounts won't be blocked, because the script acts as if it were a human.",
+            "features-title": "Features",
+            "how-title": "How it works",
+            "btn-apk": "Download the APK",
+            "btn-tuto": "App tutorials",
+            "w1": "The automated task loop",
+            "w2": "1. Telegram bot",
+            "w3": "Sends a task (like / follow / comment)",
+            "w4": "2. This APK",
+            "w5": "Performs the action on TikTok / Instagram",
+            "w6": "3. Task done",
+            "w7": "Sending \"Completed\" to the bot → credit lands in your balance",
+            "f1": "Full automation of like, follow , comment and captcha through the Accessibility Service.",
+            "f2": "A parameter that limits the actions to be performed, so as not to be restricted by either platform.",
+            "f3": "A log interface and a statistics interface showing earnings gained, completed tasks, and skipped tasks."
+        }
+    };
+
+    function readLang() {
+        try {
+            var saved = localStorage.getItem('language');
+            if (saved === 'fr' || saved === 'en') return saved;
+        } catch (e) {}
+        return (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+    }
+
+    function apply(lang) {
+        var d = T[lang] || T.en;
+        document.documentElement.lang = lang;
+        document.title = d['page-title'];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (d[k] != null) el.innerHTML = d[k];
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-aria');
+            if (d[k] != null) el.setAttribute('aria-label', d[k]);
+        });
+        document.querySelectorAll('.gallery img').forEach(function (img, i) {
+            img.alt = d.alt + (i + 1);
+        });
+    }
+
+    apply(readLang());
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'language' || e.key === null) apply(readLang());
+    });
+    window.addEventListener('pageshow', function () {
+        apply(readLang());
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply(readLang());
+    });
+})();
+</script>
 <script src="../scroll-restore.js"></script>
 
 <script>

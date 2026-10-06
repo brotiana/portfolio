@@ -451,7 +451,7 @@
                 <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
                 <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
             </svg>
-            Retour au portfolio
+            <span data-i18n="back-top">Retour au portfolio</span>
         </a>
 
         
@@ -472,18 +472,18 @@
                 <figure>
                     <img src="echec5.png" alt="Chess game online - capture 5" loading="lazy" />
                 </figure>
-                <button class="gallery-arrow prev" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
-                <button class="gallery-arrow next" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+                <button class="gallery-arrow prev" aria-label="Image précédente" data-i18n-aria="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-arrow next" aria-label="Image suivante" data-i18n-aria="next" onclick="changeSlide(1)">&#10095;</button>
             </div>
             <div class="gallery-controls">
-                <button class="gallery-nav-btn" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-nav-btn" aria-label="Image précédente" data-i18n-aria="prev" onclick="changeSlide(-1)">&#10094;</button>
                 <p class="gallery-count" id="gallery-count">1 / 5</p>
-                <button class="gallery-nav-btn" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+                <button class="gallery-nav-btn" aria-label="Image suivante" data-i18n-aria="next" onclick="changeSlide(1)">&#10095;</button>
             </div>
         </div>
 
         
-        <h1 class="project-title">Chess game online</h1>
+        <h1 class="project-title" data-i18n="title">Chess game online</h1>
 
 
 
@@ -491,15 +491,15 @@
 
         <div class="details-grid">
             <div class="detail">
-                <strong>Rôle</strong>
-                <span>full development</span>
+                <strong data-i18n="role-label">Rôle</strong>
+                <span data-i18n="role-value">full development</span>
             </div>
             <div class="detail">
-                <strong>Plateforme</strong>
+                <strong data-i18n="platform-label">Plateforme</strong>
                 <span>Web</span>
             </div>
             <div class="detail">
-                <strong>Technologies</strong>
+                <strong data-i18n="tech-label">Technologies</strong>
                 <span>JavaScript, Node JS, PHP, MySql</span>
             </div>
         </div>
@@ -509,8 +509,8 @@
 
         <div class="description">
             <div>
-                <h2>Project description</h2>
-                <p>Chess Game Online is a web platform where you can play chess against other players online or practice against the computer. The game interface displays the board with full support for all chess rules : legal moves, castling, checkmate and keeps moves synced between both players in real time. </br>
+                <h2 data-i18n="desc-title">Project description</h2>
+                <p data-i18n="desc-text">Chess Game Online is a web platform where you can play chess against other players online or practice against the computer. The game interface displays the board with full support for all chess rules : legal moves, castling, checkmate and keeps moves synced between both players in real time. </br>
 
 Players can also chat with their opponent during the game, right from the interface.</br>
 
@@ -519,17 +519,17 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
             </div>
 
             <div>
-                <h2>Features</h2>
+                <h2 data-i18n="features-title">Features</h2>
                 <ul>
-                    <li>Sign up and account creation.</li>
-                    <li>Invite a user to join a chess game.</li>
-                    <li>Interface listing all online users, with the ability to send them a message.</li>
-                    <li>Real-time move synchronization between players.</li>
-                    <li>Play against the computer.</li>
-                    <li>Full chess rules implemented (check, checkmate, stalemate, promotion).</li>
-                    <li>Match history, stats, and player rankings .</li>
-                    <li>Make a game public so other users can watch it live, or keep it private.</li>
-                    <li>An option to watch public games currently being played online.</li>
+                    <li data-i18n="f1">Sign up and account creation.</li>
+                    <li data-i18n="f2">Invite a user to join a chess game.</li>
+                    <li data-i18n="f3">Interface listing all online users, with the ability to send them a message.</li>
+                    <li data-i18n="f4">Real-time move synchronization between players.</li>
+                    <li data-i18n="f5">Play against the computer.</li>
+                    <li data-i18n="f6">Full chess rules implemented (check, checkmate, stalemate, promotion).</li>
+                    <li data-i18n="f7">Match history, stats, and player rankings .</li>
+                    <li data-i18n="f8">Make a game public so other users can watch it live, or keep it private.</li>
+                    <li data-i18n="f9">An option to watch public games currently being played online.</li>
                 </ul>
             </div>
 
@@ -540,12 +540,12 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
                 <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                 </svg>
-                Voir le code source
+                <span data-i18n="code-btn">Voir le code source</span>
             </a>
         </div>
     </main>
 
-    <a href="../#projects" class="back-button" aria-label="Retour aux projets">
+    <a href="../#projects" class="back-button" aria-label="Retour aux projets" data-i18n-aria="back-projects">
         <svg width="22px" height="22px" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
              xmlns="http://www.w3.org/2000/svg"
              style="transform: rotate(90deg);">
@@ -581,6 +581,101 @@ On the backend, the app is split into two parts: a Node.js server handles real-t
             render();
         })();
     </script>
+<script>
+(function () {
+    var T = {
+        fr: {
+            'page-title': 'Jeu d\'échecs en ligne : Projet',
+            'back-top': 'Retour au portfolio',
+            'back-projects': 'Retour aux projets',
+            'prev': 'Image précédente',
+            'next': 'Image suivante',
+            'alt': 'Jeu d\'échecs en ligne - capture ',
+            'title': 'Jeu d\'échecs en ligne',
+            'role-label': 'Rôle',
+            'role-value': 'Développement complet',
+            'platform-label': 'Plateforme',
+            'tech-label': 'Technologies',
+            'desc-title': 'Description du projet',
+            'desc-text': 'Jeu d\'échecs en ligne est une plateforme web où vous pouvez jouer aux échecs contre d\'autres joueurs en ligne ou vous entraîner contre l\'ordinateur. L\'interface affiche l\'échiquier avec la prise en charge complète des règles : coups légaux, roque, échec et mat, et synchronise les coups entre les deux joueurs en temps réel. <br>\n\nLes joueurs peuvent aussi discuter avec leur adversaire pendant la partie, directement depuis l\'interface.<br>\n\nCôté backend, l\'application est divisée en deux parties : un serveur Node.js gère la communication en temps réel entre les joueurs via les WebSockets (salles de jeu), tandis que PHP et MySQL assurent la persistance des données : comptes utilisateurs, historique des parties, statistiques et classements.',
+            'features-title': 'Fonctionnalités',
+            'f1': 'Inscription et création de compte.',
+            'f2': 'Inviter un utilisateur à rejoindre une partie d\'échecs.',
+            'f3': 'Interface listant tous les utilisateurs en ligne, avec la possibilité de leur envoyer un message.',
+            'f4': 'Synchronisation des coups en temps réel entre les joueurs.',
+            'f5': 'Jouer contre l\'ordinateur.',
+            'f6': 'Règles complètes des échecs implémentées (échec, échec et mat, pat, promotion).',
+            'f7': 'Historique des parties, statistiques et classement des joueurs.',
+            'f8': 'Rendre une partie publique pour que d\'autres utilisateurs la regardent en direct, ou la garder privée.',
+            'f9': 'Une option pour regarder les parties publiques en cours en ligne.',
+            'code-btn': 'Voir le code source'
+        },
+        en: {
+            'page-title': 'Chess game online : Project',
+            'back-top': 'Back to portfolio',
+            'back-projects': 'Back to projects',
+            'prev': 'Previous image',
+            'next': 'Next image',
+            'alt': 'Chess game online - screenshot ',
+            'title': 'Chess game online',
+            'role-label': 'Role',
+            'role-value': 'Full development',
+            'platform-label': 'Platform',
+            'tech-label': 'Technologies',
+            'desc-title': 'Project description',
+            'desc-text': 'Chess Game Online is a web platform where you can play chess against other players online or practice against the computer. The game interface displays the board with full support for all chess rules : legal moves, castling, checkmate and keeps moves synced between both players in real time. <br>\n\nPlayers can also chat with their opponent during the game, right from the interface.<br>\n\nOn the backend, the app is split into two parts: a Node.js server handles real-time communication between players through WebSockets (game rooms), while PHP and MySQL take care of data persistence like user accounts, match history, stats, and rankings.',
+            'features-title': 'Features',
+            'f1': 'Sign up and account creation.',
+            'f2': 'Invite a user to join a chess game.',
+            'f3': 'Interface listing all online users, with the ability to send them a message.',
+            'f4': 'Real-time move synchronization between players.',
+            'f5': 'Play against the computer.',
+            'f6': 'Full chess rules implemented (check, checkmate, stalemate, promotion).',
+            'f7': 'Match history, stats, and player rankings.',
+            'f8': 'Make a game public so other users can watch it live, or keep it private.',
+            'f9': 'An option to watch public games currently being played online.',
+            'code-btn': 'View source code'
+        }
+    };
+
+    function readLang() {
+        try {
+            var saved = localStorage.getItem('language');
+            if (saved === 'fr' || saved === 'en') return saved;
+        } catch (e) {}
+        return (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+    }
+
+    function apply(lang) {
+        var d = T[lang] || T.en;
+        document.documentElement.lang = lang;
+        document.title = d['page-title'];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (d[k] != null) el.innerHTML = d[k];
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-aria');
+            if (d[k] != null) el.setAttribute('aria-label', d[k]);
+        });
+        document.querySelectorAll('.gallery img').forEach(function (img, i) {
+            img.alt = d.alt + (i + 1);
+        });
+    }
+
+    apply(readLang());
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'language' || e.key === null) apply(readLang());
+    });
+    window.addEventListener('pageshow', function () {
+        apply(readLang());
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply(readLang());
+    });
+})();
+</script>
 <script src="../scroll-restore.js"></script>
 
 <script>

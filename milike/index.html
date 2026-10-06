@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Milike — Project Details</title>
+    <link rel="stylesheet" href="../zoom.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #030a18 0%, #060d1c 50%, #020508 100%);
+            color: #ffffff;
+        }
+
+
+        .scanlines {
+            position: fixed; inset: 0; z-index: 0;
+            background: repeating-linear-gradient(
+                0deg, transparent, transparent 2px,
+                rgba(0,0,0,0.32) 2px, rgba(0,0,0,0.32) 4px
+            );
+            pointer-events: none;
+        }
+        .vignette {
+            position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.72) 100%);
+            pointer-events: none;
+        }
+        .corner-glow {
+            position: fixed; inset: 0; z-index: 0;
+            background:
+                radial-gradient(ellipse 40% 40% at 0% 100%, rgba(26,111,255,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 100% 0%, rgba(0,212,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 120px;
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .back-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(30,100,220,0.3);
+            background: rgba(30,100,220,0.08);
+            backdrop-filter: blur(8px);
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            margin-bottom: 2rem;
+        }
+        .back-top:hover {
+            background: rgba(30,100,220,0.18);
+            border-color: rgba(30,100,220,0.6);
+            transform: translateX(-3px);
+        }
+        .back-top svg { flex-shrink: 0; }
+
+
+        .project-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #5a7fa8;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #1e64dc, #60a5fa, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            color: #94a3b8;
+            line-height: 1.75;
+            font-size: 0.97rem;
+            max-width: 780px;
+        }
+
+
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30,100,220,0.5), transparent);
+            margin: 1.75rem 0;
+        }
+
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .media-item {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-item h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #60a5fa;
+            margin-bottom: 0.6rem;
+        }
+
+        .media-box {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(30,100,220,0.25);
+            background: rgba(30,100,220,0.04);
+            backdrop-filter: blur(6px);
+        }
+
+        .media-box video,
+        .media-box iframe,
+        .media-box img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            border: 0;
+            max-height: 520px;
+        }
+
+        .media-box iframe {
+            aspect-ratio: 16 / 9;
+            min-height: 500px;
+        }
+
+
+        .about-card {
+            background: rgba(30,100,220,0.06);
+            border: 1px solid rgba(30,100,220,0.22);
+            border-radius: 14px;
+            padding: 1.75rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .about-card h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #60a5fa;
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 0.96rem;
+        }
+
+        .about-card ul {
+            color: #94a3b8;
+            margin-top: 0.75rem;
+            line-height: 1.8;
+            padding-left: 1.25rem;
+            font-size: 0.96rem;
+        }
+
+        .about-card ul li { margin-bottom: 0.4rem; }
+        .about-card ul li::marker { color: #1e64dc; }
+        .about-card strong { color: #c7d8f5; }
+
+
+        .tech-row { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech {
+            display: inline-block;
+            background: rgba(30,100,220,0.15);
+            color: #60a5fa;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(30,100,220,0.3);
+        }
+
+
+        .back-button {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 20;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(30,100,220,0.15);
+            border: 1px solid rgba(30,100,220,0.35);
+            color: #60a5fa;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(30,100,220,0.2), 0 18px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .back-button:hover {
+            transform: translateY(-2px);
+            background: rgba(30,100,220,0.28);
+            box-shadow: 0 0 30px rgba(30,100,220,0.4), 0 18px 40px rgba(0,0,0,0.3);
+        }
+
+
+        @media (max-width: 768px) {
+            .media-grid { grid-template-columns: 1fr; }
+            .media-item { width: 100%; max-width: 100%; }
+            .media-item h2 { text-align: center; }
+            .media-box video, .media-box img, .media-box iframe { max-height: 420px; }
+        }
+
+
+        @media (max-width: 449px) {
+            .media-grid {
+                margin-left: -20px;
+                margin-right: -20px;
+                width: auto;
+                gap: 1rem;
+            }
+            .media-item {
+                width: auto;
+                max-width: none;
+            }
+            .media-box {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+            .media-box video,
+            .media-box img,
+            .media-box iframe {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="corner-glow"></div>
+
+    <div class="container">
+
+
+        <a class="back-top" href="../#projects">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="transform: rotate(90deg);">
+                <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
+                <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
+            </svg>
+            <span data-i18n="back-top">Back to projects</span>
+        </a>
+
+
+        <h1 data-i18n="title">Milike — Instagram Automation Tool</h1>
+        <p data-i18n="desc" class="project-desc">A project that automates common Instagram actions for growth experiments and content management. Below you'll find a short screen recording of the script in action and a screenshot of the app interface.</p>
+
+        <hr class="divider" />
+
+
+        <section style="margin-bottom: 1.75rem;">
+            <div class="media-grid">
+                <div class="media-item">
+                    <h2 data-i18n="media1">Screen Recording</h2>
+                    <div class="media-box">
+                        <div class="yt-lite" data-yt="ocrlINq1Wlk"
+                            data-title="Milike demo video"
+                            role="button" tabindex="0" aria-label="Lire la vidéo" data-i18n-aria="play"></div>
+                    </div>
+                </div>
+                <div class="media-item">
+                    <h2 data-i18n="media2">Admin Screenshot</h2>
+                    <div class="media-box">
+                        <img src="scrshou.png" alt="Milike admin screenshot" data-i18n-alt="alt" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about-card">
+            <h2 data-i18n="about-title">About the program</h2>
+            <p data-i18n="about-text">
+                Milike is a automation tool built to automate some action in instagram : like , follow , unfollow , comment , post story or publication , delete a post. The project combines a Python backend that interacts with Instagram private endpoints and a minimal web-based admin UI for scheduling and monitoring tasks.
+            </p>
+            <ul>
+                <li data-i18n="li1">Specifically in the video above, the script interacts with a Telegram bot called 'SmmKingdomtasks'. This bot pays for Instagram actions such as likes, follows, and comments. The script uses Telethon to intercept and execute these tasks.</li>
+                <li data-i18n="li2"><strong>Scheduler:</strong> tasks can be scheduled or run immediately from the dashboard; the scheduler respects configurable rate limits to avoid triggering platform protections.</li>
+                <li data-i18n="li3"><strong>Storage:</strong> uses a small SQLite database for queues, user credentials and task history.</li>
+            </ul>
+
+            <div class="tech-row">
+                <span class="tech">Python</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">SQLite</span>
+                <span class="tech">Tailwind</span>
+            </div>
+        </section>
+
+    </div>
+
+
+    <a href="../#projects" class="back-button" aria-label="Retour aux projets" data-i18n-aria="back-projects">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+             style="transform: rotate(90deg);">
+            <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
+            <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
+        </svg>
+    </a>
+
+<script src="../scroll-restore.js"></script>
+<script src="../youtube-lite.js"></script>
+<script>
+(function () {
+    var T = {
+        fr: {
+            "title": "Milike — Outil d'automatisation Instagram",
+            "desc": "Un projet qui automatise des actions courantes sur Instagram pour des expériences de croissance et la gestion de contenu. Vous trouverez ci-dessous un court enregistrement d'écran du script en action et une capture d'écran de l'interface de l'application.",
+            "media1": "Enregistrement d'écran",
+            "media2": "Capture de l'admin",
+            "about-title": "À propos du programme",
+            "about-text": "Milike est un outil d'automatisation conçu pour automatiser certaines actions sur Instagram : liker, suivre, ne plus suivre, commenter, publier une story ou une publication, supprimer un post. Le projet combine un backend Python qui interagit avec les endpoints privés d'Instagram et une interface d'administration web minimale pour planifier et surveiller les tâches.",
+            "li1": "Plus précisément, dans la vidéo ci-dessus, le script interagit avec un bot Telegram appelé 'SmmKingdomtasks'. Ce bot rémunère des actions Instagram comme les likes, les follows et les commentaires. Le script utilise Telethon pour intercepter et exécuter ces tâches.",
+            "li2": "<strong>Planificateur :</strong> les tâches peuvent être planifiées ou lancées immédiatement depuis le tableau de bord ; le planificateur respecte des limites de débit configurables pour éviter de déclencher les protections de la plateforme.",
+            "li3": "<strong>Stockage :</strong> utilise une petite base de données SQLite pour les files d'attente, les identifiants des utilisateurs et l'historique des tâches.",
+            "alt": "Capture d'écran de l'admin Milike",
+            "back-top": "Retour aux projets",
+            "back-projects": "Retour aux projets",
+            "play": "Lire la vidéo",
+            "page-title": "Milike — Détails du projet"
+        },
+        en: {
+            "title": "Milike — Instagram Automation Tool",
+            "desc": "A project that automates common Instagram actions for growth experiments and content management. Below you'll find a short screen recording of the script in action and a screenshot of the app interface.",
+            "media1": "Screen Recording",
+            "media2": "Admin Screenshot",
+            "about-title": "About the program",
+            "about-text": "Milike is a automation tool built to automate some action in instagram : like , follow , unfollow , comment , post story or publication , delete a post. The project combines a Python backend that interacts with Instagram private endpoints and a minimal web-based admin UI for scheduling and monitoring tasks.",
+            "li1": "Specifically in the video above, the script interacts with a Telegram bot called 'SmmKingdomtasks'. This bot pays for Instagram actions such as likes, follows, and comments. The script uses Telethon to intercept and execute these tasks.",
+            "li2": "<strong>Scheduler:</strong> tasks can be scheduled or run immediately from the dashboard; the scheduler respects configurable rate limits to avoid triggering platform protections.",
+            "li3": "<strong>Storage:</strong> uses a small SQLite database for queues, user credentials and task history.",
+            "alt": "Milike admin screenshot",
+            "back-top": "Back to projects",
+            "back-projects": "Back to projects",
+            "play": "Play video",
+            "page-title": "Milike — Project Details"
+        }
+    };
+
+    function readLang() {
+        try {
+            var saved = localStorage.getItem('language');
+            if (saved === 'fr' || saved === 'en') return saved;
+        } catch (e) {}
+        return (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+    }
+
+    function apply(lang) {
+        var d = T[lang] || T.en;
+        document.documentElement.lang = lang;
+        document.title = d['page-title'];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (d[k] != null) el.innerHTML = d[k];
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-aria');
+            if (d[k] != null) el.setAttribute('aria-label', d[k]);
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-alt');
+            if (d[k] != null) el.setAttribute('alt', d[k]);
+        });
+    }
+
+    apply(readLang());
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'language' || e.key === null) apply(readLang());
+    });
+    window.addEventListener('pageshow', function () {
+        apply(readLang());
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply(readLang());
+    });
+})();
+</script>
+<script>
+(function(){
+  try{
+    var p = location.pathname;
+    var name = (p.split('/').pop()||'').toLowerCase();
+    if (name === 'index.html' || name.endsWith('.html')) {
+      var base = p.replace(/[^/]*\.html$/i, '');
+      history.replaceState(null, '', base + location.search + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

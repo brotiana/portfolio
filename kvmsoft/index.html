@@ -335,18 +335,18 @@
                 <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
                 <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
             </svg>
-            Back to projects
+            <span data-i18n="back-top">Back to projects</span>
         </a>
 
         
         <div class="hero-image-wrap">
-            <img src="kvm.png" alt="KVMSoft interface preview" />
+            <img src="kvm.png" alt="KVMSoft interface preview" data-i18n-alt="alt" />
         </div>
 
         
-        <p class="project-label">Project Presentation</p>
-        <h1>KVMSoft — Network Keyboard Sharing</h1>
-        <p class="project-desc">
+        <p data-i18n="label" class="project-label">Project Presentation</p>
+        <h1 data-i18n="title">KVMSoft — Network Keyboard Sharing</h1>
+        <p class="project-desc" data-i18n="desc">
             KVMSoft lets you type on a computer using the keyboard of another machine, over a local network or VPN — no cables, no extra hardware required. A lightweight software KVM built entirely in Python.
         </p>
 
@@ -355,60 +355,60 @@
         
         <div class="details-grid">
             <div class="detail-card">
-                <strong>Role</strong>
-                <span>Solo developer — architecture, full Python development, packaging & release.</span>
+                <strong data-i18n="role-label">Role</strong>
+                <span data-i18n="role-value">Solo developer — architecture, full Python development, packaging & release.</span>
             </div>
             <div class="detail-card">
-                <strong>Platform</strong>
-                <span>Linux only · Python 3.6+ · Debian package (.deb)</span>
+                <strong data-i18n="platform-label">Platform</strong>
+                <span data-i18n="platform-value">Linux only · Python 3.6+ · Debian package (.deb)</span>
             </div>
             <div class="detail-card">
-                <strong>Network</strong>
-                <span>Local network (LAN) or VPN — ZeroTier, WireGuard and others.</span>
+                <strong data-i18n="network-label">Network</strong>
+                <span data-i18n="network-value">Local network (LAN) or VPN — ZeroTier, WireGuard and others.</span>
             </div>
             <div class="detail-card">
-                <strong>Status</strong>
-                <span>Version 3.0 · Released · Available as .deb package</span>
+                <strong data-i18n="status-label">Status</strong>
+                <span data-i18n="status-value">Version 3.0 · Released · Available as .deb package</span>
             </div>
         </div>
 
         
         <div class="about-card" style="margin-bottom: 1.5rem;">
-            <p class="section-title">How it works</p>
+            <p data-i18n="how-title" class="section-title">How it works</p>
 
             <div class="modes-grid">
                 <div class="mode-card">
                     <div class="mode-icon">🖥️</div>
                     <div>
-                        <h3>Server mode</h3>
-                        <p>The target machine — receives and executes the keystrokes sent from the client over the network.</p>
+                        <h3 data-i18n="server-title">Server mode</h3>
+                        <p data-i18n="server-desc">The target machine — receives and executes the keystrokes sent from the client over the network.</p>
                     </div>
                 </div>
                 <div class="mode-card">
                     <div class="mode-icon">⌨️</div>
                     <div>
-                        <h3>Client mode</h3>
-                        <p>The source machine — captures keyboard input and streams it to the server in real time.</p>
+                        <h3 data-i18n="client-title">Client mode</h3>
+                        <p data-i18n="client-desc">The source machine — captures keyboard input and streams it to the server in real time.</p>
                     </div>
                 </div>
             </div>
 
             <div class="shortcut">
                 <kbd>F12</kbd>
-                Toggle keystroke forwarding ON / OFF without leaving the app
+                <span data-i18n="shortcut">Toggle keystroke forwarding ON / OFF without leaving the app</span>
             </div>
         </div>
 
         
         <div class="about-card">
-            <p class="section-title">About the project</p>
-            <p>
+            <p data-i18n="about-title" class="section-title">About the project</p>
+            <p data-i18n="about1">
                 KVMSoft is a pure-software KVM (Keyboard-Video-Mouse) alternative focused on keyboard sharing. It was built to solve a simple problem: controlling multiple Linux machines with a single keyboard without any physical switch or USB dongle.
             </p>
-            <p>
+            <p data-i18n="about2">
                 The application runs as two distinct processes : a <strong style="color:#c7d8f5">server</strong> on the machine you want to control and a <strong style="color:#c7d8f5">client</strong> on the machine whose keyboard you want to share. Communication happens over a standard TCP connection, making it compatible with any network setup including VPNs like ZeroTier or WireGuard for cross-location usage.
             </p>
-            <p>
+            <p data-i18n="about3">
                 The codebase is deliberately minimal: the core logic lives in a single <code style="color:#7dd3fc; font-family: 'Space Mono', monospace; font-size:0.88rem;">kvmsoft.py</code> file, and the project ships as a proper Debian package for easy installation and uninstallation.
             </p>
 
@@ -452,14 +452,14 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                 </svg>
-                View on GitHub
+                <span data-i18n="github">View on GitHub</span>
             </a>
         </div>
 
     </div>
 
     
-    <a href="../#projects" class="back-button" aria-label="Back to projects">
+    <a href="../#projects" class="back-button" aria-label="Back to projects" data-i18n-aria="back-projects">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
              style="transform: rotate(90deg);">
@@ -468,6 +468,106 @@
         </svg>
     </a>
 
+<script>
+(function () {
+    var T = {
+        fr: {
+            "label": "Présentation du projet",
+            "title": "KVMSoft — Partage de clavier en réseau",
+            "desc": "KVMSoft vous permet de taper sur un ordinateur avec le clavier d'une autre machine, via un réseau local ou un VPN — sans câble ni matériel supplémentaire. Un KVM logiciel léger, entièrement développé en Python.",
+            "role-label": "Rôle",
+            "role-value": "Développeur solo — architecture, développement complet en Python, packaging et publication.",
+            "platform-label": "Plateforme",
+            "platform-value": "Linux uniquement · Python 3.6+ · Paquet Debian (.deb)",
+            "network-label": "Réseau",
+            "network-value": "Réseau local (LAN) ou VPN — ZeroTier, WireGuard et autres.",
+            "status-label": "Statut",
+            "status-value": "Version 3.0 · Publiée · Disponible en paquet .deb",
+            "how-title": "Comment ça marche",
+            "server-title": "Mode serveur",
+            "server-desc": "La machine cible — reçoit et exécute les frappes envoyées par le client via le réseau.",
+            "client-title": "Mode client",
+            "client-desc": "La machine source — capture la saisie clavier et la transmet au serveur en temps réel.",
+            "shortcut": "Activer / désactiver la transmission des frappes sans quitter l'application",
+            "about-title": "À propos du projet",
+            "about1": "KVMSoft est une alternative KVM (Keyboard-Video-Mouse) purement logicielle, axée sur le partage de clavier. Il a été conçu pour résoudre un problème simple : contrôler plusieurs machines Linux avec un seul clavier, sans commutateur physique ni clé USB.",
+            "about2": "L'application fonctionne avec deux processus distincts : un <strong style=\"color:#c7d8f5\">serveur</strong> sur la machine que vous voulez contrôler et un <strong style=\"color:#c7d8f5\">client</strong> sur la machine dont vous voulez partager le clavier. La communication passe par une connexion TCP standard, ce qui la rend compatible avec n'importe quelle configuration réseau, y compris les VPN comme ZeroTier ou WireGuard pour une utilisation entre sites distants.",
+            "about3": "Le code est volontairement minimal : la logique principale tient dans un seul fichier <code style=\"color:#7dd3fc; font-family: 'Space Mono', monospace; font-size:0.88rem;\">kvmsoft.py</code>, et le projet est livré sous forme de véritable paquet Debian pour faciliter l'installation et la désinstallation.",
+            "github": "Voir sur GitHub",
+            "alt": "Aperçu de l'interface KVMSoft",
+            "back-top": "Retour aux projets",
+            "back-projects": "Retour aux projets",
+            "page-title": "KVMSoft — Détails du projet"
+        },
+        en: {
+            "label": "Project Presentation",
+            "title": "KVMSoft — Network Keyboard Sharing",
+            "desc": "KVMSoft lets you type on a computer using the keyboard of another machine, over a local network or VPN — no cables, no extra hardware required. A lightweight software KVM built entirely in Python.",
+            "role-label": "Role",
+            "role-value": "Solo developer — architecture, full Python development, packaging &amp; release.",
+            "platform-label": "Platform",
+            "platform-value": "Linux only · Python 3.6+ · Debian package (.deb)",
+            "network-label": "Network",
+            "network-value": "Local network (LAN) or VPN — ZeroTier, WireGuard and others.",
+            "status-label": "Status",
+            "status-value": "Version 3.0 · Released · Available as .deb package",
+            "how-title": "How it works",
+            "server-title": "Server mode",
+            "server-desc": "The target machine — receives and executes the keystrokes sent from the client over the network.",
+            "client-title": "Client mode",
+            "client-desc": "The source machine — captures keyboard input and streams it to the server in real time.",
+            "shortcut": "Toggle keystroke forwarding ON / OFF without leaving the app",
+            "about-title": "About the project",
+            "about1": "KVMSoft is a pure-software KVM (Keyboard-Video-Mouse) alternative focused on keyboard sharing. It was built to solve a simple problem: controlling multiple Linux machines with a single keyboard without any physical switch or USB dongle.",
+            "about2": "The application runs as two distinct processes : a <strong style=\"color:#c7d8f5\">server</strong> on the machine you want to control and a <strong style=\"color:#c7d8f5\">client</strong> on the machine whose keyboard you want to share. Communication happens over a standard TCP connection, making it compatible with any network setup including VPNs like ZeroTier or WireGuard for cross-location usage.",
+            "about3": "The codebase is deliberately minimal: the core logic lives in a single <code style=\"color:#7dd3fc; font-family: 'Space Mono', monospace; font-size:0.88rem;\">kvmsoft.py</code> file, and the project ships as a proper Debian package for easy installation and uninstallation.",
+            "github": "View on GitHub",
+            "alt": "KVMSoft interface preview",
+            "back-top": "Back to projects",
+            "back-projects": "Back to projects",
+            "page-title": "KVMSoft — Project Details"
+        }
+    };
+
+    function readLang() {
+        try {
+            var saved = localStorage.getItem('language');
+            if (saved === 'fr' || saved === 'en') return saved;
+        } catch (e) {}
+        return (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+    }
+
+    function apply(lang) {
+        var d = T[lang] || T.en;
+        document.documentElement.lang = lang;
+        document.title = d['page-title'];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (d[k] != null) el.innerHTML = d[k];
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-aria');
+            if (d[k] != null) el.setAttribute('aria-label', d[k]);
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-alt');
+            if (d[k] != null) el.setAttribute('alt', d[k]);
+        });
+    }
+
+    apply(readLang());
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'language' || e.key === null) apply(readLang());
+    });
+    window.addEventListener('pageshow', function () {
+        apply(readLang());
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply(readLang());
+    });
+})();
+</script>
 <script src="../scroll-restore.js"></script>
 
 <script>

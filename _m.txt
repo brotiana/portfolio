@@ -1,0 +1,24 @@
+2335:    <div class="sayit-modal-overlay" id="sayitModal">
+2336:        <div class="sayit-modal">
+2337:            <div class="sayit-modal-icon">
+2340:            <div class="sayit-modal-title">External Redirect</div>
+2341:            <p class="sayit-modal-text">
+2344:            <div class="sayit-modal-url">sayit.gt.tc</div>
+2345:            <div class="sayit-modal-buttons">
+2353:    <div class="sayit-modal-overlay" id="tikDownModal">
+2354:        <div class="sayit-modal">
+2355:            <div class="sayit-modal-icon">
+2358:            <div class="sayit-modal-title">tikDown Project</div>
+2359:            <p class="sayit-modal-text">
+2362:            <div class="sayit-modal-url">github.com/brotiana/TikDown</div>
+2363:            <div class="sayit-modal-buttons">
+2371:    <div class="sayit-modal-overlay" id="shadowMindModal">
+2372:        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
+2378:            <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">ShadowMind</div>
+2379:            <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
+2400:            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">
+2408:    <div class="sayit-modal-overlay" id="miiaModal">
+2409:        <div class="sayit-modal" style="max-width:620px;padding:2rem 1.5rem;">
+2416:            <div class="sayit-modal-title" style="font-size:1.3rem;margin-bottom:0.5rem;">MIIA Editor</div>
+2417:            <p class="sayit-modal-text" style="text-align:center;margin-bottom:1rem;">
+2434:            <div class="sayit-modal-buttons" style="margin-top:1.25rem;">

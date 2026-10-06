@@ -424,7 +424,7 @@
                 <path d="M8 14V8.00005C8 5.23862 10.2386 3 13 3C15.7614 3 18 5.23862 18 8.00005V21"/>
                 <path d="M12 11C10.4379 12.5621 9.5621 13.4379 8 15C6.4379 13.4379 5.5621 12.5621 4 11"/>
             </svg>
-            Retour au portfolio
+            <span data-i18n="back-top">Retour au portfolio</span>
         </a>
 
         
@@ -460,31 +460,31 @@
                 <figure>
                     <img src="helpcercle11.png" alt="HelpCercle - capture 10" loading="lazy" />
                 </figure>
-                <button class="gallery-arrow prev" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
-                <button class="gallery-arrow next" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+                <button class="gallery-arrow prev" aria-label="Image précédente" data-i18n-aria="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-arrow next" aria-label="Image suivante" data-i18n-aria="next" onclick="changeSlide(1)">&#10095;</button>
             </div>
             <div class="gallery-controls">
-                <button class="gallery-nav-btn" aria-label="Image précédente" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="gallery-nav-btn" aria-label="Image précédente" data-i18n-aria="prev" onclick="changeSlide(-1)">&#10094;</button>
                 <p class="gallery-count" id="gallery-count">1 / 10</p>
-                <button class="gallery-nav-btn" aria-label="Image suivante" onclick="changeSlide(1)">&#10095;</button>
+                <button class="gallery-nav-btn" aria-label="Image suivante" data-i18n-aria="next" onclick="changeSlide(1)">&#10095;</button>
             </div>
         </div>
 
         
-        <p class="project-subtitle">Présentation du projet</p>
+        <p class="project-subtitle" data-i18n="subtitle">Présentation du projet</p>
         <h1 class="project-title">HelpCercle</h1>
         <hr class="section-divider" />
         <div class="details-grid">
             <div class="detail">
-                <strong>Rôle</strong>
-                <span>full development</span>
+                <strong data-i18n="role-label">Rôle</strong>
+                <span data-i18n="role-value">full development</span>
             </div>
             <div class="detail">
-                <strong>Plateforme</strong>
+                <strong data-i18n="platform-label">Plateforme</strong>
                 <span>Web</span>
             </div>
             <div class="detail">
-                <strong>Technologies</strong>
+                <strong data-i18n="tech-label">Technologies</strong>
                 <span>JavaScript, Node JS, PHP, MySql</span>
             </div>
         </div>
@@ -495,8 +495,8 @@
 
         <div class="description">
             <div>
-                <h2>Project description</h2>
-                <p>
+                <h2 data-i18n="desc-title">Project description</h2>
+                <p data-i18n="desc-text">
                   HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.</br>
 
 There are basically two types of users: the first kind sells something like a skill or an account, for example. The second kind is looking to buy that skill or a specific service, and can post a request on the platform if they can't find what they need.</br>
@@ -508,21 +508,21 @@ Connecting an AI agent to the HelpCercle platform requires the site admin (me) t
             </div>
 
             <div>
-                <h2>Features</h2>
+                <h2 data-i18n="features-title">Features</h2>
                 <ul>
-                    <li>Buyers and sellers can chat with each other directly.</li>
-                    <li>Automatic deposits using cryptocurrency.</li>
-                    <li>Real-time messaging and notifications using WebSocket.</li>
-                    <li>Member profiles, transaction tracking, and history.</li>
-                    <li>Affiliate system.</li>
-                    <li>Users can offer 100% automated services powered by AI or scripts, by connecting their own server (running the system that performs the task) to the HelpCercle platform.</li>
+                    <li data-i18n="f1">Buyers and sellers can chat with each other directly.</li>
+                    <li data-i18n="f2">Automatic deposits using cryptocurrency.</li>
+                    <li data-i18n="f3">Real-time messaging and notifications using WebSocket.</li>
+                    <li data-i18n="f4">Member profiles, transaction tracking, and history.</li>
+                    <li data-i18n="f5">Affiliate system.</li>
+                    <li data-i18n="f6">Users can offer 100% automated services powered by AI or scripts, by connecting their own server (running the system that performs the task) to the HelpCercle platform.</li>
                 </ul>
             </div>
 
         </div>
 
         <div style="margin-top:2rem; padding:22px 24px; background:rgba(30,100,220,0.07); border:1px solid rgba(30,100,220,0.3); border-radius:12px; line-height:1.8; color:#94a3b8;">
-            <p style="margin:0; font-size:0.97rem;">
+            <p data-i18n="note" style="margin:0; font-size:0.97rem;">
                 <b style="color:#60a5fa; font-family:'Orbitron',monospace; letter-spacing:0.05em; text-transform:uppercase; display:block; margin-bottom:8px; font-size:0.8rem;">Note</b>
                 The website is not hosted yet, as we are still sorting out the legal paperwork. I also can't show the source code because this is a big and serious project for me. I prefer to present the project with the images at the top only.
             </p>
@@ -531,7 +531,7 @@ Connecting an AI agent to the HelpCercle platform requires the site admin (me) t
     </main>
 
 
-    <a href="../#projects" class="back-button" aria-label="Retour aux projets">
+    <a href="../#projects" class="back-button" aria-label="Retour aux projets" data-i18n-aria="back-projects">
         <svg width="22px" height="22px" viewBox="0 0 24 24" stroke-width="1.5" fill="none"
              xmlns="http://www.w3.org/2000/svg"
              style="transform: rotate(90deg);">
@@ -567,6 +567,95 @@ Connecting an AI agent to the HelpCercle platform requires the site admin (me) t
             render();
         })();
     </script>
+<script>
+(function () {
+    var T = {
+        fr: {
+            "page-title": "HelpCercle : Projet",
+            "back-top": "Retour au portfolio",
+            "back-projects": "Retour aux projets",
+            "prev": "Image précédente",
+            "next": "Image suivante",
+            "alt": "HelpCercle - capture ",
+            "subtitle": "Présentation du projet",
+            "role-label": "Rôle",
+            "role-value": "Développement complet",
+            "platform-label": "Plateforme",
+            "tech-label": "Technologies",
+            "desc-title": "Description du projet",
+            "desc-text": "HelpCercle est une application web où les utilisateurs peuvent soit proposer un service contre rémunération, soit publier une demande pour un service dont ils ont besoin.<br>\nIl y a en gros deux types d'utilisateurs : le premier vend quelque chose, comme une compétence ou un compte, par exemple. Le second cherche à acheter cette compétence ou un service précis, et peut publier une demande sur la plateforme s'il ne trouve pas ce dont il a besoin.<br>\nLes utilisateurs qui publient des offres peuvent aussi proposer des services réalisés par des agents IA. Ces services alimentés par des agents IA peuvent inclure, par exemple, la transcription audio, la suppression d'arrière-plan d'images, l'envoi de messages à une liste de 1000 e-mails, la création d'un site web, etc.<br>\nConnecter un agent IA à la plateforme HelpCercle nécessite l'intervention de l'administrateur du site (moi), car chaque offre d'agent IA a besoin de sa propre interface sur mesure, adaptée à ce qu'elle fait.<br>",
+            "features-title": "Fonctionnalités",
+            "note": "<b style=\"color:#60a5fa; font-family:'Orbitron',monospace; letter-spacing:0.05em; text-transform:uppercase; display:block; margin-bottom:8px; font-size:0.8rem;\">Note</b>\n                Le site n'est pas encore hébergé, car nous finalisons encore les démarches juridiques. Je ne peux pas non plus montrer le code source, car c'est un projet important et sérieux pour moi. Je préfère présenter le projet uniquement avec les images en haut.",
+            "f1": "Les acheteurs et les vendeurs peuvent discuter directement entre eux.",
+            "f2": "Dépôts automatiques en cryptomonnaie.",
+            "f3": "Messagerie et notifications en temps réel via WebSocket.",
+            "f4": "Profils des membres, suivi des transactions et historique.",
+            "f5": "Système d'affiliation.",
+            "f6": "Les utilisateurs peuvent proposer des services 100 % automatisés, propulsés par l'IA ou des scripts, en connectant leur propre serveur (qui exécute le système réalisant la tâche) à la plateforme HelpCercle."
+        },
+        en: {
+            "page-title": "HelpCercle : Project",
+            "back-top": "Back to portfolio",
+            "back-projects": "Back to projects",
+            "prev": "Previous image",
+            "next": "Next image",
+            "alt": "HelpCercle - screenshot ",
+            "subtitle": "Project overview",
+            "role-label": "Role",
+            "role-value": "Full development",
+            "platform-label": "Platform",
+            "tech-label": "Technologies",
+            "desc-title": "Project description",
+            "desc-text": "HelpCercle is a web application where users can either offer a service in exchange for money or post a request for a service they need.<br>\n\nThere are basically two types of users: the first kind sells something like a skill or an account, for example. The second kind is looking to buy that skill or a specific service, and can post a request on the platform if they can't find what they need.<br>\n\nUsers who post offers can also offer services carried out by AI agents. These AI-agent-powered services could include things like audio transcription, image background removal, sending messages to a list of 1000 emails, building a website, and so on.<br>\n\nConnecting an AI agent to the HelpCercle platform requires the site admin (me) to step in, since each AI agent offer needs its own custom-built interface tailored to what it does.<br>",
+            "features-title": "Features",
+            "note": "<b style=\"color:#60a5fa; font-family:'Orbitron',monospace; letter-spacing:0.05em; text-transform:uppercase; display:block; margin-bottom:8px; font-size:0.8rem;\">Note</b>\n                The website is not hosted yet, as we are still sorting out the legal paperwork. I also can't show the source code because this is a big and serious project for me. I prefer to present the project with the images at the top only.",
+            "f1": "Buyers and sellers can chat with each other directly.",
+            "f2": "Automatic deposits using cryptocurrency.",
+            "f3": "Real-time messaging and notifications using WebSocket.",
+            "f4": "Member profiles, transaction tracking, and history.",
+            "f5": "Affiliate system.",
+            "f6": "Users can offer 100% automated services powered by AI or scripts, by connecting their own server (running the system that performs the task) to the HelpCercle platform."
+        }
+    };
+
+    function readLang() {
+        try {
+            var saved = localStorage.getItem('language');
+            if (saved === 'fr' || saved === 'en') return saved;
+        } catch (e) {}
+        return (navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en';
+    }
+
+    function apply(lang) {
+        var d = T[lang] || T.en;
+        document.documentElement.lang = lang;
+        document.title = d['page-title'];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (d[k] != null) el.innerHTML = d[k];
+        });
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n-aria');
+            if (d[k] != null) el.setAttribute('aria-label', d[k]);
+        });
+        document.querySelectorAll('.gallery img').forEach(function (img, i) {
+            img.alt = d.alt + (i + 1);
+        });
+    }
+
+    apply(readLang());
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'language' || e.key === null) apply(readLang());
+    });
+    window.addEventListener('pageshow', function () {
+        apply(readLang());
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) apply(readLang());
+    });
+})();
+</script>
 <script src="../scroll-restore.js"></script>
 
 <script>
