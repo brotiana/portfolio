@@ -1701,7 +1701,7 @@
 
     <section id="home" class="section active" style="padding: 0; min-height: 0; height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; scroll-snap-type: y mandatory; scroll-behavior: smooth;">
 
-        <div class="sticky w-full flex items-center justify-center z-0 pt-20 pb-10" style="top: -25vh; height: 100vh; height: 100dvh; scroll-snap-align: start;">
+        <div id="heroBlock" class="sticky w-full flex items-center justify-center z-0 pt-20 pb-10" style="top: -25vh; height: 100vh; height: 100dvh; scroll-snap-align: start;">
             <div class="max-w-7xl mx-auto px-4 sm:px-8">
                 <div class="flex flex-col items-center justify-center gap-6 md:gap-10">
                     <div class="flex justify-center order-1 mt-4 md:mt-8">
@@ -1739,7 +1739,7 @@
         </div>
 
 
-        <div class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
+        <div id="bioBlock" class="relative z-10 w-full bg-[#060c17] border-t border-blue-500/30 shadow-[0_-20px_50px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center p-6 sm:p-12" style="height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden;">
             <div class="max-w-4xl mx-auto w-full flex flex-col h-full justify-center min-h-0 pt-16 pb-4">
                 <h2 class="text-3xl md:text-5xl font-bold text-center mb-6 md:mb-10 text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] shrink-0">My Bio</h2>
 
@@ -2754,6 +2754,91 @@
             navigator.serviceWorker.register('sw.js').catch(function () {});
         });
     }
+</script>
+
+<!-- ═══ Umami Analytics ═══ -->
+<script defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="abfc547b-9207-45d2-b644-803a42cbdc52"
+        data-auto-track="false"></script>
+
+<script>
+(function () {
+  var last = null, timer = null;
+
+  // Attend que le script Umami soit chargé, puis exécute la fonction
+  function whenUmami(fn, tries) {
+    tries = tries || 0;
+    if (window.umami && window.umami.track) fn();
+    else if (tries < 50) setTimeout(function () { whenUmami(fn, tries + 1); }, 200);
+  }
+
+  // Envoie une "page vue" virtuelle (avec anti-doublon)
+  function trackPage(path, title) {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      if (path === last) return;
+      last = path;
+      whenUmami(function () {
+        umami.track(function (props) {
+          return Object.assign({}, props, { url: path, title: title });
+        });
+      });
+    }, 400);
+  }
+
+  // 1) Sections : skills, projects, contact
+  var titles = { skills: 'Skills', projects: 'Projects', contact: 'Contact' };
+  document.querySelectorAll('.section').forEach(function (sec) {
+    if (sec.id === 'home') return;
+    new MutationObserver(function () {
+      if (sec.classList.contains('active')) trackPage('/' + sec.id, titles[sec.id]);
+    }).observe(sec, { attributes: true, attributeFilter: ['class'] });
+  });
+
+  // 2) Accueil vs Bio (même section, scroll interne)
+  var hero = document.getElementById('heroBlock');
+  var bio  = document.getElementById('bioBlock');
+  if (hero && bio) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target.id === 'bioBlock')  trackPage('/bio', 'Bio');
+        if (e.target.id === 'heroBlock') trackPage('/home', 'Home');
+      });
+    }, { root: document.getElementById('home'), threshold: 0.6 });
+    io.observe(hero);
+    io.observe(bio);
+  }
+
+  // 3) Clics sur les cartes projets
+  document.querySelectorAll('.project-row').forEach(function (row) {
+    row.addEventListener('click', function () {
+      var h3 = row.querySelector('h3');
+      var name = h3 ? h3.textContent.trim() : 'unknown';
+      whenUmami(function () {
+        umami.track('project-click', { project: name });
+      });
+    });
+  });
+
+  // 4) Boutons de confirmation des modales (Sayit, tikDown, ShadowMind, MIIA)
+  window.addEventListener('load', function () {
+    var actions = {
+      confirmSayit: 'sayit',
+      confirmTikDown: 'tikdown',
+      confirmShadowMind: 'shadowmind',
+      confirmMIIA: 'miia-download'
+    };
+    document.querySelectorAll('.sayit-btn-confirm').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var m = (btn.getAttribute('onclick') || '').match(/(\w+)\(\)/);
+        var target = m && actions[m[1]];
+        if (target) whenUmami(function () { umami.track('modal-confirm', { target: target }); });
+      });
+    });
+  });
+})();
 </script>
 </body>
 
