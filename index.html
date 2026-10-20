@@ -14,7 +14,8 @@
             }
         })();
     </script>
-    <script src="tailwind.js"></script>
+    <link rel="preload" href="Osiris.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="tailwind.css?v=1">
     <script src="transition.js?v=2"></script>
     <script src="anime.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,6 +29,7 @@
                  url('Osiris.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap;
         }
 
         * {
@@ -2810,6 +2812,14 @@
     io.observe(hero);
     io.observe(bio);
   }
+
+  // 2b) Vue initiale au chargement (section active ou accueil)
+  window.addEventListener('load', function () {
+    var act = document.querySelector('.section.active');
+    var id = act && act.id ? act.id : 'home';
+    var t = { home: 'Home', skills: 'Skills', projects: 'Projects', contact: 'Contact' };
+    trackPage('/' + id, t[id] || id);
+  });
 
   // 3) Clics sur les cartes projets
   document.querySelectorAll('.project-row').forEach(function (row) {
