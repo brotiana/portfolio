@@ -233,22 +233,32 @@
         /* ── Sélecteur de langue (mobile : dans le menu déroulant) ── */
         .mobile-lang {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
-            padding: 4px 0 2px;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 30px 4px;
+        }
+        .mobile-lang-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            margin-right: 8px;
+            color: #60a5fa;
         }
         .mobile-lang-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 10px;
+            padding: 20px 14px;
             background: transparent;
             border: none;
             color: #94a3b8;
-            font-size: 12px;
-            letter-spacing: 2px;
+            font-size: 24px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             text-align: left;
+            white-space: nowrap;
             cursor: pointer;
             transition: color 0.2s ease;
         }
@@ -1172,41 +1182,41 @@
             transition: max-height 0.45s cubic-bezier(.77,0,.18,1), padding 0.3s;
         }
         .mobile-menu.open {
-            max-height: 300px;
-            padding: 10px 0;
+            max-height: 800px;
+            padding: 20px 0;
         }
 
         .mobile-menu a {
             color: #7ca8d4;
             text-decoration: none;
             font-family: 'Orbitron', monospace;
-            font-size: 10px;
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            padding: 14px 30px;
+            padding: 28px 60px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 24px;
             border-bottom: 1px solid rgba(13,56,117,0.4);
             transition: color 0.2s, background 0.2s, padding-left 0.3s;
             position: relative;
         }
         .mobile-menu a::before {
             content: '▶';
-            font-size: 7px;
+            font-size: 14px;
             color: #1a6fff;
             opacity: 0;
             transition: opacity 0.2s;
         }
         .mobile-menu a:last-child  { border-bottom: none; }
-        .mobile-menu a:hover { color: #00d4ff; background: rgba(26,111,255,0.06); padding-left: 38px; }
+        .mobile-menu a:hover { color: #00d4ff; background: rgba(26,111,255,0.06); padding-left: 76px; }
         .mobile-menu a:hover::before { opacity: 1; }
 
         .mobile-menu .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, #1a6fff, transparent);
-            margin: 6px 20px;
+            margin: 12px 40px;
             opacity: 0.4;
         }
 
@@ -1262,7 +1272,10 @@
             .home-icon { width: 38px; height: 38px; }
             .home-icon svg { width: 15px; height: 15px; }
             .hamburger { width: 34px; height: 34px; }
-            .mobile-menu a { font-size: 9px; padding: 12px 24px; letter-spacing: 2px; }
+            .mobile-menu a { font-size: 18px; padding: 24px 48px; letter-spacing: 4px; }
+            .mobile-lang { padding: 8px 20px 4px; }
+            .mobile-lang-btn { font-size: 16px; padding: 18px 10px; }
+            .mobile-lang-icon { width: 30px; height: 30px; margin-right: 4px; }
         }
 
 
@@ -1681,6 +1694,7 @@
             <a href="#contact" data-text="Contact">Contact</a>
             <div class="divider"></div>
             <div class="mobile-lang">
+                <svg class="mobile-lang-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
                 <button type="button" class="mobile-lang-btn" data-lang="fr">🇫🇷 Français</button>
                 <button type="button" class="mobile-lang-btn" data-lang="en">🇬🇧 English</button>
             </div>
