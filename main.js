@@ -516,6 +516,9 @@ function initializeScrollAnimations() {
             opacity: 1;
             transform: translateY(0);
         }
+        #offer .reveal-item {
+            transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1), background 0.3s ease, border-color 0.3s ease;
+        }
     `;
     document.head.appendChild(revealCSS);
 
@@ -526,16 +529,22 @@ function initializeScrollAnimations() {
                 const parent = entry.target.parentElement;
                 const siblings = Array.from(parent.children).filter(c => c.classList.contains('reveal-item'));
                 const idx = siblings.indexOf(entry.target);
-                entry.target.style.transitionDelay = `${idx * 80}ms`;
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+                const el = entry.target;
+                const solo = el.matches('.offer-hook, .offer-lead, .offer-subtitle, .offer-callout, .offer-cta, .offer-list li');
+                el.style.transitionDelay = solo ? '0ms' : `${Math.min(idx, 4) * 80}ms`;
+                el.classList.add('revealed');
+                if (el.closest('#offer')) {
+                    // libère le délai pour que le survol reste fluide
+                    setTimeout(() => { el.style.transitionDelay = ''; }, 1100);
+                }
+                observer.unobserve(el);
             }
         });
     }, { threshold: 0.1 });
 
 
     function observeItems() {
-        document.querySelectorAll('.skill-card, .project-row, #skills .grid > div:not(.skill-card)').forEach(el => {
+        document.querySelectorAll('.skill-card, .project-row, #skills .grid > div:not(.skill-card), .offer-card, .offer-list li, .offer-hook, .offer-lead, .offer-subtitle, .offer-callout, .offer-cta').forEach(el => {
             if (!el.classList.contains('reveal-item')) {
                 el.classList.add('reveal-item');
                 observer.observe(el);
@@ -699,6 +708,7 @@ const translations = {
         'nav-bio': 'Bio',
         'nav-skills': 'Compétences',
         'nav-projects': 'Projets',
+        'nav-offer': 'Offre',
         'nav-contact': 'Contact',
 
         'hero-title': 'Développeur Fullstack',
@@ -798,12 +808,40 @@ const translations = {
         'miia-f3': '<b style="color:#e2e8f0;">Personnalisation sans limites :</b> pour créer des fonctionnalités, des ajustements d\'interface et des thèmes sur mesure, sans les restrictions imposées par les éditeurs propriétaires.',
         'miia-f4': '<b style="color:#e2e8f0;">Montée en compétences et indépendance :</b> pour progresser en ingénierie tout en sortant des sentiers battus.',
         'miia-close': 'Fermer',
-        'miia-download': 'Télécharger l\'app'
+        'miia-download': 'Télécharger l\'app',
+
+        'offer-title': 'Mon Offre',
+        'offer-hook': 'Vous avez une activité, mais pas de site web ?',
+        'offer-lead': 'Je crée des sites web sur mesure pour les entrepreneurs et les petites entreprises.',
+        'offer-types-title': 'Selon votre besoin, je peux réaliser :',
+        'offer-type-1': 'Un site vitrine pour présenter votre activité, vos établissements et votre portfolio',
+        'offer-type-2': 'Une boutique en ligne pour vendre vos produits, physiques ou numériques, ou vos services',
+        'offer-type-3': 'Un site créatif ou événementiel, pour des marques de luxe ou des artistes',
+        'offer-type-4': 'Une application web : SaaS, site avec prise de rendez-vous ou de réservation...',
+        'offer-automation': 'Et comme j\'ai aussi une expertise en automatisation, je peux réduire vos tâches manuelles. Votre site peut faire plus que s\'afficher : envoyer automatiquement une confirmation à vos clients, ranger leurs demandes dans un tableau, vous notifier dès qu\'un message arrive.',
+        'offer-steps-title': 'Comment ça se passe',
+        'offer-step-1': 'On échange sur votre activité, vos clients et ce que vous attendez du site',
+        'offer-step-2': 'Je vous propose une maquette, pour que vous voyiez le résultat avant le développement',
+        'offer-step-3': 'Je développe le site, avec vos retours à chaque étape',
+        'offer-step-4': 'Je le livre en ligne, prêt à être utilisé, et je reste disponible pour la suite',
+        'offer-get-title': 'Ce que vous recevez',
+        'offer-get-1': 'Un site moderne, mis en ligne et hébergé',
+        'offer-get-2': 'Adapté à tous les écrans (ordinateur, tablette, téléphone)',
+        'offer-get-3': 'Optimisé pour apparaître sur les moteurs de recherche',
+        'offer-get-4': 'À l\'image de votre activité',
+        'offer-get-5': 'Un accès aux statistiques de votre site (via Umami) : nombre de visiteurs par jour, pays des visiteurs, durée des visites',
+        'offer-cta-text': 'Vous avez un projet, même encore flou ?',
+        'offer-cta-btn': 'CONTACTEZ-MOI',
+        'offer-price-title': 'Mon tarif',
+        'offer-price-text': 'Le coût varie selon votre site, mais il commence à <span class="offer-highlight">100 USD</span> pour les sites vitrines simples.',
+        'offer-delivery-title': 'Durée de livraison',
+        'offer-delivery-text': 'La durée varie selon votre site, mais je peux livrer à partir de <span class="offer-highlight">3 jours</span> pour les sites simples.'
     },
     en: {
         'nav-bio': 'Bio',
         'nav-skills': 'Skills',
         'nav-projects': 'Projects',
+        'nav-offer': 'Offer',
         'nav-contact': 'Contact',
 
         'hero-title': 'Fullstack Developer',
@@ -903,7 +941,34 @@ const translations = {
         'miia-f3': '<b style=\"color:#e2e8f0;\">Unrestricted Customization:</b> To build custom features, UI tweaks, and themes without running into the walls set by corporate-backed editors.',
         'miia-f4': '<b style=\"color:#e2e8f0;\">Skill Growth &amp; Independence:</b> To level up my engineering skills while stepping off the beaten path.',
         'miia-close': 'Close',
-        'miia-download': 'Download app'
+        'miia-download': 'Download app',
+
+        'offer-title': 'My Offer',
+        'offer-hook': 'Do you have a business but no website?',
+        'offer-lead': 'I build custom websites for entrepreneurs and small businesses.',
+        'offer-types-title': 'Depending on your needs, I can build:',
+        'offer-type-1': 'A showcase website to present your business, your locations and your portfolio',
+        'offer-type-2': 'An online store to sell your products, physical or digital, or your services',
+        'offer-type-3': 'A creative or event website, for luxury brands or artists',
+        'offer-type-4': 'A web application: SaaS, a site with appointment booking or reservations...',
+        'offer-automation': 'And since I also have expertise in automation, I can reduce your manual tasks. Your website can do more than just display content: automatically send a confirmation to your customers, organize their requests in a spreadsheet, notify you as soon as a message arrives.',
+        'offer-steps-title': 'How it works',
+        'offer-step-1': 'We talk about your business, your customers and what you expect from the website',
+        'offer-step-2': 'I propose a mockup, so you can see the result before development',
+        'offer-step-3': 'I build the website, with your feedback at every stage',
+        'offer-step-4': 'I deliver it online, ready to use, and I remain available for what comes next',
+        'offer-get-title': 'What you get',
+        'offer-get-1': 'A modern website, put online and hosted',
+        'offer-get-2': 'Adapted to all screens (computer, tablet, phone)',
+        'offer-get-3': 'Optimized to appear on search engines',
+        'offer-get-4': 'Reflecting your business identity',
+        'offer-get-5': 'Access to your site\'s statistics (via Umami): daily visitors, visitors\' countries, visit duration',
+        'offer-cta-text': 'Have a project, even if it\'s still unclear?',
+        'offer-cta-btn': 'CONTACT ME',
+        'offer-price-title': 'My pricing',
+        'offer-price-text': 'The cost varies depending on your website, but it starts at <span class="offer-highlight">100 USD</span> for simple showcase websites.',
+        'offer-delivery-title': 'Delivery time',
+        'offer-delivery-text': 'The time varies depending on your website, but I can deliver simple websites in as little as <span class="offer-highlight">3 days</span>.'
     }
 };
 
@@ -929,7 +994,7 @@ const SM_FEATURE_KEYS = ['sm-f1', 'sm-f2', 'sm-f3', 'sm-f4'];
 const MIIA_FEATURE_KEYS = ['miia-f1', 'miia-f2', 'miia-f3', 'miia-f4'];
 const BIO_KEYS = ['bio-p1', 'bio-p2', 'bio-p3', 'bio-p4', 'bio-p5'];
 const CONTACT_LABEL_KEYS = ['contact-label-email', 'contact-label-phone', 'contact-label-location'];
-const NAV_KEYS = { '#bio': 'nav-bio', '#skills': 'nav-skills', '#projects': 'nav-projects', '#contact': 'nav-contact' };
+const NAV_KEYS = { '#bio': 'nav-bio', '#skills': 'nav-skills', '#projects': 'nav-projects', '#offer': 'nav-offer', '#contact': 'nav-contact' };
 
 // Applique la langue en une seule passe synchrone (changement instantané)
 function applyLanguage(lang) {
@@ -964,6 +1029,13 @@ function applyLanguage(lang) {
             a.textContent = d[k];
             a.setAttribute('data-text', d[k]);
         }
+    });
+
+    // Section Offre : tous les éléments marqués data-i18n="clé"
+    // (pour ajouter/modifier un texte de l'offre, il suffit de changer la clé dans les traductions)
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        const k = el.getAttribute('data-i18n');
+        if (d[k] != null) el.innerHTML = d[k];
     });
 
     // Accueil

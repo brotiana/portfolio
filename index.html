@@ -1049,7 +1049,12 @@
             list-style: none;
             margin: 0;
             padding: 0;
+            /* chaque côté prend la même largeur : l'icône Accueil reste pile au centre,
+               même quand les libellés n'ont pas la même longueur (ex. "Compétences" / "Offre") */
+            flex: 1;
         }
+        .nav-links.nav-left  { justify-content: flex-start; }
+        .nav-links.nav-right { justify-content: flex-end; }
 
         .nav-links a {
             color: #7ca8d4;
@@ -1641,6 +1646,180 @@
             }
         }
 
+
+        /* ═══════════════ Section « Offre » (tout est centré) ═══════════════ */
+        .offer-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            text-align: center;
+        }
+
+        .offer-hook {
+            font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+            font-weight: 700;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .offer-lead {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+            color: #a1a1aa;
+        }
+
+        .offer-subtitle {
+            margin: 4rem 0 2rem;
+            font-size: clamp(1.3rem, 3vw, 1.875rem);
+            font-weight: 700;
+            color: #60a5fa;
+            text-align: center;
+        }
+
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        .offer-steps {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .offer-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9rem;
+            padding: 1.5rem 1.25rem;
+            /* même style que les cartes de projets (.project-row) :
+               aucun arrondi, deux coins coupés (haut droit et bas gauche) */
+            background: rgba(30, 100, 220, 0.05);
+            border: 1px solid rgba(30, 100, 220, 0.2);
+            border-radius: 0;
+            clip-path: polygon(
+                0 0,
+                calc(100% - 20px) 0,
+                100% 20px,
+                100% 100%,
+                20px 100%,
+                0 calc(100% - 20px)
+            );
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .offer-card:hover {
+            background: rgba(30, 100, 220, 0.1);
+            border-color: #1e64dc;
+        }
+        .offer-card > svg {
+            flex-shrink: 0;
+            color: #60a5fa;
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.55));
+        }
+        .offer-card p {
+            color: #cbd5e1;
+            font-size: 0.98rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .offer-step-num {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #00d4ff;
+            background: rgba(26, 111, 255, 0.12);
+            border: 1px solid rgba(26, 111, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .offer-callout {
+            max-width: 760px;
+            margin: 2.5rem auto 0;
+            padding: 1.5rem 1.75rem;
+            background: rgba(26, 111, 255, 0.07);
+            border: 1px solid rgba(26, 111, 255, 0.25);
+            border-radius: 12px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .offer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+        .offer-list li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9rem;
+            padding: 1rem 1.25rem;
+            background: rgba(26, 111, 255, 0.05);
+            border: 1px solid rgba(26, 111, 255, 0.18);
+            border-radius: 12px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            text-align: center;
+        }
+        .offer-list li i {
+            flex-shrink: 0;
+            color: #00d4ff;
+        }
+
+        .offer-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+        .offer-cta p {
+            font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .offer-info { margin-top: 4rem; }
+        .offer-info-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #7ca8d4;
+        }
+        .offer-highlight {
+            color: #00d4ff;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            .offer-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 640px) {
+            .offer-grid,
+            .offer-steps { grid-template-columns: 1fr; }
+            .offer-subtitle { margin-top: 3rem; }
+        }
+
     </style>
 </head>
 
@@ -1659,9 +1838,9 @@
             <span class="corner br"></span>
 
 
-            <ul class="nav-links">
-                <li><a href="#bio" data-text="Bio">Bio</a></li>
+            <ul class="nav-links nav-left">
                 <li><a href="#skills" data-text="Skills">Skills</a></li>
+                <li><a href="#projects" data-text="Projects">Projects</a></li>
             </ul>
 
 
@@ -1672,8 +1851,8 @@
             </div>
 
 
-            <ul class="nav-links">
-                <li><a href="#projects" data-text="Projects">Projects</a></li>
+            <ul class="nav-links nav-right">
+                <li><a href="#offer" data-text="Offer">Offer</a></li>
                 <li><a href="#contact" data-text="Contact">Contact</a></li>
             </ul>
 
@@ -1687,10 +1866,10 @@
 
 
         <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-            <a href="#bio" data-text="Bio">Bio</a>
             <a href="#skills" data-text="Skills">Skills</a>
-            <div class="divider"></div>
             <a href="#projects" data-text="Projects">Projects</a>
+            <div class="divider"></div>
+            <a href="#offer" data-text="Offer">Offer</a>
             <a href="#contact" data-text="Contact">Contact</a>
             <div class="divider"></div>
             <div class="mobile-lang">
@@ -2211,6 +2390,91 @@
 
 
 
+    <section id="offer" class="section">
+        <div class="offer-wrap">
+            <h2 class="text-5xl font-bold text-center mb-16 text-blue-400" data-i18n="offer-title">My Offer</h2>
+
+            <p class="offer-hook" data-i18n="offer-hook">Do you have a business but no website?</p>
+            <p class="offer-lead" data-i18n="offer-lead">I build custom websites for entrepreneurs and small businesses.</p>
+
+            <h3 class="offer-subtitle" data-i18n="offer-types-title">Depending on your needs, I can build:</h3>
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flower preview-icon"><circle cx="12" cy="12" r="3"/><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"/><path d="M12 7.5V9"/><path d="M7.5 12H9"/><path d="M16.5 12H15"/><path d="M12 16.5V15"/><path d="m8 8 1.88 1.88"/><path d="M14.12 9.88 16 8"/><path d="m8 16 1.88-1.88"/><path d="M14.12 14.12 16 16"/></svg>
+                    <p data-i18n="offer-type-1">A showcase website to present your business, your locations and your portfolio</p>
+                </div>
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart preview-icon"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18"/><path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25"/><circle cx="18" cy="20" r="2"/><circle cx="8" cy="20" r="2"/></svg>
+                    <p data-i18n="offer-type-2">An online store to sell your products, physical or digital, or your services</p>
+                </div>
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette preview-icon"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                    <p data-i18n="offer-type-3">A creative or event website, for luxury brands or artists</p>
+                </div>
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-dollar-sign preview-icon"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+                    <p data-i18n="offer-type-4">A web application: SaaS, a site with appointment booking or reservations...</p>
+                </div>
+            </div>
+
+            <p class="offer-callout" data-i18n="offer-automation">And since I also have expertise in automation, I can reduce your manual tasks. Your website can do more than just display content: automatically send a confirmation to your customers, organize their requests in a spreadsheet, notify you as soon as a message arrives.</p>
+
+            <h3 class="offer-subtitle" data-i18n="offer-steps-title">How it works</h3>
+            <div class="offer-steps">
+                <div class="offer-card">
+                    <div class="offer-step-num">1</div>
+                    <p data-i18n="offer-step-1">We talk about your business, your customers and what you expect from the website</p>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-step-num">2</div>
+                    <p data-i18n="offer-step-2">I propose a mockup, so you can see the result before development</p>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-step-num">3</div>
+                    <p data-i18n="offer-step-3">I build the website, with your feedback at every stage</p>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-step-num">4</div>
+                    <p data-i18n="offer-step-4">I deliver it online, ready to use, and I remain available for what comes next</p>
+                </div>
+            </div>
+
+            <h3 class="offer-subtitle" data-i18n="offer-get-title">What you get</h3>
+            <ul class="offer-list">
+                <li><i class="fas fa-check"></i><span data-i18n="offer-get-1">A modern website, put online and hosted</span></li>
+                <li><i class="fas fa-check"></i><span data-i18n="offer-get-2">Adapted to all screens (computer, tablet, phone)</span></li>
+                <li><i class="fas fa-check"></i><span data-i18n="offer-get-3">Optimized to appear on search engines</span></li>
+                <li><i class="fas fa-check"></i><span data-i18n="offer-get-4">Reflecting your business identity</span></li>
+                <li><i class="fas fa-check"></i><span data-i18n="offer-get-5">Access to your site's statistics (via Umami): daily visitors, visitors' countries, visit duration</span></li>
+            </ul>
+
+            <div class="offer-cta">
+                <p data-i18n="offer-cta-text">Have a project, even if it's still unclear?</p>
+                <button class="b7" type="button" onclick="showSection('contact')">
+                    <span class="plate"></span>
+                    <span class="edge edgeTR"></span>
+                    <span class="edge edgeBL"></span>
+                    <span class="plate2" style="font-size:12px; letter-spacing:2px;" data-i18n="offer-cta-btn">CONTACT ME</span>
+                </button>
+            </div>
+
+            <div class="offer-grid offer-info">
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins preview-icon"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg>
+                    <div class="offer-info-title" data-i18n="offer-price-title">My pricing</div>
+                    <p data-i18n="offer-price-text">The cost varies depending on your website, but it starts at <span class="offer-highlight">100 USD</span> for simple showcase websites.</p>
+                </div>
+                <div class="offer-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass-cog preview-icon"><path d="m14.305 19.53.923-.382"/><path d="m15.228 16.852-.923-.383"/><path d="m16.852 15.228-.383-.923"/><path d="m16.852 20.772-.383.924"/><path d="M17 2v4.172a2 2 0 0 1-.586 1.414l-8.828 8.828A2 2 0 0 0 7 17.828V22"/><path d="m19.148 15.228.383-.923"/><path d="m19.53 21.696-.382-.924"/><path d="m20.772 16.852.924-.383"/><path d="m20.772 19.148.924.383"/><path d="M5 22h6.159"/><path d="M5 2h14"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414l5.188 5.188"/><circle cx="18" cy="18" r="3"/></svg>
+                    <div class="offer-info-title" data-i18n="offer-delivery-title">Delivery time</div>
+                    <p data-i18n="offer-delivery-text">The time varies depending on your website, but I can deliver simple websites in as little as <span class="offer-highlight">3 days</span>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <section id="contact" class="section">
         <div class="max-w-5xl mx-auto contact-wrapper" style="padding-top: 2rem;">
 
@@ -2255,6 +2519,7 @@
                             <a href="https://www.linkedin.com/in/manampisoa-tiana-147b1233a/" target="_blank" class="social-icon-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://github.com/brotiana" class="social-icon-btn" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                             <a href="https://www.facebook.com/tiana.kevine" target="_blank" class="social-icon-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="https://wa.me/261387037747" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
 
@@ -2804,7 +3069,7 @@
   }
 
   // 1) Sections : skills, projects, contact
-  var titles = { skills: 'Skills', projects: 'Projects', contact: 'Contact' };
+  var titles = { skills: 'Skills', projects: 'Projects', offer: 'Offer', contact: 'Contact' };
   document.querySelectorAll('.section').forEach(function (sec) {
     if (sec.id === 'home') return;
     new MutationObserver(function () {
@@ -2831,7 +3096,7 @@
   window.addEventListener('load', function () {
     var act = document.querySelector('.section.active');
     var id = act && act.id ? act.id : 'home';
-    var t = { home: 'Home', skills: 'Skills', projects: 'Projects', contact: 'Contact' };
+    var t = { home: 'Home', skills: 'Skills', projects: 'Projects', offer: 'Offer', contact: 'Contact' };
     trackPage('/' + id, t[id] || id);
   });
 
