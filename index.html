@@ -457,6 +457,62 @@
             transform: translateX(10px);
         }
 
+        .project-row {
+            position: relative;
+        }
+        .project-row::before,
+        .project-row::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .project-row::after {
+            opacity: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.14) 0%,
+                rgba(255, 255, 255, 0.03) 35%,
+                rgba(255, 255, 255, 0.02) 65%,
+                rgba(255, 255, 255, 0.10) 100%
+            );
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+                inset 0 0 40px rgba(160, 210, 255, 0.10);
+            transition: opacity 0.4s ease;
+        }
+        .project-row::before {
+            opacity: 0;
+            background: linear-gradient(
+                108deg,
+                transparent 38%,
+                rgba(255, 255, 255, 0.10) 44%,
+                rgba(255, 255, 255, 0.38) 50%,
+                rgba(255, 255, 255, 0.10) 56%,
+                transparent 62%
+            );
+            background-size: 250% 100%;
+            background-repeat: no-repeat;
+            background-position: -20% 0;
+            transition:
+                background-position 0.9s cubic-bezier(.25, .6, .3, 1),
+                opacity 0.3s ease;
+        }
+        .project-row:hover {
+            -webkit-backdrop-filter: blur(6px) saturate(140%);
+            backdrop-filter: blur(6px) saturate(140%);
+        }
+        .project-row:hover::after {
+            opacity: 1;
+        }
+        .project-row:hover::before {
+            opacity: 1;
+            background-position: 120% 0;
+        }
+
 
         .project-cover {
             position: relative;
